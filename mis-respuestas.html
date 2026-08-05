@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="es-EC">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#111111">
+<title>Mis respuestas · Butterfly</title>
+
+<style>
+/* =========================================================================
+   Todo va en este archivo: se abre sin internet y sin instalar nada.
+   ========================================================================= */
+:root{
+  --rosa:#FB2E71; --rosa-suave:#FFF1F5; --rosa-borde:#FFD5E3;
+  --negro:#111; --gris:#6B7280; --gris-claro:#F3F4F6; --linea:#E5E7EB;
+  --verde:#12A150; --blanco:#fff;
+  --fuente:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--fuente); font-size:15px; line-height:1.55; color:var(--negro);
+  background:var(--gris-claro); -webkit-font-smoothing:antialiased;
+  padding-bottom:calc(24px + env(safe-area-inset-bottom,0px));
+}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--rosa);outline-offset:2px;border-radius:6px}
+
+/* ---------------------------------------------------------------- cabecera */
+.tope{
+  position:sticky; top:0; z-index:20; background:var(--negro); color:var(--blanco);
+  padding:14px 16px calc(12px); padding-top:calc(14px + env(safe-area-inset-top,0px));
+}
+.tope__fila{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.tope__logo{font-weight:800;letter-spacing:.12em;font-size:15px}
+.tope__logo span{color:var(--rosa)}
+.tope__cuenta{margin-left:auto;font-size:12px;opacity:.65}
+
+.buscador{position:relative}
+.buscador input{
+  width:100%; min-height:46px; padding:0 42px 0 40px; border-radius:23px;
+  border:0; background:rgba(255,255,255,.14); color:#fff; font-size:16px;
+}
+.buscador input::placeholder{color:rgba(255,255,255,.55)}
+.buscador__lupa{position:absolute;left:14px;top:50%;transform:translateY(-50%);opacity:.55;font-size:15px}
+.buscador__limpiar{
+  position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  width:34px;height:34px;border-radius:50%;color:rgba(255,255,255,.7);font-size:18px;
+  display:none;place-items:center;
+}
+.buscador__limpiar.visible{display:grid}
+
+/* --------------------------------------------------------------- personaliza */
+.personaliza{
+  background:var(--blanco); border-bottom:1px solid var(--linea);
+  padding:12px 16px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+}
+.personaliza label{font-size:12px;font-weight:700;color:var(--gris);white-space:nowrap}
+.personaliza input{
+  flex:1 1 140px; min-width:0; min-height:40px; padding:0 12px;
+  border:1.5px solid var(--linea); border-radius:20px; font-size:16px;
+}
+.personaliza input:focus{outline:none;border-color:var(--rosa)}
+.personaliza__nota{font-size:11px;color:var(--gris);flex:1 1 100%}
+
+/* ------------------------------------------------------------------ filtros */
+.filtros{
+  position:sticky; top:0; z-index:15;
+  display:flex; gap:8px; overflow-x:auto; padding:12px 16px;
+  background:var(--gris-claro); scrollbar-width:none;
+  border-bottom:1px solid var(--linea);
+}
+.filtros::-webkit-scrollbar{display:none}
+.chip{
+  flex:0 0 auto; padding:8px 14px; min-height:38px; border-radius:19px;
+  background:var(--blanco); border:1.5px solid var(--linea);
+  font-size:13px; font-weight:600; white-space:nowrap; color:var(--gris);
+}
+.chip--activo{background:var(--negro);border-color:var(--negro);color:var(--blanco)}
+.chip b{font-weight:700}
+
+/* ------------------------------------------------------------------- listado */
+.lista{padding:16px;display:grid;gap:12px;max-width:760px;margin-inline:auto}
+.grupo{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--gris);margin:8px 0 -4px}
+
+.tarjeta{
+  background:var(--blanco); border:1px solid var(--linea); border-radius:14px;
+  overflow:hidden;
+}
+.tarjeta__tope{
+  display:flex; align-items:center; gap:10px; padding:12px 14px;
+  border-bottom:1px solid var(--linea); background:#FAFAFA;
+}
+.tarjeta__titulo{font-size:13.5px;font-weight:700;flex:1 1 auto;min-width:0}
+.tarjeta__veces{font-size:11px;color:var(--gris);white-space:nowrap}
+.tarjeta__cuerpo{padding:14px}
+.tarjeta__texto{
+  font-size:14px; white-space:pre-wrap; word-wrap:break-word;
+  color:#1F2937; background:var(--rosa-suave); border:1px solid var(--rosa-borde);
+  border-radius:10px; padding:12px;
+}
+.tarjeta__texto mark{background:#FFE58A;border-radius:3px;padding:0 2px}
+.tarjeta__acciones{display:flex;gap:8px;margin-top:12px}
+.btn{
+  flex:1 1 auto; min-height:46px; border-radius:23px; font-weight:700; font-size:14px;
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  transition:transform .15s, background-color .15s;
+}
+.btn:active{transform:scale(.97)}
+.btn--copiar{background:var(--negro);color:var(--blanco)}
+.btn--copiar.listo{background:var(--verde)}
+.btn--wa{flex:0 0 auto;width:52px;background:#25D366;color:#fff;font-size:19px}
+
+.vacio{text-align:center;padding:48px 16px;color:var(--gris)}
+.vacio strong{display:block;font-size:16px;color:var(--negro);margin-bottom:6px}
+
+.aviso{
+  max-width:760px;margin:0 auto;padding:14px 16px;font-size:12px;color:var(--gris);
+  text-align:center;line-height:1.6;
+}
+
+/* --------------------------------------------------------------------- toast */
+.toast{
+  position:fixed; left:50%; bottom:calc(20px + env(safe-area-inset-bottom,0px));
+  transform:translate(-50%,140%); z-index:50;
+  background:var(--verde); color:#fff; font-weight:700; font-size:14px;
+  padding:12px 22px; border-radius:24px; box-shadow:0 8px 24px rgba(0,0,0,.22);
+  transition:transform .28s cubic-bezier(.22,.61,.36,1);
+}
+.toast.visible{transform:translate(-50%,0)}
+
+@media (min-width:600px){
+  body{font-size:15.5px}
+  .btn--copiar{flex:0 0 auto;padding-inline:28px}
+  .tarjeta__acciones{justify-content:flex-start}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+
+<body>
+
+<header class="tope">
+  <div class="tope__fila">
+    <span class="tope__logo">BUTTER<span>FLY</span></span>
+    <span class="tope__cuenta" id="cuenta"></span>
+  </div>
+  <div class="buscador">
+    <span class="buscador__lupa" aria-hidden="true">🔍</span>
+    <input type="search" id="buscar" placeholder="Buscar respuesta…" autocomplete="off"
+           aria-label="Buscar una respuesta">
+    <button class="buscador__limpiar" id="limpiar" aria-label="Limpiar búsqueda">✕</button>
+  </div>
+</header>
+
+<div class="personaliza">
+  <label for="nombreCliente">Cliente:</label>
+  <input type="text" id="nombreCliente" placeholder="Nombre (opcional)" autocomplete="off">
+  <p class="personaliza__nota">
+    Si escribes el nombre aquí, se pone solo en todos los mensajes.
+  </p>
+</div>
+
+<nav class="filtros" id="filtros" aria-label="Categorías"></nav>
+
+<main class="lista" id="lista"></main>
+
+<p class="aviso">
+  Toca <strong>Copiar</strong> y pega en WhatsApp.<br>
+  El botón verde abre WhatsApp directo con el mensaje ya escrito.
+</p>
+
+<div class="toast" id="toast" role="status" aria-live="polite">¡Copiado!</div>
+
+<script>
+/* =========================================================================
+   DATOS DE TU NEGOCIO
+   Cambia esto y todos los mensajes se actualizan solos.
+   ========================================================================= */
+const MI = {
+  tienda:  'Butterfly',
+  link:    'https://andeymejia3045-coder.github.io/butterfty.store/',
+  precio:  '$29.99',
+  antes:   '$50.00',
+  pack2:   '$49.99',
+  pack3:   '$69.99',
+  transf:  '$28.49',
+  banco:   'Banco Pichincha',
+  tipoCta: 'Cuenta de Ahorros',
+  cuenta:  '2213135141',
+  titular: 'Andrey Cabascango',
+  correo:  'corpusenigma4@gmail.com',
+  rapido:  '24 a 48 horas',
+  lento:   '2 a 4 días laborables',
+  ciudades:'Guayaquil, Quito, Cuenca, Manta, Machala y Ambato',
+  garantia:'30 días',
+};
+
+/* =========================================================================
+   LAS RESPUESTAS
+   {nombre} se reemplaza por el nombre del cliente que escribas arriba.
+   ========================================================================= */
+const RESPUESTAS = [
+
+/* ------------------------------- SALUDOS ------------------------------- */
+{c:'Saludos', t:'Saludo inicial', m:
+`¡Hola{nombre}! 😊 Bienvenida a ${MI.tienda}.
+
+Te escribo del Cepillo, Secador y Aplanchador 3 en 1: seca, alisa y da volumen en un solo paso, en unos 10 minutos.
+
+¿Te cuento el precio y cómo funciona?`},
+
+{c:'Saludos', t:'Responde a "hola"', m:
+`¡Hola{nombre}! 👋 Con gusto te ayudo.
+
+¿Qué te gustaría saber del cepillo? Puedo contarte del precio, cómo funciona, o cómo es la entrega.`},
+
+{c:'Saludos', t:'Cuando solo escriben "info" o "precio"', m:
+`¡Hola{nombre}! Te paso toda la info 👇
+
+🌸 *Cepillo, Secador y Aplanchador 3 en 1*
+Seca, alisa y da volumen en una sola pasada.
+
+💰 Precio: *${MI.precio}* (antes ${MI.antes})
+🚚 Envío *GRATIS* a todo el Ecuador
+💵 Pagas *cuando lo recibes*, en efectivo
+🛡️ Garantía de ${MI.garantia}
+
+Más fotos y detalles aquí:
+${MI.link}
+
+¿Te lo envío?`},
+
+{c:'Saludos', t:'Fuera de horario', m:
+`¡Hola{nombre}! Gracias por escribir 🌙
+
+Ahora no estoy en línea, pero mañana temprano te respondo todo con detalle.
+
+Mientras tanto puedes ver el producto aquí: ${MI.link}`},
+
+/* -------------------------------- PRECIO ------------------------------- */
+{c:'Precio', t:'Cuánto cuesta', m:
+`El precio es *${MI.precio}* {nombre}, con *envío gratis* a todo el Ecuador 🚚
+
+Antes estaba en ${MI.antes}, así que ahorras un 40%.
+
+Y lo mejor: *pagas cuando lo recibes en tu casa*. No adelantas nada.`},
+
+{c:'Precio', t:'Packs de 2 y 3 (para que compre más)', m:
+`Te cuento las opciones{nombre} 👇
+
+1️⃣ *1 cepillo* → ${MI.precio}
+2️⃣ *2 cepillos* → ${MI.pack2} (ahorras $10)
+3️⃣ *3 cepillos* → ${MI.pack3} (ahorras $20)
+
+Muchas clientas llevan dos: uno para ellas y uno de regalo. Sale mucho más barato por unidad.
+
+¿Cuál te preparo?`},
+
+{c:'Precio', t:'"Está muy caro"', m:
+`Te entiendo{nombre} 🙏 Pero mira la cuenta:
+
+Un alisado en salón cuesta entre $15 y $25, y dura poco. Si vas dos veces al mes son más de $30 al mes.
+
+Este cepillo son ${MI.precio} *una sola vez* y lo usas todos los días por años. Se paga solo en la primera semana.
+
+Además pagas al recibirlo, así que no arriesgas nada.`},
+
+{c:'Precio', t:'Pide descuento', m:
+`{nombre} el precio ya está con el 40% de descuento (de ${MI.antes} bajó a ${MI.precio}) y el envío va gratis, así que no puedo bajarlo más 🙏
+
+Pero sí te puedo dar una mejor opción: si llevas *2 cepillos* te sale en ${MI.pack2}, o sea que el segundo te queda a mitad de precio.
+
+¿Te interesa esa?`},
+
+{c:'Precio', t:'Descuento por transferencia', m:
+`{nombre} si pagas por transferencia te doy *5% de descuento*: te queda en *${MI.transf}* en lugar de ${MI.precio} 💚
+
+Y tu pedido sale con prioridad el mismo día.
+
+Si prefieres pagar al recibir, también se puede, sin ningún recargo.`},
+
+{c:'Precio', t:'"¿Hay más barato?"', m:
+`Es el precio más bajo que manejo{nombre} 😊
+
+Ojo con los que venden más baratos: suelen ser copias de menos vatios que se calientan mal y maltratan el pelo. El mío es de 1000 W con recubrimiento cerámico y viene con garantía de ${MI.garantia}.
+
+Prefiero venderte algo que sí te funcione y que vuelvas, no algo barato que te decepcione.`},
+
+/* ------------------------------- PRODUCTO ------------------------------ */
+{c:'Producto', t:'Qué hace / para qué sirve', m:
+`Hace tres cosas al mismo tiempo{nombre} ✨
+
+1. *Seca* tu cabello
+2. *Alisa* y quita el frizz
+3. *Da volumen* desde la raíz
+
+O sea que reemplaza el secador, el cepillo y la plancha. Pasas de 30 minutos de rutina a unos 10, y tu pelo recibe menos calor porque es un solo paso.`},
+
+{c:'Producto', t:'¿Sirve para mi tipo de cabello?', m:
+`Sí{nombre}, funciona en todos los tipos de cabello: liso, ondulado, rizado, fino o grueso 💁‍♀️
+
+Tiene *3 niveles de temperatura*:
+• Baja → cabello fino o teñido
+• Media → uso diario
+• Alta → cabello grueso o muy rizado
+
+Así lo ajustas a tu pelo y no lo maltratas.`},
+
+{c:'Producto', t:'¿Daña o quema el cabello?', m:
+`No{nombre}, al contrario 🌿
+
+Tiene recubrimiento *cerámico*, que reparte el calor de forma uniforme y evita los puntos calientes que son los que queman el pelo. También tiene diseño anti quemaduras para que puedas peinar desde la raíz sin miedo.
+
+Y al hacer todo en un solo paso, tu cabello recibe *menos calor total* que usando secador y plancha por separado.`},
+
+{c:'Producto', t:'¿Sirve para pelo muy rizado?', m:
+`Sí{nombre} 💪 Para cabello muy rizado te recomiendo:
+
+• Usar la *temperatura alta*
+• Dividir el cabello en 4 secciones
+• Pasar el cepillo despacio, desde la raíz a las puntas
+
+Varias clientas de pelo rizado lo usan y quedan encantadas. No queda plancha total, queda liso con movimiento y brillo, que se ve más natural.`},
+
+{c:'Producto', t:'¿Se usa en pelo mojado o seco?', m:
+`En cabello *húmedo*, no empapado{nombre} 💧
+
+Sécalo con la toalla primero hasta que no gotee, y de ahí pasas el cepillo. Así seca y alisa al mismo tiempo.
+
+También lo puedes usar en pelo seco solo para dar forma y volumen.`},
+
+{c:'Producto', t:'Cómo se usa (paso a paso)', m:
+`Súper fácil{nombre} 👇
+
+1️⃣ Seca con toalla hasta que quede húmedo, no mojado
+2️⃣ Divide el cabello en 4 secciones con pinzas
+3️⃣ Empieza por las secciones de abajo
+4️⃣ Desliza el cepillo desde la raíz hacia las puntas
+5️⃣ Para volumen: gira el cepillo hacia dentro en la raíz y sostén 2 segundos
+6️⃣ Termina con aire frío para fijar y dar brillo
+
+En 10 minutos quedas lista ✨`},
+
+{c:'Producto', t:'Características técnicas', m:
+`Te paso las especificaciones{nombre} 📋
+
+⚡ Potencia: 1000 W
+🌡️ 3 temperaturas + 2 velocidades + aire frío
+✨ Recubrimiento cerámico con iones (menos frizz)
+📏 31,5 cm de largo, barril de 7 cm
+🪮 Cerdas mixtas con puntas redondeadas anti tirones
+🔌 Cable de 2 metros que gira 360°
+🔋 Voltaje 110 V (el de Ecuador)
+📦 Incluye manual en español y caja de regalo`},
+
+{c:'Producto', t:'¿Es original?', m:
+`Sí{nombre} ✅ Es producto original, no una copia.
+
+Te lo entrego en su caja sellada con su manual. Puedes *revisarlo delante del mensajero antes de pagar*, y si algo no te cuadra, no lo recibes.
+
+Además tienes ${MI.garantia} de garantía: si no te gusta, te devuelvo tu dinero.`},
+
+{c:'Producto', t:'¿Cuánto dura?', m:
+`Con uso normal diario dura años{nombre} 💪
+
+Para cuidarlo: límpiale el filtro de atrás cada cierto tiempo (se acumula pelusa), no lo enrolles apretado del cable, y guárdalo cuando esté frío.
+
+Cualquier falla de fábrica te la cubro en los primeros ${MI.garantia}.`},
+
+{c:'Producto', t:'¿Tiene garantía?', m:
+`Sí{nombre} 🛡️ Tienes *${MI.garantia}* de garantía.
+
+Si el producto llega con alguna falla, te lo cambio por uno nuevo sin costo.
+Y si simplemente no te gusta el resultado, me lo devuelves y te regreso tu dinero completo.
+
+Yo coordino el retiro, tú no pagas nada extra.`},
+
+{c:'Producto', t:'¿Qué colores hay?', m:
+`Viene en *negro con detalles rosados*{nombre} 🌸 Es el único color disponible ahora.
+
+Se ve elegante y no se ensucia con facilidad. Puedes verlo en las fotos aquí: ${MI.link}`},
+
+/* --------------------------------- ENVÍO ------------------------------- */
+{c:'Envío', t:'Costo del envío', m:
+`El envío es *totalmente GRATIS*{nombre} 🚚 A todo el Ecuador, sin monto mínimo.
+
+Solo pagas el producto: ${MI.precio}`},
+
+{c:'Envío', t:'Tiempo de entrega', m:
+`Depende de tu ciudad{nombre} 📦
+
+🏙️ ${MI.ciudades} → *${MI.rapido}*
+🌄 Resto del país → *${MI.lento}*
+
+¿De qué ciudad eres? Así te digo exacto.`},
+
+{c:'Envío', t:'¿Envían a mi ciudad?', m:
+`Sí{nombre}, enviamos a *todo el Ecuador* 🇪🇨 Todas las provincias, incluso zonas rurales.
+
+Dime tu ciudad y te confirmo en cuántos días llega.`},
+
+{c:'Envío', t:'¿Cómo sé cuándo llega?', m:
+`Te aviso por aquí mismo{nombre} 📲
+
+Cuando tu pedido sale a ruta te escribo, y el día de la entrega el mensajero te llama antes de llegar.
+
+Así no te toma por sorpresa y estás en casa.`},
+
+{c:'Envío', t:'¿Puedo recibir en otra dirección?', m:
+`Claro que sí{nombre} 😊 Puede ser tu casa, tu trabajo, o la dirección de un familiar.
+
+Solo mándame:
+📍 Dirección completa
+👤 Nombre de quien recibe
+📱 Su número de celular
+
+Y lo despacho para allá.`},
+
+{c:'Envío', t:'Todavía no ha llegado', m:
+`Déjame revisar ya mismo{nombre} 🙏 Disculpa la espera.
+
+Reviso con la transportadora en qué punto va tu pedido y te confirmo en unos minutos con información exacta.
+
+No te preocupes que tu pedido está en camino y yo respondo por él.`},
+
+/* ---------------------------------- PAGO ------------------------------- */
+{c:'Pago', t:'Formas de pago', m:
+`Tienes dos opciones{nombre} 💳
+
+1️⃣ *Pago contra entrega* → No adelantas nada. Pagas en efectivo al mensajero cuando lo recibes y ya lo revisaste.
+
+2️⃣ *Transferencia* → Tienes *5% de descuento* (te queda en ${MI.transf}) y tu pedido sale con prioridad.
+
+¿Cuál prefieres?`},
+
+{c:'Pago', t:'Explicar pago contra entrega', m:
+`Es lo más cómodo y seguro para ti{nombre} 🤝
+
+Funciona así:
+1. Me das tu dirección
+2. El mensajero llega a tu puerta
+3. *Revisas el producto*
+4. Recién ahí pagas los ${MI.precio} en efectivo
+
+Si no te gusta, no lo recibes y no pagas nada. Cero riesgo.
+
+💡 Ten el monto exacto listo para que sea más rápido.`},
+
+{c:'Pago', t:'Datos para transferencia', m:
+`Te paso los datos{nombre} 🏦
+
+🏦 ${MI.banco}
+📋 ${MI.tipoCta}
+🔢 ${MI.cuenta}
+👤 ${MI.titular}
+📧 ${MI.correo}
+
+💰 Monto: *${MI.transf}* (ya con tu 5% de descuento)
+
+Cuando transfieras, *mándame la foto del comprobante por aquí* y despacho tu pedido el mismo día 📦`},
+
+{c:'Pago', t:'¿Aceptan tarjeta?', m:
+`Por ahora no manejo tarjeta{nombre} 🙏
+
+Pero tengo dos opciones cómodas:
+💵 *Contra entrega* → pagas en efectivo al recibir
+🏦 *Transferencia* → con 5% de descuento
+
+La de contra entrega es la más segura para ti porque no adelantas nada.`},
+
+{c:'Pago', t:'Ya transferí', m:
+`¡Perfecto{nombre}! 🙌 Muchas gracias.
+
+Mándame la *foto del comprobante* por aquí para verificarlo y despacho tu pedido de una.
+
+En cuanto salga a ruta te escribo para avisarte 📦`},
+
+{c:'Pago', t:'Comprobante recibido, pedido confirmado', m:
+`¡Listo{nombre}! ✅ Pago verificado.
+
+Tu pedido queda confirmado y sale hoy mismo. Te escribo por aquí cuando esté en ruta.
+
+¡Gracias por confiar en ${MI.tienda}! 🌸`},
+
+/* ---------------------------- DESCONFIANZA ----------------------------- */
+{c:'Dudas', t:'"¿Es estafa? / ¿son confiables?"', m:
+`Te entiendo perfectamente{nombre}, hoy hay que tener cuidado 🙏
+
+Por eso trabajo con *pago contra entrega*: tú no me adelantas ni un centavo. El mensajero llega, revisas el producto, y solo si te gusta lo pagas.
+
+O sea que el riesgo lo asumo yo, no tú. Y si después no te convence, tienes ${MI.garantia} para devolverlo.
+
+Aquí puedes ver la tienda y las opiniones de otras clientas: ${MI.link}`},
+
+{c:'Dudas', t:'"No confío en pagos por internet"', m:
+`No hace falta que pagues nada por internet{nombre} 😊
+
+Con el *pago contra entrega* le pagas en *efectivo* al mensajero, en tu puerta, cuando ya tengas el producto en la mano.
+
+Ni tarjeta, ni transferencia, ni datos bancarios. Nada.`},
+
+{c:'Dudas', t:'"¿Tienes local físico?"', m:
+`Trabajo con entregas a domicilio{nombre} 🏠 Así llega directo a tu puerta sin que tengas que salir ni gastar en transporte.
+
+Y como pagas al recibir, es igual de seguro que comprar en un local: revisas el producto antes de entregar el dinero.`},
+
+{c:'Dudas', t:'Mostrar opiniones de otras clientas', m:
+`Mira lo que dicen otras clientas{nombre} 🌟
+
+En la tienda están las opiniones y las fotos que me han enviado:
+${MI.link}
+
+La mayoría dice lo mismo: que se ahorran media hora cada mañana y que el pelo les queda con más brillo que con la plancha.`},
+
+/* ------------------------------ SEGUIMIENTO ---------------------------- */
+{c:'Seguimiento', t:'"Déjame pensarlo"', m:
+`Claro que sí{nombre}, tómate tu tiempo 😊
+
+Solo te comento que la oferta de ${MI.precio} es por tiempo limitado y me quedan pocas unidades.
+
+Si quieres te lo reservo sin compromiso: no pagas nada hasta que lo recibas, y si cambias de opinión antes de que salga, me avisas y lo cancelamos sin problema.
+
+¿Te lo aparto?`},
+
+{c:'Seguimiento', t:'"Luego te escribo"', m:
+`Perfecto{nombre}, aquí estoy cuando quieras 🌸
+
+Te dejo el link para que lo veas con calma:
+${MI.link}
+
+Cualquier duda me escribes con confianza.`},
+
+{c:'Seguimiento', t:'No responde (primer recordatorio)', m:
+`¡Hola{nombre}! 😊 ¿Pudiste ver la información del cepillo?
+
+Si te quedó alguna duda me dices con confianza, sin compromiso.
+
+Sigo teniendo el precio de ${MI.precio} con envío gratis.`},
+
+{c:'Seguimiento', t:'No responde (segundo, con urgencia)', m:
+`{nombre} te escribo solo para avisarte 🙌
+
+Me quedan las últimas unidades a ${MI.precio}. Después de estas el precio sube a ${MI.antes}.
+
+Si lo quieres asegurar, dime y te lo reservo. Recuerda que *pagas cuando lo recibes*, no arriesgas nada.`},
+
+{c:'Seguimiento', t:'No responde (último, sin presionar)', m:
+`¡Hola{nombre}! No quiero molestarte más 🙏
+
+Te dejo por aquí el link por si algún día lo necesitas:
+${MI.link}
+
+Si más adelante te decides, escríbeme con confianza. ¡Que tengas un lindo día! 🌸`},
+
+/* ------------------------------- CIERRE -------------------------------- */
+{c:'Cierre', t:'Pedir los datos del pedido', m:
+`¡Excelente decisión{nombre}! 🎉
+
+Para despacharlo mándame estos datos:
+
+👤 Nombres y apellidos
+🪪 Cédula
+📱 Celular
+📍 Provincia y ciudad
+🏠 Dirección completa (calles, número de casa, sector)
+🗺️ Alguna referencia para el mensajero
+
+Y me confirmas: ¿pago contra entrega o transferencia?`},
+
+{c:'Cierre', t:'Confirmar el pedido', m:
+`¡Listo{nombre}! ✅ Tu pedido queda registrado.
+
+📦 Cepillo, Secador y Aplanchador 3 en 1
+💰 Total: ${MI.precio} (envío gratis)
+💵 Pagas al recibir, en efectivo
+
+Te escribo por aquí cuando salga a ruta. ¡Gracias por confiar en ${MI.tienda}! 🌸`},
+
+{c:'Cierre', t:'Últimas unidades (urgencia)', m:
+`{nombre} te cuento que me quedan *pocas unidades* de este lote ⏰
+
+Como no adelantas nada, te lo puedo reservar ahora y decides cuando lo tengas en la mano.
+
+¿Te lo aparto?`},
+
+{c:'Cierre', t:'Mandar el link de la tienda', m:
+`Aquí puedes ver todo con fotos y opiniones{nombre} 👇
+
+${MI.link}
+
+Ahí mismo puedes hacer tu pedido, o si prefieres me das los datos por aquí y yo lo registro.`},
+
+/* ------------------------------ POSTVENTA ------------------------------ */
+{c:'Postventa', t:'Pedido enviado', m:
+`¡Buenas noticias{nombre}! 🚚 Tu pedido *ya salió a ruta*.
+
+Llega en ${MI.rapido}. El mensajero te llama antes de llegar.
+
+Ten listos los ${MI.precio} en efectivo 💵 Y recuerda: revísalo antes de pagar.`},
+
+{c:'Postventa', t:'Confirmar que llegó bien', m:
+`¡Hola{nombre}! 😊 ¿Ya recibiste tu cepillo?
+
+Cuéntame cómo te fue con el primer uso. Si necesitas algún consejo para sacarle el mejor resultado, con gusto te ayudo.`},
+
+{c:'Postventa', t:'Consejos al recibirlo', m:
+`¡Qué bueno que ya lo tienes{nombre}! 🎉 Te dejo unos tips para la primera vez:
+
+✅ Úsalo en pelo húmedo, no mojado
+✅ Divide en 4 secciones
+✅ Empieza con temperatura media
+✅ Termina con aire frío para más brillo
+⚠️ La primera vez puede oler un poquito a nuevo, es normal y se va
+
+Cualquier duda me escribes 💕`},
+
+{c:'Postventa', t:'Pedir reseña y foto', m:
+`{nombre} me alegra mucho que te haya gustado 🥰
+
+¿Me harías un favor? Mándame una *foto de tu resultado* y unas palabritas de tu experiencia. Las publico en la tienda para que otras clientas se animen.
+
+¡Mil gracias por tu confianza! 🌸`},
+
+{c:'Postventa', t:'Ofrecer que recomiende', m:
+`{nombre} si conoces a alguien que también sufra con el secador y la plancha, pásale mi contacto 💕
+
+A las clientas que me recomiendan siempre les tengo un precio especial en su siguiente compra.
+
+¡Gracias por ser parte de ${MI.tienda}! 🌸`},
+
+/* ------------------------------ PROBLEMAS ------------------------------ */
+{c:'Problemas', t:'Llegó dañado o con falla', m:
+`{nombre} lamento mucho que haya pasado esto 🙏 Lo resolvemos ya mismo.
+
+¿Me puedes mandar una foto o un video corto de la falla? Con eso coordino de inmediato el cambio por uno nuevo, sin ningún costo para ti.
+
+Tienes ${MI.garantia} de garantía y yo respondo. Tranquila que esto se soluciona.`},
+
+{c:'Problemas', t:'No funciona / no calienta', m:
+`Vamos a revisarlo juntas{nombre} 🔧 Primero lo simple:
+
+1️⃣ ¿Está bien enchufado y el tomacorriente funciona?
+2️⃣ ¿Probaste subir el nivel de temperatura?
+3️⃣ ¿El filtro de atrás está limpio? Si tiene pelusa se apaga solo por seguridad
+
+Si ya probaste todo y sigue igual, te lo cambio por uno nuevo. Solo mándame un video cortito.`},
+
+{c:'Problemas', t:'Quiere devolverlo', m:
+`Sin problema{nombre}, se respeta 🙏
+
+Tienes ${MI.garantia} para devolverlo. Solo necesito que esté completo con su caja.
+
+Yo coordino el retiro sin costo para ti y te devuelvo el 100% de lo que pagaste.
+
+¿Me confirmas la dirección donde lo retiramos?`},
+
+{c:'Problemas', t:'Cliente enojado', m:
+`{nombre} tienes toda la razón en estar molesta y te pido disculpas 🙏
+
+No es la experiencia que quiero darte. Dame la oportunidad de arreglarlo: dime qué pasó exactamente y lo soluciono hoy mismo, sea con un cambio o con la devolución completa de tu dinero.
+
+Tu tranquilidad es más importante que la venta.`},
+
+{c:'Problemas', t:'No estaba en casa / rechazó el pedido', m:
+`{nombre} el mensajero pasó y no te encontró 😕
+
+¿Quieres que lo intentemos de nuevo? Solo dime:
+📅 Qué día te queda mejor
+🕐 En qué horario
+📍 Si prefieres otra dirección
+
+Sin problema lo reprogramo.`},
+
+{c:'Problemas', t:'Se arrepintió antes de recibir', m:
+`No hay problema{nombre}, se entiende 🙏
+
+Lo cancelo sin ningún cargo, tranquila.
+
+Si más adelante te animas, escríbeme con confianza que aquí estoy. ¡Que tengas un lindo día! 🌸`},
+
+];
+
+/* =========================================================================
+   FUNCIONAMIENTO
+   ========================================================================= */
+const $ = (s) => document.querySelector(s);
+const CLAVE_USOS = 'butterfly_respuestas_usos';
+
+let filtro = 'Más usadas';
+let busqueda = '';
+let usos = cargarUsos();
+
+function cargarUsos(){
+  try { return JSON.parse(localStorage.getItem(CLAVE_USOS) || '{}'); }
+  catch(e){ return {}; }
+}
+function guardarUsos(){
+  try { localStorage.setItem(CLAVE_USOS, JSON.stringify(usos)); } catch(e){}
+}
+
+function escapar(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/** Pone el nombre del cliente en el mensaje */
+function personalizar(texto){
+  const n = $('#nombreCliente').value.trim();
+  return texto.replace(/\{nombre\}/g, n ? ' ' + n : '');
+}
+
+/** Resalta en amarillo lo que se está buscando */
+function resaltar(html){
+  if (!busqueda) return html;
+  const re = new RegExp('(' + busqueda.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi');
+  return html.replace(re, '<mark>$1</mark>');
+}
+
+function categorias(){
+  const orden = ['Más usadas'];
+  RESPUESTAS.forEach(r => { if (orden.indexOf(r.c) === -1) orden.push(r.c); });
+  return orden;
+}
+
+function pintarFiltros(){
+  const cont = $('#filtros');
+  cont.innerHTML = categorias().map(c => {
+    const n = c === 'Más usadas'
+      ? Object.keys(usos).length
+      : RESPUESTAS.filter(r => r.c === c).length;
+    return '<button class="chip' + (c === filtro ? ' chip--activo' : '') +
+           '" data-cat="' + escapar(c) + '">' + escapar(c) +
+           (n ? ' <b>' + n + '</b>' : '') + '</button>';
+  }).join('');
+}
+
+function visibles(){
+  let lista = RESPUESTAS.map((r, i) => Object.assign({}, r, {id:i}));
+
+  if (busqueda){
+    const q = busqueda.toLowerCase();
+    lista = lista.filter(r =>
+      r.t.toLowerCase().includes(q) ||
+      r.m.toLowerCase().includes(q) ||
+      r.c.toLowerCase().includes(q));
+  } else if (filtro === 'Más usadas'){
+    lista = lista.filter(r => usos[r.id] > 0)
+                 .sort((a,b) => usos[b.id] - usos[a.id]);
+  } else {
+    lista = lista.filter(r => r.c === filtro);
+  }
+  return lista;
+}
+
+function pintarLista(){
+  const cont = $('#lista');
+  const lista = visibles();
+  $('#cuenta').textContent = RESPUESTAS.length + ' respuestas';
+
+  if (!lista.length){
+    cont.innerHTML = '<div class="vacio"><strong>' +
+      (busqueda ? 'No encontré nada con "' + escapar(busqueda) + '"'
+                : 'Aún no has usado ninguna') + '</strong>' +
+      (busqueda ? 'Prueba con otra palabra.'
+                : 'Cuando copies un mensaje, aparecerá aquí para tenerlo a mano.') +
+      '</div>';
+    return;
+  }
+
+  let html = '';
+  let grupoActual = '';
+  lista.forEach(r => {
+    const mostrarGrupo = !busqueda && filtro === 'Más usadas' ? false : true;
+    if (mostrarGrupo && busqueda && r.c !== grupoActual){
+      grupoActual = r.c;
+      html += '<p class="grupo">' + escapar(r.c) + '</p>';
+    }
+    const texto = personalizar(r.m);
+    html +=
+      '<article class="tarjeta">' +
+        '<div class="tarjeta__tope">' +
+          '<h2 class="tarjeta__titulo">' + resaltar(escapar(r.t)) + '</h2>' +
+          (usos[r.id] ? '<span class="tarjeta__veces">' + usos[r.id] + '×</span>' : '') +
+        '</div>' +
+        '<div class="tarjeta__cuerpo">' +
+          '<div class="tarjeta__texto">' + resaltar(escapar(texto)) + '</div>' +
+          '<div class="tarjeta__acciones">' +
+            '<button class="btn btn--copiar" data-copiar="' + r.id + '">📋 Copiar</button>' +
+            '<button class="btn btn--wa" data-wa="' + r.id + '" ' +
+                    'aria-label="Abrir WhatsApp con este mensaje">💬</button>' +
+          '</div>' +
+        '</div>' +
+      '</article>';
+  });
+  cont.innerHTML = html;
+}
+
+function pintar(){ pintarFiltros(); pintarLista(); }
+
+/* ------------------------------- copiar -------------------------------- */
+let tiempoToast;
+function avisar(texto){
+  const t = $('#toast');
+  t.textContent = texto;
+  t.classList.add('visible');
+  clearTimeout(tiempoToast);
+  tiempoToast = setTimeout(() => t.classList.remove('visible'), 1800);
+}
+
+async function copiar(texto){
+  try {
+    if (navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(texto);
+      return true;
+    }
+  } catch(e){}
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = texto;
+    ta.style.position = 'fixed';
+    ta.style.top = '0';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    const ok = document.execCommand('copy');
+    ta.remove();
+    return ok;
+  } catch(e){ return false; }
+}
+
+/* ------------------------------- eventos ------------------------------- */
+$('#filtros').addEventListener('click', (e) => {
+  const chip = e.target.closest('[data-cat]');
+  if (!chip) return;
+  filtro = chip.getAttribute('data-cat');
+  busqueda = '';
+  $('#buscar').value = '';
+  $('#limpiar').classList.remove('visible');
+  pintar();
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+$('#lista').addEventListener('click', async (e) => {
+  const bCopiar = e.target.closest('[data-copiar]');
+  const bWa = e.target.closest('[data-wa]');
+
+  if (bCopiar){
+    const id = +bCopiar.getAttribute('data-copiar');
+    const texto = personalizar(RESPUESTAS[id].m);
+    const ok = await copiar(texto);
+    if (ok){
+      bCopiar.textContent = '✅ Copiado';
+      bCopiar.classList.add('listo');
+      setTimeout(() => { bCopiar.textContent = '📋 Copiar'; bCopiar.classList.remove('listo'); }, 1400);
+      avisar('¡Copiado! Ya puedes pegarlo');
+      usos[id] = (usos[id] || 0) + 1;
+      guardarUsos();
+      pintarFiltros();
+    } else {
+      avisar('No se pudo copiar, selecciona el texto a mano');
+    }
+  }
+
+  if (bWa){
+    const id = +bWa.getAttribute('data-wa');
+    const texto = personalizar(RESPUESTAS[id].m);
+    usos[id] = (usos[id] || 0) + 1;
+    guardarUsos();
+    window.open('https://wa.me/?text=' + encodeURIComponent(texto), '_blank');
+  }
+});
+
+$('#buscar').addEventListener('input', (e) => {
+  busqueda = e.target.value.trim();
+  $('#limpiar').classList.toggle('visible', !!busqueda);
+  pintarLista();
+});
+
+$('#limpiar').addEventListener('click', () => {
+  busqueda = '';
+  $('#buscar').value = '';
+  $('#limpiar').classList.remove('visible');
+  pintarLista();
+  $('#buscar').focus();
+});
+
+$('#nombreCliente').addEventListener('input', pintarLista);
+
+/* ------------------------------- arranque ------------------------------ */
+// Si nunca has usado nada, arrancamos en la primera categoría real
+if (!Object.keys(usos).length) filtro = categorias()[1];
+pintar();
+</script>
+</body>
+</html>
