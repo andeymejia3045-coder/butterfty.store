@@ -734,8 +734,10 @@ def main():
     print("Generando imágenes en assets/img/ ...")
 
     escribir("producto-1.svg", producto_1())
-    escribir("producto-2.svg", producto_2())
-    escribir("producto-3.svg", producto_3())
+    # La ranura 2 ya tiene foto real (infografía de temperatura), así que su
+    # ilustración de respaldo lleva ese mismo tema, y la de medidas pasa a la 3
+    escribir("producto-2.svg", producto_3())
+    escribir("producto-3.svg", producto_2())
     escribir("producto-4.svg", producto_4())
     escribir("producto-5.svg", producto_5())
 

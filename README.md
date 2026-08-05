@@ -112,7 +112,37 @@ primer segundo. Se ven bien, pero **nada vende como una foto real**.
 
 ### Fotos del producto
 
-Pon tus fotos en `assets/img/` y actualiza la galería en `config.js`:
+**Ya están puestas las dos primeras.** Para las que faltan, súbelas a
+`assets/img/` con estos nombres y aparecen solas, sin tocar código:
+
+| Archivo | Posición en la galería | Estado |
+|---|---|---|
+| `producto-1.png` | 1ª (la principal) | ✅ foto real |
+| `producto-2.png` | 2ª | ✅ foto real |
+| `producto-3.jpg` | 3ª | ⬜ falta |
+| `producto-4.jpg` | 4ª | ⬜ falta |
+| `producto-5.jpg` | 5ª | ⬜ falta |
+
+Da igual si las subes como `.jpg` o como `.png`: la tienda prueba primero
+`.jpg`, luego `.png`, y si no encuentra ninguna muestra la ilustración `.svg`.
+Nunca se ve un cuadro roto.
+
+### Bajarle el peso a una foto
+
+Las fotos de más de medio mega hacen esperar a quien entra con datos móviles.
+Este comando las reduce sin que se noten peor:
+
+```bash
+python3 herramientas/optimizar-png.py assets/img/producto-3.png --ancho 1000
+```
+
+Para fotos muy pesadas conviene además convertirlas a `.jpg` en
+[squoosh.app](https://squoosh.app), que es gratis y no instala nada: una foto
+de 1 MB suele quedar en menos de 100 KB.
+
+### Si quieres cambiar el orden o los nombres
+
+Edita la galería en `config.js`:
 
 ```js
 galeria: [

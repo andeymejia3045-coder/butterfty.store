@@ -562,15 +562,28 @@
      Usamos la fase de captura porque el evento "error" de las imágenes no
      sube por el árbol como los demás eventos.
      ======================================================================= */
-  const EXTENSIONES_FOTO = /\.(jpe?g|png|webp|avif)$/i;
+  /* Orden en que se buscan las imágenes. Si subes la foto como .jpg o como
+     .png da igual: se prueba una y luego la otra, y si no hay ninguna se
+     muestra la ilustración .svg, que siempre existe. */
+  const CADENA_FORMATOS = ['.jpg', '.png', '.svg'];
+  const EXTENSIONES_FOTO = /\.(jpe?g|png|webp|avif|svg)$/i;
 
   function usarRespaldo(img) {
     if (!img || img.tagName !== 'IMG') return;
-    if (img.dataset.respaldo === 'usado') return; // solo se intenta una vez
+
     const actual = img.getAttribute('src') || '';
-    if (!EXTENSIONES_FOTO.test(actual)) return;
+    const coincide = actual.match(EXTENSIONES_FOTO);
+    if (!coincide) return;
+
+    const extActual = coincide[0].toLowerCase().replace('.jpeg', '.jpg');
+    const posicion = CADENA_FORMATOS.indexOf(extActual);
+
+    // Si ya llegamos a la ilustración, no hay nada más que intentar
+    if (posicion === -1 || posicion === CADENA_FORMATOS.length - 1) return;
+
+    const siguiente = CADENA_FORMATOS[posicion + 1];
     img.dataset.respaldo = 'usado';
-    img.src = actual.replace(EXTENSIONES_FOTO, '.svg');
+    img.src = actual.replace(EXTENSIONES_FOTO, siguiente);
   }
 
   /** Revisa las imágenes que ya fallaron antes de que empezáramos a escuchar */

@@ -68,11 +68,13 @@ const CONFIG = {
        Para poner tus fotos reales: súbelas a assets/img/ con estos nombres
        exactos (producto-1.jpg, producto-2.jpg, ...) y aparecen solas.
        --------------------------------------------------------------------- */
-    imagenPrincipal: 'assets/img/producto-1.jpg',
+    imagenPrincipal: 'assets/img/producto-1.png',
     galeria: [
-      { src: 'assets/img/producto-1.jpg', alt: 'Cepillo, secador y aplanchador 3 en 1 con su caja' },
-      { src: 'assets/img/producto-2.jpg', alt: 'Medidas del cepillo: 31,5 cm de largo y barril de 7 cm' },
-      { src: 'assets/img/producto-3.jpg', alt: 'Niveles de temperatura y velocidad del cepillo' },
+      // ── Fotos reales ya subidas ──
+      { src: 'assets/img/producto-1.png', alt: 'Cepillo, secador y aplanchador 3 en 1 en color negro con detalles rosados' },
+      { src: 'assets/img/producto-2.png', alt: 'Temperatura y velocidad ajustables: alta, media y baja, con tecnología de iones negativos' },
+      // ── Faltan por subir: mientras tanto se ve la ilustración ──
+      { src: 'assets/img/producto-3.jpg', alt: 'Medidas del cepillo: 31,5 cm de largo y barril de 7 cm' },
       { src: 'assets/img/producto-4.jpg', alt: 'Cuatro estilos posibles: secado, rizos, alisado y volumen' },
       { src: 'assets/img/producto-5.jpg', alt: 'Especificaciones técnicas: 1000 W, cerámica y ondas suaves' },
     ],

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img"
-     aria-label="Medidas del cepillo: 12.4 pulgadas de alto y barril de 2.8 pulgadas">
+     aria-label="Niveles múltiples de temperatura y velocidad del cepillo">
 
   <defs>
     <linearGradient id="gMango" x1="0" y1="0" x2="1" y2="0">
@@ -23,99 +23,64 @@
     </linearGradient>
   </defs>
 
-  <rect width="800" height="800" fill="#ffffff"/>
+  <rect width="800" height="800" fill="#EDE7E1"/>
 
-  <text x="60" y="70" font-family="Arial, sans-serif" font-size="46" font-weight="bold"
-        fill="#101010" letter-spacing="6">LISAPRO</text>
+  <rect x="60" y="70" width="330" height="112" rx="4" fill="#C9B9AC" opacity="0.95"/>
+  <text x="84" y="118" font-family="Arial, sans-serif" font-size="27" font-weight="bold"
+        fill="#ffffff">MULTIPLE HEAT &amp;</text>
+  <text x="84" y="154" font-family="Arial, sans-serif" font-size="27" font-weight="bold"
+        fill="#ffffff">SPEED SECTIONS</text>
 
-  <!-- medida superior: 3 inch -->
-  <g stroke="#101010" stroke-width="2.5">
-    <line x1="120" y1="150" x2="250" y2="150"/>
-    <line x1="120" y1="142" x2="120" y2="158"/>
-    <line x1="250" y1="142" x2="250" y2="158"/>
-  </g>
-  <text x="185" y="138" font-family="Arial, sans-serif" font-size="19" font-weight="bold"
-        fill="#101010" text-anchor="middle">3 inch</text>
-
-  
-  <g transform="translate(125 170) scale(1.0) rotate(0)">
-    <!-- cable -->
-    <path d="M60 470 C 20 500, 105 520, 70 552" fill="none" stroke="#101010"
-          stroke-width="7" stroke-linecap="round"/>
-    <rect x="48" y="548" width="30" height="20" rx="4" fill="#101010"/>
-
-    <!-- mango -->
-    <path d="M38 300 L82 300 L78 470 Q60 486 42 470 Z" fill="url(#gMango)"/>
-    <!-- controles del mango -->
-    <rect x="47" y="330" width="26" height="7" rx="3.5" fill="#FB2E71"/>
-    <rect x="47" y="345" width="26" height="7" rx="3.5" fill="#3a3a3a"/>
-    <rect x="47" y="360" width="26" height="7" rx="3.5" fill="#3a3a3a"/>
-    <text x="60" y="392" font-family="Arial, sans-serif" font-size="9"
-          fill="#8a8a8a" text-anchor="middle" letter-spacing="1">LISAPRO</text>
-
-    <!-- collar rosado -->
-    <path d="M32 262 L88 262 L84 306 L36 306 Z" fill="url(#gRosa)"/>
-    <ellipse cx="60" cy="262" rx="28" ry="7" fill="#FF6B9D"/>
-
-    <!-- barril -->
-    <rect x="26" y="86" width="68" height="180" rx="34" fill="url(#gBarril)"/>
-    <rect x="38" y="96" width="20" height="160" rx="10" fill="#2a2a2a" opacity="0.55"/>
-
-    <!-- cerdas: filas laterales -->
-    <g stroke="#101010" stroke-width="3.4" stroke-linecap="round">
-      <line x1="26" y1="100" x2="6" y2="97"/><line x1="26" y1="115" x2="6" y2="112"/><line x1="26" y1="130" x2="6" y2="127"/><line x1="26" y1="145" x2="6" y2="142"/><line x1="26" y1="160" x2="6" y2="157"/><line x1="26" y1="175" x2="6" y2="172"/><line x1="26" y1="190" x2="6" y2="187"/><line x1="26" y1="205" x2="6" y2="202"/><line x1="26" y1="220" x2="6" y2="217"/><line x1="26" y1="235" x2="6" y2="232"/><line x1="26" y1="250" x2="6" y2="247"/>
-      <line x1="94" y1="100" x2="114" y2="97"/><line x1="94" y1="115" x2="114" y2="112"/><line x1="94" y1="130" x2="114" y2="127"/><line x1="94" y1="145" x2="114" y2="142"/><line x1="94" y1="160" x2="114" y2="157"/><line x1="94" y1="175" x2="114" y2="172"/><line x1="94" y1="190" x2="114" y2="187"/><line x1="94" y1="205" x2="114" y2="202"/><line x1="94" y1="220" x2="114" y2="217"/><line x1="94" y1="235" x2="114" y2="232"/><line x1="94" y1="250" x2="114" y2="247"/>
-    </g>
-    <g stroke="#FB2E71" stroke-width="3" stroke-linecap="round">
-      <line x1="28" y1="108" x2="12" y2="112"/><line x1="28" y1="123" x2="12" y2="127"/><line x1="28" y1="138" x2="12" y2="142"/><line x1="28" y1="153" x2="12" y2="157"/><line x1="28" y1="168" x2="12" y2="172"/><line x1="28" y1="183" x2="12" y2="187"/><line x1="28" y1="198" x2="12" y2="202"/><line x1="28" y1="213" x2="12" y2="217"/><line x1="28" y1="228" x2="12" y2="232"/><line x1="28" y1="243" x2="12" y2="247"/>
-      <line x1="92" y1="108" x2="108" y2="112"/><line x1="92" y1="123" x2="108" y2="127"/><line x1="92" y1="138" x2="108" y2="142"/><line x1="92" y1="153" x2="108" y2="157"/><line x1="92" y1="168" x2="108" y2="172"/><line x1="92" y1="183" x2="108" y2="187"/><line x1="92" y1="198" x2="108" y2="202"/><line x1="92" y1="213" x2="108" y2="217"/><line x1="92" y1="228" x2="108" y2="232"/><line x1="92" y1="243" x2="108" y2="247"/>
-    </g>
-    <!-- puntas redondeadas de las cerdas -->
-    <g fill="#FF6B9D">
-      <circle cx="6" cy="97" r="2.6"/><circle cx="6" cy="112" r="2.6"/><circle cx="6" cy="127" r="2.6"/><circle cx="6" cy="142" r="2.6"/><circle cx="6" cy="157" r="2.6"/><circle cx="6" cy="172" r="2.6"/><circle cx="6" cy="187" r="2.6"/><circle cx="6" cy="202" r="2.6"/><circle cx="6" cy="217" r="2.6"/><circle cx="6" cy="232" r="2.6"/><circle cx="6" cy="247" r="2.6"/>
-      <circle cx="114" cy="97" r="2.6"/><circle cx="114" cy="112" r="2.6"/><circle cx="114" cy="127" r="2.6"/><circle cx="114" cy="142" r="2.6"/><circle cx="114" cy="157" r="2.6"/><circle cx="114" cy="172" r="2.6"/><circle cx="114" cy="187" r="2.6"/><circle cx="114" cy="202" r="2.6"/><circle cx="114" cy="217" r="2.6"/><circle cx="114" cy="232" r="2.6"/><circle cx="114" cy="247" r="2.6"/>
-    </g>
-
-    <!-- cerdas frontales (textura) -->
-    <g fill="#101010" opacity="0.85">
-      <circle cx="44" cy="100" r="3.1"/><circle cx="60" cy="100" r="3.1"/><circle cx="76" cy="100" r="3.1"/><circle cx="44" cy="118" r="3.1"/><circle cx="60" cy="118" r="3.1"/><circle cx="76" cy="118" r="3.1"/><circle cx="44" cy="136" r="3.1"/><circle cx="60" cy="136" r="3.1"/><circle cx="76" cy="136" r="3.1"/><circle cx="44" cy="154" r="3.1"/><circle cx="60" cy="154" r="3.1"/><circle cx="76" cy="154" r="3.1"/><circle cx="44" cy="172" r="3.1"/><circle cx="60" cy="172" r="3.1"/><circle cx="76" cy="172" r="3.1"/><circle cx="44" cy="190" r="3.1"/><circle cx="60" cy="190" r="3.1"/><circle cx="76" cy="190" r="3.1"/><circle cx="44" cy="208" r="3.1"/><circle cx="60" cy="208" r="3.1"/><circle cx="76" cy="208" r="3.1"/><circle cx="44" cy="226" r="3.1"/><circle cx="60" cy="226" r="3.1"/><circle cx="76" cy="226" r="3.1"/><circle cx="44" cy="244" r="3.1"/><circle cx="60" cy="244" r="3.1"/><circle cx="76" cy="244" r="3.1"/><circle cx="44" cy="262" r="3.1"/><circle cx="60" cy="262" r="3.1"/><circle cx="76" cy="262" r="3.1"/>
-    </g>
-
-    <!-- tapa superior -->
-    <ellipse cx="60" cy="88" rx="34" ry="11" fill="#1c1c1c"/>
-    <ellipse cx="60" cy="86" rx="22" ry="7" fill="#FB2E71" opacity="0.9"/>
+  <!-- mango grande a la izquierda -->
+  <g transform="translate(120 210)">
+    <path d="M40 0 L200 0 L182 470 Q120 500 58 470 Z" fill="url(#gMango)"/>
+    <rect x="88" y="120" width="64" height="16" rx="8" fill="#FB2E71"/>
+    <rect x="88" y="156" width="64" height="16" rx="8" fill="#3a3a3a"/>
+    <rect x="88" y="192" width="64" height="16" rx="8" fill="#3a3a3a"/>
+    <text x="120" y="262" font-family="Arial, sans-serif" font-size="17"
+          fill="#8a8a8a" text-anchor="middle" letter-spacing="2">LISAPRO</text>
   </g>
 
-
-  <!-- medida lateral: 12.4 inch -->
-  <g stroke="#101010" stroke-width="2.5">
-    <line x1="300" y1="256" x2="300" y2="640"/>
-    <line x1="292" y1="256" x2="308" y2="256"/>
-    <line x1="292" y1="640" x2="308" y2="640"/>
+  <g transform="translate(430 250)">
+    <circle cx="46" cy="46" r="46" fill="url(#gBarril)"/>
+    <path d="M0 46 a46 46 0 0 0 92 0 z" fill="#FB2E71"/>
+    <text x="46" y="30" font-family="Arial, sans-serif" font-size="8"
+          fill="#bbb" text-anchor="middle">HI  HOT</text>
+    <text x="46" y="43" font-family="Arial, sans-serif" font-size="8"
+          fill="#bbb" text-anchor="middle">MID WARM</text>
+    <text x="46" y="56" font-family="Arial, sans-serif" font-size="8"
+          fill="#fff" text-anchor="middle">LOW COOL</text>
+    <text x="120" y="40" font-family="Arial, sans-serif" font-size="19" font-weight="bold"
+          fill="#101010">LOW Temperature</text>
+    <text x="120" y="66" font-family="Arial, sans-serif" font-size="19" font-weight="bold"
+          fill="#101010">High Speed</text>
   </g>
-  <text x="326" y="448" font-family="Arial, sans-serif" font-size="19" font-weight="bold"
-        fill="#101010" text-anchor="middle"
-        transform="rotate(90 326 448)">12.4 inch</text>
-
-  <!-- etiqueta -->
-  <rect x="392" y="96" width="256" height="42" rx="21" fill="#FFE3EC"/>
-  <text x="520" y="124" font-family="Arial, sans-serif" font-size="18" font-weight="bold"
-        fill="#101010" text-anchor="middle">Product size display</text>
-
-  <!-- detalle del barril en círculo -->
-  <circle cx="570" cy="430" r="168" fill="#FFF2F6"/>
-  <g transform="translate(492 300) scale(1.35)">
-    <rect x="0" y="0" width="116" height="190" rx="58" fill="url(#gBarril)"/>
-    <g fill="#FB2E71">
-      <circle cx="16" cy="22" r="4.4"/><circle cx="37" cy="22" r="4.4"/><circle cx="58" cy="22" r="4.4"/><circle cx="79" cy="22" r="4.4"/><circle cx="100" cy="22" r="4.4"/><circle cx="16" cy="43" r="4.4"/><circle cx="37" cy="43" r="4.4"/><circle cx="58" cy="43" r="4.4"/><circle cx="79" cy="43" r="4.4"/><circle cx="100" cy="43" r="4.4"/><circle cx="16" cy="64" r="4.4"/><circle cx="37" cy="64" r="4.4"/><circle cx="58" cy="64" r="4.4"/><circle cx="79" cy="64" r="4.4"/><circle cx="100" cy="64" r="4.4"/><circle cx="16" cy="85" r="4.4"/><circle cx="37" cy="85" r="4.4"/><circle cx="58" cy="85" r="4.4"/><circle cx="79" cy="85" r="4.4"/><circle cx="100" cy="85" r="4.4"/><circle cx="16" cy="106" r="4.4"/><circle cx="37" cy="106" r="4.4"/><circle cx="58" cy="106" r="4.4"/><circle cx="79" cy="106" r="4.4"/><circle cx="100" cy="106" r="4.4"/><circle cx="16" cy="127" r="4.4"/><circle cx="37" cy="127" r="4.4"/><circle cx="58" cy="127" r="4.4"/><circle cx="79" cy="127" r="4.4"/><circle cx="100" cy="127" r="4.4"/><circle cx="16" cy="148" r="4.4"/><circle cx="37" cy="148" r="4.4"/><circle cx="58" cy="148" r="4.4"/><circle cx="79" cy="148" r="4.4"/><circle cx="100" cy="148" r="4.4"/><circle cx="16" cy="169" r="4.4"/><circle cx="37" cy="169" r="4.4"/><circle cx="58" cy="169" r="4.4"/><circle cx="79" cy="169" r="4.4"/><circle cx="100" cy="169" r="4.4"/>
-    </g>
-    <ellipse cx="58" cy="188" rx="30" ry="12" fill="#0a0a0a"/>
+  <g transform="translate(430 402)">
+    <circle cx="46" cy="46" r="46" fill="url(#gBarril)"/>
+    <path d="M0 46 a46 46 0 0 0 92 0 z" fill="#FF6B9D"/>
+    <text x="46" y="30" font-family="Arial, sans-serif" font-size="8"
+          fill="#bbb" text-anchor="middle">HI  HOT</text>
+    <text x="46" y="43" font-family="Arial, sans-serif" font-size="8"
+          fill="#bbb" text-anchor="middle">MID WARM</text>
+    <text x="46" y="56" font-family="Arial, sans-serif" font-size="8"
+          fill="#fff" text-anchor="middle">LOW COOL</text>
+    <text x="120" y="40" font-family="Arial, sans-serif" font-size="19" font-weight="bold"
+          fill="#101010">Medium Temperature</text>
+    <text x="120" y="66" font-family="Arial, sans-serif" font-size="19" font-weight="bold"
+          fill="#101010">Low Speed</text>
   </g>
-  <g stroke="#101010" stroke-width="2.5">
-    <line x1="492" y1="268" x2="648" y2="268"/>
-    <line x1="492" y1="260" x2="492" y2="276"/>
-    <line x1="648" y1="260" x2="648" y2="276"/>
+  <g transform="translate(430 554)">
+    <circle cx="46" cy="46" r="46" fill="url(#gBarril)"/>
+    <path d="M0 46 a46 46 0 0 0 92 0 z" fill="#C81355"/>
+    <text x="46" y="30" font-family="Arial, sans-serif" font-size="8"
+          fill="#bbb" text-anchor="middle">HI  HOT</text>
+    <text x="46" y="43" font-family="Arial, sans-serif" font-size="8"
+          fill="#bbb" text-anchor="middle">MID WARM</text>
+    <text x="46" y="56" font-family="Arial, sans-serif" font-size="8"
+          fill="#fff" text-anchor="middle">LOW COOL</text>
+    <text x="120" y="40" font-family="Arial, sans-serif" font-size="19" font-weight="bold"
+          fill="#101010">HIGH Temperature</text>
+    <text x="120" y="66" font-family="Arial, sans-serif" font-size="19" font-weight="bold"
+          fill="#101010">High Speed</text>
   </g>
-  <text x="570" y="252" font-family="Arial, sans-serif" font-size="19" font-weight="bold"
-        fill="#101010" text-anchor="middle">2.8" BARREL</text>
 </svg>
