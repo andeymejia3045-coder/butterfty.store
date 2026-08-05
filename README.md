@@ -1,4 +1,4 @@
-# Butterfly — Cepillo Secador Voluminizador 3 en 1
+# Butterfly — Cepillo, Secador y Aplanchador 3 en 1
 
 Tienda de un solo producto, lista para vender. Funciona en cualquier hosting
 (incluso gratis), no necesita servidor, base de datos ni instalar nada.
@@ -225,7 +225,7 @@ oferta: {
 _Tienda Butterfly_
 
 *PRODUCTOS*
-• 1 x Cepillo Secador Voluminizador Tres En Uno (Pack de 2 unidades) — $49.99
+• 1 x Cepillo, Secador y Aplanchador 3 en 1 (Pack de 2 unidades) — $49.99
 
 *TOTALES*
 Subtotal: $49.99

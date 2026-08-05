@@ -38,7 +38,7 @@ const CONFIG = {
     numeroBonito: '+593 96 070 2682',
     // Mensaje del botón flotante (consultas, no pedidos)
     saludo:
-      '¡Hola! 👋 Vi la página del Cepillo Secador Voluminizador 3 en 1 y quiero más información.',
+      '¡Hola! 👋 Vi la página del Cepillo, Secador y Aplanchador 3 en 1 y quiero más información.',
   },
 
   /* ---------------------------------------------------------------------
@@ -46,7 +46,9 @@ const CONFIG = {
      --------------------------------------------------------------------- */
   producto: {
     id: 'cepillo-secador-3en1',
-    nombre: 'Cepillo Secador Voluminizador Tres En Uno',
+    nombre: 'Cepillo, Secador y Aplanchador 3 en 1',
+    // Versión corta para la barra fija de abajo, donde no cabe el nombre completo
+    nombreCorto: 'Cepillo 3 en 1',
     subtitulo:
       'Logra un acabado de salón en minutos con <strong>menos daño</strong> para tu cabello.',
     sku: 'LSP-3EN1-001',
@@ -56,13 +58,23 @@ const CONFIG = {
     rating: 4.9,
     numResenas: 1084,
     stock: 6, // se muestra como "Solo quedan X en stock"
-    imagenPrincipal: 'assets/img/producto-1.svg',
+    /* ---------------------------------------------------------------------
+       IMÁGENES DEL PRODUCTO
+       ---------------------------------------------------------------------
+       Apuntan a archivos .jpg. Mientras no subas una foto, la tienda muestra
+       automáticamente la ilustración .svg con el mismo nombre, así que nunca
+       se ve una imagen rota.
+
+       Para poner tus fotos reales: súbelas a assets/img/ con estos nombres
+       exactos (producto-1.jpg, producto-2.jpg, ...) y aparecen solas.
+       --------------------------------------------------------------------- */
+    imagenPrincipal: 'assets/img/producto-1.jpg',
     galeria: [
-      { src: 'assets/img/producto-1.svg', alt: 'Cepillo secador voluminizador 3 en 1 con su caja' },
-      { src: 'assets/img/producto-2.svg', alt: 'Medidas del cepillo: 12.4 pulgadas, barril de 2.8 pulgadas' },
-      { src: 'assets/img/producto-3.svg', alt: 'Niveles de temperatura y velocidad del cepillo' },
-      { src: 'assets/img/producto-4.svg', alt: 'Cuatro estilos posibles: secado, rizos, alisado y volumen' },
-      { src: 'assets/img/producto-5.svg', alt: 'Especificaciones técnicas: 1000W, cerámica, ondas suaves' },
+      { src: 'assets/img/producto-1.jpg', alt: 'Cepillo, secador y aplanchador 3 en 1 con su caja' },
+      { src: 'assets/img/producto-2.jpg', alt: 'Medidas del cepillo: 31,5 cm de largo y barril de 7 cm' },
+      { src: 'assets/img/producto-3.jpg', alt: 'Niveles de temperatura y velocidad del cepillo' },
+      { src: 'assets/img/producto-4.jpg', alt: 'Cuatro estilos posibles: secado, rizos, alisado y volumen' },
+      { src: 'assets/img/producto-5.jpg', alt: 'Especificaciones técnicas: 1000 W, cerámica y ondas suaves' },
     ],
     // "icono" usa los nombres del catálogo de iconos en assets/js/tienda.js
     bullets: [

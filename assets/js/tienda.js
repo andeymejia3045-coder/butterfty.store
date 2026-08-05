@@ -553,6 +553,44 @@
   }
 
   /* =======================================================================
+     4.b RESPALDO DE IMÁGENES
+     -----------------------------------------------------------------------
+     Si una foto real todavía no está subida, mostramos la ilustración con el
+     mismo nombre pero terminación .svg. Así puedes ir subiendo tus fotos de
+     a una y nunca aparece el recuadro roto de imagen faltante.
+
+     Usamos la fase de captura porque el evento "error" de las imágenes no
+     sube por el árbol como los demás eventos.
+     ======================================================================= */
+  const EXTENSIONES_FOTO = /\.(jpe?g|png|webp|avif)$/i;
+
+  function usarRespaldo(img) {
+    if (!img || img.tagName !== 'IMG') return;
+    if (img.dataset.respaldo === 'usado') return; // solo se intenta una vez
+    const actual = img.getAttribute('src') || '';
+    if (!EXTENSIONES_FOTO.test(actual)) return;
+    img.dataset.respaldo = 'usado';
+    img.src = actual.replace(EXTENSIONES_FOTO, '.svg');
+  }
+
+  /** Revisa las imágenes que ya fallaron antes de que empezáramos a escuchar */
+  function barrerImagenesFallidas() {
+    $$('img').forEach((img) => {
+      if (img.complete && img.naturalWidth === 0) usarRespaldo(img);
+    });
+  }
+
+  function activarRespaldoImagenes() {
+    // Para las imágenes que se crean después: escuchamos el evento
+    document.addEventListener('error', (e) => usarRespaldo(e.target), true);
+
+    // Para las que ya estaban en el HTML: su evento de error pudo dispararse
+    // antes de que este script se ejecutara, así que las revisamos a mano
+    barrerImagenesFallidas();
+    window.addEventListener('load', barrerImagenesFallidas);
+  }
+
+  /* =======================================================================
      5. ANIMACIÓN AL HACER SCROLL
      ======================================================================= */
   function activarRevelado() {
@@ -626,6 +664,7 @@
      8. ARRANQUE
      ======================================================================= */
   function iniciar() {
+    activarRespaldoImagenes();
     construirCajon();
     pintarContadores();
     activarRevelado();

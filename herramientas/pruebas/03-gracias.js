@@ -31,7 +31,7 @@
      $('.paso-sig__titulo').textContent.includes('transferencia'));
 
   ok('Muestra el resumen del producto',
-     $('#resumenLineas').textContent.includes('Cepillo Secador'));
+     $('#resumenLineas').textContent.includes(CONFIG.producto.nombre));
   ok('El desglose incluye el precio de lista',
      $('#resumenTotales').textContent.includes('50.00'));
   ok('El desglose incluye el descuento por transferencia',

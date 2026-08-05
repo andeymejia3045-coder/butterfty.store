@@ -127,7 +127,19 @@
   ok('El body se desbloquea al cerrar',
      !document.body.classList.contains('bloqueado'));
 
-  /* ---------- 11. Limpieza ---------- */
+  /* ---------- 11. Respaldo de imágenes ---------- */
+  // Ninguna imagen de la página debe quedar rota
+  const rotas = $$('img').filter((i) => i.complete && i.naturalWidth === 0);
+  ok('Ninguna imagen queda rota', rotas.length === 0,
+     rotas.map((i) => i.getAttribute('src')).join(', '));
+
+  // Las fotos que aún no subes caen en la ilustración con el mismo nombre
+  const conRespaldo = $$('img').filter((i) => i.dataset.respaldo === 'usado');
+  ok('Las fotos faltantes usan la ilustración de respaldo',
+     conRespaldo.every((i) => /\.svg$/.test(i.getAttribute('src'))),
+     conRespaldo.length + ' imagen(es) con respaldo');
+
+  /* ---------- 12. Limpieza ---------- */
   Tienda.Carrito.vaciar();
   delete window.__hackeado;
 
