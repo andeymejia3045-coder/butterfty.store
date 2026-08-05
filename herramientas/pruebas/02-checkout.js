@@ -18,7 +18,7 @@
   /* ---------- 1. El carrito llegó desde la landing ---------- */
   ok('El checkout ve el carrito', Tienda.Carrito.lineas().length === 1);
   ok('El resumen muestra el producto',
-     $('#resumenLineas').textContent.includes('Cepillo Secador'));
+     $('#resumenLineas').textContent.includes(CONFIG.producto.nombre));
   ok('El resumen muestra $29.99', $('#resumenTotales').textContent.includes('29.99'));
   ok('El bloque de carrito vacío está oculto', $('#carritoVacio').hidden === true);
 
@@ -189,7 +189,7 @@
     : '';
   ok('El mensaje incluye el número de pedido',
      !!pedido && msg.includes(pedido.numero));
-  ok('El mensaje incluye el producto', msg.includes('Cepillo Secador Voluminizador'));
+  ok('El mensaje incluye el producto', msg.includes(CONFIG.producto.nombre));
   ok('El mensaje incluye el total', msg.includes('TOTAL: $28.49 USD'));
   ok('El mensaje incluye el método de pago', msg.includes('Transferencia o depósito'));
   ok('El mensaje incluye la dirección',

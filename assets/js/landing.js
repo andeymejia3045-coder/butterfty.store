@@ -232,8 +232,8 @@
     set('garantiaTitulo', esc(CONFIG.garantia.titulo));
     set('garantiaTexto', esc(CONFIG.garantia.texto));
 
-    // Barra sticky
-    set('stickyNombre', esc(P.nombre));
+    // Barra fija de abajo: usamos el nombre corto para que no se corte
+    set('stickyNombre', esc(P.nombreCorto || P.nombre));
     set('stickyPrecio', dinero(P.precio) + ' · Envío gratis');
 
     // Nota de estadísticas
@@ -678,7 +678,7 @@
           brand: { '@type': 'Brand', name: P.marca },
           image: [base + P.imagenPrincipal],
           description:
-            'Cepillo secador voluminizador tres en uno. Seca, alisa y da volumen en un solo paso con tecnología cerámica y 1000 W de potencia.',
+            'Cepillo, secador y aplanchador 3 en 1. Seca, alisa y da volumen en un solo paso con tecnología cerámica y 1000 W de potencia.',
           aggregateRating: {
             '@type': 'AggregateRating',
             ratingValue: P.rating,

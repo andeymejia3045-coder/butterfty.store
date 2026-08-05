@@ -11,8 +11,12 @@
   Tienda.Carrito.vaciar();
 
   /* ---------- 1. Renderizado básico ---------- */
-  ok('Título del producto correcto',
-     $('#tituloProducto').textContent === 'Cepillo Secador Voluminizador Tres En Uno');
+  ok('El título del producto coincide con la configuración',
+     $('#tituloProducto').textContent === CONFIG.producto.nombre,
+     $('#tituloProducto').textContent);
+  ok('El título dice Cepillo, Secador y Aplanchador',
+     /cepillo.*secador.*aplanchador/i.test(CONFIG.producto.nombre),
+     CONFIG.producto.nombre);
   ok('Precio actual $29.99', $('#precioAhora').textContent.includes('29.99'));
   ok('Precio anterior $50.00', $('#precioAntes').textContent.includes('50.00'));
   ok('Descuento del 40 %', $('#insigniaAhorro').textContent === 'AHORRA UN 40%');
@@ -64,6 +68,12 @@
   ok('La variante dice Pack de 2 unidades', lineas1[0].variante === 'Pack de 2 unidades');
   ok('Subtotal = 49.99', Tienda.Carrito.subtotal() === 49.99);
   ok('El cajón del carrito se abrió', $('.cajon').classList.contains('abierto'));
+  ok('La barra fija muestra el nombre corto completo, sin cortarse',
+     $('#stickyNombre').textContent === CONFIG.producto.nombreCorto &&
+     $('#stickyNombre').scrollWidth <= $('#stickyNombre').clientWidth + 1,
+     $('#stickyNombre').textContent + ' (' + $('#stickyNombre').scrollWidth +
+     'px de ' + $('#stickyNombre').clientWidth + 'px)');
+
   ok('El contador del ícono muestra 1',
      $('[data-contador-carrito]').textContent === '1');
   ok('El cajón muestra el total 49.99',
