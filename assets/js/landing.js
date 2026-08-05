@@ -468,6 +468,32 @@
   }
 
   /* =======================================================================
+     9.b BOTÓN FLOTANTE DE WHATSAPP
+     -----------------------------------------------------------------------
+     Mientras el bloque de la asesora está a la vista, el botón flotante
+     sobra y encima tapa el título. Lo escondemos y lo mostramos recién
+     cuando ese bloque queda arriba.
+     ======================================================================= */
+  function activarFlotanteWa() {
+    const boton = document.getElementById('waFlotante');
+    const bloque = $('.asesora');
+    if (!boton || !bloque) return;
+
+    if (!('IntersectionObserver' in window)) {
+      boton.classList.add('visible');
+      return;
+    }
+
+    const obs = new IntersectionObserver(
+      (entradas) => {
+        entradas.forEach((e) => boton.classList.toggle('visible', !e.isIntersecting));
+      },
+      { threshold: 0 }
+    );
+    obs.observe(bloque);
+  }
+
+  /* =======================================================================
      10. CUENTA REGRESIVA
      ======================================================================= */
   function activarRegresiva() {
@@ -780,6 +806,7 @@
     pintarStats();
     activarBotones();
     activarSticky();
+    activarFlotanteWa();
     activarRegresiva();
     pintarSchema();
     window.Tienda.activarRevelado();

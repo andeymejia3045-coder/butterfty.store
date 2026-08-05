@@ -490,6 +490,137 @@ h4 {
 }
 
 /* -------------------------------------------------------------------------
+   5.b BLOQUE DE LA ASESORA
+   ------------------------------------------------------------------------- */
+.asesora {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  background: var(--blanco);
+  border: 1px solid var(--gris-200);
+  border-radius: var(--r-lg);
+  padding: var(--sp-4);
+  box-shadow: var(--sombra-md);
+}
+
+.asesora__avatar {
+  position: relative;
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(140deg, var(--rosa-claro), var(--rosa));
+  color: var(--blanco);
+  font-weight: 800;
+  font-size: 1.375rem;
+  line-height: 1;
+}
+
+/* Punto verde de "en línea", da la sensación de atención inmediata */
+.asesora__punto {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #25d366;
+  border: 2.5px solid var(--blanco);
+}
+
+.asesora__punto::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid #25d366;
+  opacity: 0;
+  animation: onda 2.2s ease-out infinite;
+}
+
+@keyframes onda {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.asesora__info {
+  flex: 1 1 180px;
+  min-width: 0;
+}
+
+.asesora__titulo {
+  font-weight: 800;
+  font-size: var(--t-lg);
+  line-height: 1.2;
+}
+
+.asesora__texto {
+  font-size: var(--t-sm);
+  color: var(--gris-700);
+  margin-top: 2px;
+}
+
+.asesora__horario {
+  font-size: var(--t-xs);
+  color: var(--gris-500);
+  margin-top: 3px;
+}
+
+.asesora__btn {
+  flex: 1 1 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  min-height: 48px;
+  padding-inline: var(--sp-5);
+  border-radius: var(--r-pill);
+  background: #25d366;
+  color: #fff;
+  font-weight: 700;
+  font-size: var(--t-base);
+  transition: background-color 0.16s var(--ease), transform 0.16s var(--ease);
+}
+
+.asesora__btn:hover {
+  background: #1eb757;
+}
+
+.asesora__btn:active {
+  transform: scale(0.97);
+}
+
+.asesora__btn svg {
+  flex: 0 0 auto;
+  width: 21px;
+  height: 21px;
+}
+
+/* Versión compacta para el checkout */
+.asesora--compacta {
+  padding: var(--sp-3);
+  box-shadow: none;
+  background: var(--rosa-fondo-suave);
+  border-color: var(--rosa-pastel);
+}
+
+@media (min-width: 560px) {
+  .asesora__btn {
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+}
+
+/* -------------------------------------------------------------------------
    6. PRODUCTO — LAYOUT PRINCIPAL
    ------------------------------------------------------------------------- */
 .producto {
@@ -2364,11 +2495,30 @@ h4 {
   display: grid;
   place-items: center;
   box-shadow: 0 6px 18px rgba(37, 211, 102, 0.42);
-  transition: transform 0.2s var(--ease);
+  transition: transform 0.2s var(--ease), opacity 0.24s var(--ease),
+    visibility 0.24s var(--ease);
+  /* Arranca oculto: aparece cuando el bloque de la asesora queda fuera de vista */
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.85);
 }
 
-.wa-flotante:hover {
+.wa-flotante.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.wa-flotante.visible:hover {
   transform: scale(1.08);
+}
+
+/* En páginas sin bloque de asesora se muestra siempre */
+body.sin-barra .wa-flotante,
+.wa-flotante:focus-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
 }
 
 .wa-flotante svg {

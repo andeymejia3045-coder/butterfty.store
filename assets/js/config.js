@@ -42,6 +42,21 @@ const CONFIG = {
   },
 
   /* ---------------------------------------------------------------------
+     ASESORA
+     ---------------------------------------------------------------------
+     La persona que atiende por WhatsApp. Aparece en un bloque arriba de la
+     página y también en el checkout, para resolver dudas antes de comprar.
+     --------------------------------------------------------------------- */
+  asesora: {
+    nombre: 'Karla',
+    cargo: 'Asesora de belleza',
+    horario: 'Lunes a sábado · 9:00 a 19:00',
+    // Con qué mensaje arranca la conversación
+    mensaje:
+      '¡Hola Karla! 😊 Tengo una duda sobre el Cepillo, Secador y Aplanchador 3 en 1.',
+  },
+
+  /* ---------------------------------------------------------------------
      PRODUCTO
      --------------------------------------------------------------------- */
   producto: {

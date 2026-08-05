@@ -45,6 +45,28 @@
   ok('Ya no queda el nombre de la marca anterior en el texto visible',
      !document.body.textContent.includes('LISAPRO Ecuador'));
 
+  /* ---------- Bloque de la asesora ---------- */
+  ok('El bloque de la asesora aparece al inicio', !!$('.asesora'));
+  ok('Está antes de la ficha del producto',
+     !!$('.asesora') &&
+     $('.asesora').compareDocumentPosition($('#tituloProducto')) & Node.DOCUMENT_POSITION_FOLLOWING);
+  ok('Muestra el nombre de la asesora',
+     $('.asesora').textContent.includes(CONFIG.asesora.nombre), CONFIG.asesora.nombre);
+  ok('Pregunta si tiene dudas',
+     $('.asesora__titulo').textContent.toLowerCase().includes('dudas'));
+  ok('Tiene el ícono de WhatsApp', !!$('.asesora__btn svg'));
+  ok('El botón lleva a tu WhatsApp',
+     $('.asesora__btn').getAttribute('href')
+       .indexOf('https://wa.me/' + CONFIG.whatsapp.numeroWa) === 0,
+     $('.asesora__btn').getAttribute('href').slice(0, 40));
+  ok('El mensaje ya viene escrito y nombra a la asesora',
+     decodeURIComponent($('.asesora__btn').getAttribute('href').split('?text=')[1] || '')
+       .includes(CONFIG.asesora.nombre));
+  ok('Abre en una pestaña nueva sin perder la tienda',
+     $('.asesora__btn').getAttribute('target') === '_blank' &&
+     ($('.asesora__btn').getAttribute('rel') || '').includes('noopener'));
+  ok('El punto de "en línea" está visible', !!$('.asesora__punto'));
+
   const waHref = $('#waFlotante').getAttribute('href');
   ok('WhatsApp apunta a 593960702682', waHref.indexOf('wa.me/593960702682') !== -1, waHref.slice(0, 60));
 

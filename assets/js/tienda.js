@@ -628,6 +628,45 @@
   }
 
   /* =======================================================================
+     4.c BLOQUE DE LA ASESORA
+     -----------------------------------------------------------------------
+     Se pinta en cualquier página que tenga un contenedor con
+     data-asesora. Lleva a WhatsApp con el mensaje ya escrito.
+     ======================================================================= */
+  function pintarAsesora() {
+    const A = CONFIG.asesora;
+    if (!A) return;
+
+    $$('[data-asesora]').forEach((cont) => {
+      const compacta = cont.hasAttribute('data-compacta');
+      cont.innerHTML =
+        '<div class="asesora' + (compacta ? ' asesora--compacta' : '') + '">' +
+        '<span class="asesora__avatar" aria-hidden="true">' +
+        esc(A.nombre.trim().charAt(0).toUpperCase()) +
+        '<span class="asesora__punto"></span>' +
+        '</span>' +
+        '<div class="asesora__info">' +
+        '<p class="asesora__titulo">¿Tienes dudas?</p>' +
+        '<p class="asesora__texto">Habla con <strong>' +
+        esc(A.nombre) +
+        '</strong>, ' +
+        esc(A.cargo.toLowerCase()) +
+        '. Te responde una persona real.</p>' +
+        '<p class="asesora__horario">' +
+        esc(A.horario) +
+        '</p>' +
+        '</div>' +
+        '<a class="asesora__btn" href="' +
+        esc(enlaceWa(A.mensaje)) +
+        '" target="_blank" rel="noopener">' +
+        ICO.whatsapp +
+        '<span>Escríbeme</span>' +
+        '</a>' +
+        '</div>';
+    });
+  }
+
+  /* =======================================================================
      5. ANIMACIÓN AL HACER SCROLL
      ======================================================================= */
   function activarRevelado() {
@@ -704,6 +743,7 @@
     activarRespaldoImagenes();
     construirCajon();
     pintarContadores();
+    pintarAsesora();
     activarRevelado();
     activarCopiar();
     activarAcordeones();
