@@ -1,4 +1,4 @@
-# Tienda LISAPRO — Cepillo Secador Voluminizador 3 en 1
+# Butterfly — Cepillo Secador Voluminizador 3 en 1
 
 Tienda de un solo producto, lista para vender. Funciona en cualquier hosting
 (incluso gratis), no necesita servidor, base de datos ni instalar nada.
@@ -56,40 +56,50 @@ bash herramientas/probar.sh
 
 ---
 
-## 3. Lo que TIENES que cambiar antes de vender
+## 3. Tus datos, ya configurados
 
-Son tres cosas, todas en `assets/js/config.js`.
-
-### a) Tus cuentas bancarias
-
-Busca `cuentas:` y reemplaza los datos de ejemplo por los tuyos:
+Todo está en `assets/js/config.js`, listo:
 
 ```js
+tienda: {
+  nombre: 'Butterfly',
+  email: 'corpusenigma4@gmail.com',
+  dominio: 'https://butterfly.store',
+}
+
+whatsapp: {
+  numeroLocal: '0960702682',
+  numeroWa: '593960702682',
+}
+
+// Cuenta para recibir transferencias
 cuentas: [
   {
     banco: 'Banco Pichincha',
     tipo: 'Cuenta de Ahorros',
-    numero: 'TU NÚMERO REAL',
-    titular: 'TU NOMBRE O RAZÓN SOCIAL',
-    identificacion: 'TU CÉDULA O RUC',
-    correo: 'tu@correo.com',
+    numero: '2213135141',
+    titular: 'Andrey Cabascango',
+    identificacion: '',   // opcional: si lo llenas, se muestra
+    correo: 'corpusenigma4@gmail.com',
   },
 ],
 ```
 
-> ⚠️ Ahora mismo dicen "LISAPRO ECUADOR S.A." con números inventados. Si no los
-> cambias, tus clientas transferirán a una cuenta que no existe.
+### Agregar una segunda cuenta
 
-### b) Tu correo de contacto
+Copia el bloque `{ ... }` y sepáralo con coma. La tienda muestra todas las
+cuentas automáticamente, cada una con su botón de copiar:
 
 ```js
-tienda: {
-  email: 'ventas@lisapro.com',   // ← cámbialo
-  ciudad: 'Guayaquil, Ecuador',  // ← cámbialo si es otra
-}
+cuentas: [
+  { banco: 'Banco Pichincha', tipo: 'Cuenta de Ahorros', numero: '2213135141',
+    titular: 'Andrey Cabascango', identificacion: '', correo: 'corpusenigma4@gmail.com' },
+  { banco: 'Banco Guayaquil', tipo: 'Cuenta Corriente', numero: '...',
+    titular: 'Andrey Cabascango', identificacion: '', correo: 'corpusenigma4@gmail.com' },
+],
 ```
 
-### c) Las fotos reales del producto
+### Lo único que falta: las fotos reales
 
 Ver la sección 4.
 
@@ -212,7 +222,7 @@ oferta: {
 
 ```
 *NUEVO PEDIDO LP-260805-4821*
-_Tienda LISAPRO_
+_Tienda Butterfly_
 
 *PRODUCTOS*
 • 1 x Cepillo Secador Voluminizador Tres En Uno (Pack de 2 unidades) — $49.99
@@ -272,7 +282,7 @@ La regla para Ecuador: quita el `0` del inicio y pon `593` delante.
 ### Opción A — Netlify (la más fácil, 2 minutos)
 
 1. Entra a [app.netlify.com/drop](https://app.netlify.com/drop)
-2. Arrastra la carpeta `lisapro-store` completa a la página
+2. Arrastra la carpeta del proyecto completa a la página
 3. Listo, te da un enlace público al instante
 
 Para conectar tu propio dominio: *Site settings → Domain management*.
@@ -303,7 +313,7 @@ cualquier hosting, incluso el más básico.
 ## 8. Estructura de archivos
 
 ```
-lisapro-store/
+butterfty.store/
 ├── index.html              La página del producto
 ├── checkout.html           Datos del cliente y forma de pago
 ├── gracias.html            Confirmación del pedido
@@ -390,8 +400,15 @@ En `assets/css/styles.css`, las primeras líneas:
 ```
 
 **¿Cómo cambio el nombre de la tienda?**
-Busca `LISA<span>PRO</span>` en los tres archivos `.html` y cámbialo. También
-el campo `tienda.nombre` en `config.js`.
+Busca `BUTTER<span>FLY</span>` en los tres archivos `.html` y cámbialo. También
+el campo `tienda.nombre` en `config.js` y el `<title>` de cada página.
+
+**¿Por qué el producto dice LISAPRO y la tienda Butterfly?**
+Porque son dos cosas distintas: **Butterfly** es tu tienda y **LISAPRO** es la
+marca impresa en el cepillo y en su caja. Así lo verá la clienta cuando le
+llegue el paquete, y por eso las imágenes del producto conservan ese nombre. Si
+algún día vendes el cepillo con tu propia marca, reemplaza las imágenes de
+`assets/img/producto-*.svg` por tus fotos y listo.
 
 **¿La cuenta regresiva es real?**
 Se reinicia para cada visitante nuevo y dura los minutos que configures. Es una
@@ -401,9 +418,9 @@ técnica común de urgencia. Si prefieres no usarla, pon `activa: false`.
 
 ## 11. Antes de publicar: lista de verificación
 
-- [ ] Cambié los datos bancarios reales en `config.js`
-- [ ] Verifiqué que el WhatsApp `0960702682` es el correcto
-- [ ] Puse mi correo de contacto real
+- [x] Datos bancarios reales en `config.js` (Pichincha 2213135141)
+- [x] WhatsApp `0960702682` conectado
+- [x] Correo de contacto `corpusenigma4@gmail.com`
 - [ ] Reemplacé las fotos del producto por las reales
 - [ ] Reemplacé las reseñas por opiniones reales de clientas
 - [ ] Revisé que el precio y los packs estén bien

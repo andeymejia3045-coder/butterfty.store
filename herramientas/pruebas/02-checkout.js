@@ -85,14 +85,14 @@
   ok('Dirección demasiado corta rechazada', tieneError('direccion'));
 
   /* ---------- 7. Enviar con formulario incompleto NO debe crear pedido ---------- */
-  localStorage.removeItem('lisapro_pedido_actual');
+  localStorage.removeItem(CONFIG.tienda.prefijoDatos + '_pedido_actual');
   let abierto = null;
   const openOriginal = window.open;
   window.open = (u) => { abierto = u; return null; };
 
   $('#btnConfirmar').click();
   ok('Con datos incompletos no se crea el pedido',
-     localStorage.getItem('lisapro_pedido_actual') === null);
+     localStorage.getItem(CONFIG.tienda.prefijoDatos + '_pedido_actual') === null);
   ok('Con datos incompletos no se abre WhatsApp', abierto === null);
 
   /* ---------- 8. Llenar el formulario correctamente ---------- */
@@ -141,10 +141,19 @@
   ok('Transferencia: total $28.49', txtTR.includes('28.49'));
   ok('Transferencia: el botón muestra 28.49',
      $('#btnConfirmar').textContent.includes('28.49'));
-  ok('Transferencia: se muestran los datos bancarios',
-     $$('[data-metodo="transferencia"] .banco').length === 2);
-  ok('Transferencia: hay botón de copiar la cuenta',
-     $$('[data-metodo="transferencia"] .copiar').length === 2);
+  ok('Transferencia: se muestran todas las cuentas bancarias',
+     $$('[data-metodo="transferencia"] .banco').length === CONFIG.pagos.transferencia.cuentas.length &&
+     CONFIG.pagos.transferencia.cuentas.length >= 1,
+     'cuentas mostradas: ' + $$('[data-metodo="transferencia"] .banco').length);
+  ok('Transferencia: cada cuenta tiene su botón de copiar',
+     $$('[data-metodo="transferencia"] .copiar').length === CONFIG.pagos.transferencia.cuentas.length);
+  ok('Transferencia: muestra el número de cuenta configurado',
+     $('[data-metodo="transferencia"]').textContent
+       .includes(CONFIG.pagos.transferencia.cuentas[0].numero),
+     CONFIG.pagos.transferencia.cuentas[0].numero);
+  ok('Transferencia: muestra el titular configurado',
+     $('[data-metodo="transferencia"]').textContent
+       .includes(CONFIG.pagos.transferencia.cuentas[0].titular));
   ok('Transferencia: pide el comprobante',
      $('[data-metodo="transferencia"]').textContent.includes('comprobante'));
   ok('Transferencia: la opción queda marcada visualmente',
@@ -152,7 +161,7 @@
 
   /* ---------- 11. Confirmar el pedido (con transferencia) ---------- */
   $('#btnConfirmar').click();
-  const pedido = JSON.parse(localStorage.getItem('lisapro_pedido_actual') || 'null');
+  const pedido = JSON.parse(localStorage.getItem(CONFIG.tienda.prefijoDatos + '_pedido_actual') || 'null');
 
   ok('Se creó el pedido', !!pedido);
   ok('El número de pedido tiene formato LP-AAMMDD-XXXX',
@@ -194,7 +203,7 @@
   ok('El carrito quedó vacío después de confirmar', Tienda.Carrito.vacio());
 
   /* ---------- 14. Historial de pedidos ---------- */
-  const hist = JSON.parse(localStorage.getItem('lisapro_pedidos') || '[]');
+  const hist = JSON.parse(localStorage.getItem(CONFIG.tienda.prefijoDatos + '_pedidos') || '[]');
   ok('El pedido se guardó en el historial',
      hist.length >= 1 && hist[0].numero === pedido.numero);
 

@@ -707,7 +707,7 @@ def og_imagen():
   <rect width="1200" height="630" fill="{ROSA_FONDO}"/>
   <circle cx="1010" cy="320" r="270" fill="{ROSA_PASTEL}"/>
   <text x="80" y="150" font-family="Arial, sans-serif" font-size="34" font-weight="bold"
-        fill="{ROSA}" letter-spacing="7">LISAPRO</text>
+        fill="{ROSA}" letter-spacing="7">BUTTERFLY</text>
   <text x="80" y="248" font-family="Arial, sans-serif" font-size="60" font-weight="bold"
         fill="{NEGRO}">Cepillo Secador</text>
   <text x="80" y="320" font-family="Arial, sans-serif" font-size="60" font-weight="bold"

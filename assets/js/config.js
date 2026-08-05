@@ -10,13 +10,18 @@ const CONFIG = {
      NEGOCIO
      --------------------------------------------------------------------- */
   tienda: {
-    nombre: 'LISAPRO',
+    nombre: 'Butterfly',
     eslogan: 'Tu salón de belleza en casa',
-    // Se usa en el pie de página y en los correos/mensajes
-    email: 'ventas@lisapro.com',
-    ciudad: 'Guayaquil, Ecuador',
+    // Se usa en el pie de página y en los mensajes de WhatsApp
+    email: 'corpusenigma4@gmail.com',
+    ciudad: 'Ecuador',
     moneda: 'USD',
     simbolo: '$',
+    // Tu dominio, sin la barra final. Si cambia, actualízalo también en la
+    // etiqueta <link rel="canonical"> de index.html
+    dominio: 'https://butterfly.store',
+    // Prefijo con el que se guardan los datos en el navegador de la clienta
+    prefijoDatos: 'butterfly',
   },
 
   /* ---------------------------------------------------------------------
@@ -140,23 +145,17 @@ const CONFIG = {
         'Tu pedido sale con prioridad el mismo día.',
         'Te confirmamos por WhatsApp en minutos.',
       ],
-      // 👇 CAMBIA ESTOS DATOS POR LOS TUYOS REALES
+      // Cuentas donde recibes las transferencias.
+      // Puedes agregar más copiando el bloque { ... } y separándolo con coma.
+      // El campo "identificacion" es opcional: si lo dejas vacío no se muestra.
       cuentas: [
         {
           banco: 'Banco Pichincha',
           tipo: 'Cuenta de Ahorros',
-          numero: '2209876543',
-          titular: 'LISAPRO ECUADOR S.A.',
-          identificacion: 'RUC 0993456789001',
-          correo: 'pagos@lisapro.com',
-        },
-        {
-          banco: 'Banco Guayaquil',
-          tipo: 'Cuenta Corriente',
-          numero: '0034567890',
-          titular: 'LISAPRO ECUADOR S.A.',
-          identificacion: 'RUC 0993456789001',
-          correo: 'pagos@lisapro.com',
+          numero: '2213135141',
+          titular: 'Andrey Cabascango',
+          identificacion: '',
+          correo: 'corpusenigma4@gmail.com',
         },
       ],
     },

@@ -9,7 +9,7 @@
 
   function leerPedido() {
     try {
-      const raw = localStorage.getItem('lisapro_pedido_actual');
+      const raw = localStorage.getItem(CONFIG.tienda.prefijoDatos + '_pedido_actual');
       if (!raw) return null;
       const p = JSON.parse(raw);
       if (!p || !p.numero || !Array.isArray(p.lineas)) return null;
@@ -60,7 +60,7 @@
               fila('Tipo', c.tipo) +
               fila('Número', c.numero) +
               fila('Titular', c.titular) +
-              fila('Identificación', c.identificacion) +
+              (c.identificacion ? fila('Identificación', c.identificacion) : '') +
               fila('Correo', c.correo) +
               '</dl>' +
               '<button type="button" class="copiar" data-copiar="' + esc(c.numero) + '">' +
