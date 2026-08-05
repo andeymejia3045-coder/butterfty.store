@@ -236,6 +236,11 @@
     set('stickyNombre', esc(P.nombreCorto || P.nombre));
     set('stickyPrecio', dinero(P.precio) + ' · Envío gratis');
 
+    // La miniatura toma la foto real del producto si ya está subida.
+    // Si no existe, el respaldo de tienda.js vuelve a la ilustración.
+    const stickyFoto = document.getElementById('stickyFoto');
+    if (stickyFoto) stickyFoto.src = P.imagenPrincipal;
+
     // Nota de estadísticas
     set(
       'notaStats',
