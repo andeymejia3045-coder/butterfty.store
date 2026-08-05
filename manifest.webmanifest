@@ -1,0 +1,20 @@
+{
+  "name": "LISAPRO — Cepillo Secador Voluminizador 3 en 1",
+  "short_name": "LISAPRO",
+  "description": "Seca, alisa y da volumen en un solo paso. Envío gratis a todo Ecuador con pago contra entrega.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#FB2E71",
+  "lang": "es-EC",
+  "icons": [
+    {
+      "src": "assets/img/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

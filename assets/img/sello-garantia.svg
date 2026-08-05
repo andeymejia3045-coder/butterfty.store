@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img"
+     aria-label="Sello de garantía de 30 días">
+  <circle cx="60" cy="60" r="56" fill="#FFF2F6" stroke="#FB2E71" stroke-width="2"
+          stroke-dasharray="5 4"/>
+  <circle cx="60" cy="60" r="44" fill="none" stroke="#FB2E71" stroke-width="1.5"/>
+  <text x="60" y="52" font-family="Arial, sans-serif" font-size="27" font-weight="bold"
+        fill="#FB2E71" text-anchor="middle">30</text>
+  <text x="60" y="70" font-family="Arial, sans-serif" font-size="13" font-weight="bold"
+        fill="#101010" text-anchor="middle">DÍAS</text>
+  <text x="60" y="87" font-family="Arial, sans-serif" font-size="9"
+        fill="#757575" text-anchor="middle">GARANTÍA</text>
+</svg>

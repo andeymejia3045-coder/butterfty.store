@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es-EC">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FB2E71">
+
+<title>Cepillo Secador Voluminizador 3 en 1 | LISAPRO Ecuador</title>
+<meta name="description" content="Seca, alisa y da volumen en un solo paso. Acabado de salón en 10 minutos con menos daño. $29.99 con envío gratis a todo Ecuador. Pago contra entrega o transferencia.">
+<link rel="canonical" href="https://lisapro.com/">
+
+<!-- Open Graph / redes sociales -->
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="LISAPRO">
+<meta property="og:title" content="Cepillo Secador Voluminizador 3 en 1 — 40% de descuento">
+<meta property="og:description" content="Acabado de salón en minutos con menos daño para tu cabello. Envío gratis a todo Ecuador y pago contra entrega.">
+<meta property="og:image" content="assets/img/og-imagen.svg">
+<meta property="og:locale" content="es_EC">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+<link rel="apple-touch-icon" href="assets/img/favicon.svg">
+<link rel="manifest" href="manifest.webmanifest">
+
+<!-- Tipografía (con reserva de fuentes del sistema si no carga) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+
+<link rel="preload" href="assets/img/producto-1.svg" as="image">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+
+<!-- =====================================================================
+     CABECERA
+     ===================================================================== -->
+<header class="cabecera">
+  <div class="cabecera__anuncio">
+    ENVÍO GRATIS A TODO ECUADOR &nbsp;·&nbsp; PAGO CONTRA ENTREGA &nbsp;·&nbsp; GARANTÍA 30 DÍAS
+  </div>
+  <div class="contenedor">
+    <div class="cabecera__barra">
+      <a class="logo" href="index.html" aria-label="LISAPRO, ir al inicio">LISA<span>PRO</span></a>
+      <div class="cabecera__acciones">
+        <a class="icono-btn" href="#" id="waCabecera" aria-label="Escribirnos por WhatsApp" target="_blank" rel="noopener"></a>
+        <button class="icono-btn" data-abrir-cajon aria-label="Abrir el carrito de compras">
+          <span data-icono-carrito></span>
+          <span class="contador-carrito" data-contador-carrito aria-hidden="true">0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- =====================================================================
+     FICHA DEL PRODUCTO
+     ===================================================================== -->
+<section class="producto contenedor" aria-labelledby="tituloProducto">
+  <div class="producto__grid">
+
+    <!-- ---------- Galería ---------- -->
+    <div class="producto__galeria">
+      <div class="galeria__marco">
+        <img class="galeria__insignia" src="assets/img/insignia-top.svg" alt="Cinco años entre los más vendidos" width="140" height="150">
+        <img class="galeria__sello" src="assets/img/sello-marca.svg" alt="Sello de garantía de satisfacción" width="100" height="100">
+
+        <div class="galeria__pista" id="galeriaPista" tabindex="0" role="region" aria-label="Imágenes del producto, desliza para ver más"></div>
+
+        <button class="galeria__flecha galeria__flecha--prev" id="galeriaPrev" aria-label="Imagen anterior"></button>
+        <button class="galeria__flecha galeria__flecha--next" id="galeriaNext" aria-label="Imagen siguiente"></button>
+      </div>
+
+      <div class="galeria__puntos" id="galeriaPuntos" role="tablist" aria-label="Seleccionar imagen"></div>
+      <div class="galeria__miniaturas" id="galeriaMinis"></div>
+    </div>
+
+    <!-- ---------- Información y compra ---------- -->
+    <div class="producto__info">
+      <h1 class="producto__titulo" id="tituloProducto"></h1>
+
+      <div class="valoracion">
+        <span class="estrellas" id="estrellasProducto" aria-hidden="true"></span>
+        <span id="textoValoracion"></span>
+      </div>
+
+      <p class="producto__resumen" id="resumenProducto"></p>
+
+      <div class="precios">
+        <span class="precio-antes" id="precioAntes"></span>
+        <span class="precio-ahora" id="precioAhora"></span>
+        <span class="insignia-ahorro" id="insigniaAhorro"></span>
+      </div>
+
+      <ul class="lista-bullets" id="bulletsProducto"></ul>
+
+      <div class="regresiva" id="regresiva" hidden>
+        <span id="regresivaTexto"></span>
+        <span class="regresiva__reloj" aria-live="off">
+          <span class="regresiva__bloque"><b id="regMin">00</b><i>min</i></span>
+          <span class="regresiva__bloque"><b id="regSeg">00</b><i>seg</i></span>
+        </span>
+      </div>
+
+      <p class="escasez">
+        <span class="escasez__punto" aria-hidden="true"></span>
+        <span id="textoEscasez"></span>
+      </p>
+
+      <!-- Selector de packs -->
+      <fieldset class="packs" id="packs">
+        <legend class="solo-lectores">Elige tu pack</legend>
+      </fieldset>
+
+      <button class="btn btn--cta btn--bloque" id="btnAgregar">
+        <span data-icono-carrito-btn></span>
+        AÑADIR AL CARRITO
+      </button>
+
+      <div class="metodos-pago">
+        <span class="metodos-pago__item"><span class="ico" data-icono="billete"></span> Contra entrega</span>
+        <span class="metodos-pago__item"><span class="ico" data-icono="banco"></span> Transferencia</span>
+        <span class="metodos-pago__item"><span class="ico" data-icono="camion"></span> Envío gratis</span>
+        <span class="metodos-pago__item"><span class="ico" data-icono="candado"></span> Compra segura</span>
+      </div>
+
+      <!-- Acordeones de detalles -->
+      <div id="detallesProducto"></div>
+
+      <!-- Garantía -->
+      <div class="garantia">
+        <img class="garantia__sello" src="assets/img/sello-garantia.svg" alt="" width="120" height="120" loading="lazy">
+        <div>
+          <span class="garantia__etiqueta">SIN RIESGOS 100%</span>
+          <h3 class="garantia__titulo" id="garantiaTitulo"></h3>
+          <p class="garantia__texto" id="garantiaTexto"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     TU VARITA MÁGICA DEL PEINADO
+     ===================================================================== -->
+<section class="seccion varita">
+  <div class="contenedor">
+    <div class="varita__grid">
+      <div class="revelar">
+        <h2 class="varita__titulo">Tu varita mágica del peinado</h2>
+        <p class="varita__texto">
+          <strong>Olvídate de las herramientas múltiples</strong> y simplifica tu mañana. Desliza
+          este cepillo desde la raíz, <em>sintiendo cómo alisa y da volumen</em> al instante. El
+          calor controlado protege tu fibra mientras logras ese acabado de salón en minutos.
+          ¡Despídete del frizz <em>sin preocupaciones</em> en tu pelo rizado!
+        </p>
+        <button class="btn btn--cta" data-comprar-ahora>COMPRAR AHORA</button>
+      </div>
+      <figure class="varita__figura revelar">
+        <img src="assets/img/producto-4.svg" alt="Cuatro estilos que logras con el cepillo: secado, rizos, alisado y volumen" width="800" height="800" loading="lazy">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     TU SALÓN DE BELLEZA EN CASA
+     ===================================================================== -->
+<section class="seccion">
+  <div class="contenedor">
+    <h2 class="titulo-seccion revelar">Tu salón de belleza en casa</h2>
+    <p class="subtitulo-seccion revelar">
+      Simplifica tu rutina mañanera secando y peinando tu cabello en solo diez minutos sin complicaciones.
+    </p>
+
+    <div class="beneficios__grid">
+      <div class="beneficios__columna revelar">
+        <div class="beneficio">
+          <div class="beneficio__icono" data-icono="reloj"></div>
+          <h3 class="beneficio__titulo">Facilidad diaria</h3>
+          <p class="beneficio__texto">Ahorra tiempo al combinar secadora, peine y plancha en uno.</p>
+        </div>
+        <div class="beneficio">
+          <div class="beneficio__icono" data-icono="chispa"></div>
+          <h3 class="beneficio__titulo">Acabado profesional</h3>
+          <p class="beneficio__texto">Consigue ese volumen impecable y brillo radiante cada mañana sin esfuerzo.</p>
+        </div>
+      </div>
+
+      <div class="beneficios__centro revelar">
+        <span class="beneficios__aro" aria-hidden="true"></span>
+        <img src="assets/img/producto-5.svg" alt="Especificaciones del cepillo: 1000 W, tecnología cerámica y ondas suaves" width="800" height="800" loading="lazy">
+      </div>
+
+      <div class="beneficios__columna revelar">
+        <div class="beneficio">
+          <div class="beneficio__icono" data-icono="corazon"></div>
+          <h3 class="beneficio__titulo">Cuidado suave</h3>
+          <p class="beneficio__texto">Menos tiempo de calor significa un cabello más sano y protegido.</p>
+        </div>
+        <div class="beneficio">
+          <div class="beneficio__icono" data-icono="escudo"></div>
+          <h3 class="beneficio__titulo">Uso seguro</h3>
+          <p class="beneficio__texto">Su diseño anti quemaduras te brinda tranquilidad al peinar desde la raíz.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     PREGUNTAS FRECUENTES
+     ===================================================================== -->
+<section class="seccion seccion--rosa" aria-labelledby="tituloFaq">
+  <div class="contenedor" style="max-width:820px">
+    <h2 class="titulo-seccion revelar" id="tituloFaq">Preguntas frecuentes</h2>
+    <div style="margin-top:var(--sp-6)" id="listaFaq"></div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     RESEÑAS
+     ===================================================================== -->
+<section class="seccion" aria-labelledby="tituloResenas">
+  <div class="contenedor">
+    <h2 class="titulo-seccion revelar" id="tituloResenas">Lo que dicen nuestras usuarias</h2>
+    <p class="subtitulo-seccion revelar">
+      Únete a miles de mujeres que han simplificado su rutina matutina y consiguen resultados
+      profesionales sin esfuerzo desde casa cada día.
+    </p>
+
+    <div class="resumen-valoracion revelar">
+      <span class="resumen-valoracion__nota" id="notaGlobal"></span>
+      <span class="estrellas" id="estrellasGlobal" aria-hidden="true"></span>
+      <span class="resumen-valoracion__meta" id="metaGlobal"></span>
+    </div>
+
+    <div class="resenas__muro" id="muroResenas"></div>
+
+    <div class="resenas__acciones">
+      <button class="btn btn--fantasma" id="btnMasResenas">Ver más reseñas</button>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     CLIENTES FELICES
+     ===================================================================== -->
+<section class="seccion seccion--pastel">
+  <div class="contenedor">
+    <h2 class="titulo-seccion revelar">Más de 10.000 clientes felices</h2>
+  </div>
+  <div class="felices">
+    <div class="felices__pista" id="pistaFelices" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     ESTADÍSTICAS
+     ===================================================================== -->
+<section class="seccion">
+  <div class="contenedor">
+    <div class="stats__grid">
+      <figure class="stats__figura revelar">
+        <img src="assets/img/producto-2.svg" alt="Medidas del cepillo: 12,4 pulgadas de alto con barril de 2,8 pulgadas" width="800" height="800" loading="lazy">
+      </figure>
+
+      <div class="revelar">
+        <h2 style="font-size:var(--t-2xl);margin-bottom:var(--sp-2)">Lo que dicen quienes ya lo probaron</h2>
+        <p style="color:var(--gris-500);font-size:var(--t-sm);margin-bottom:var(--sp-4)">
+          Historias reales de mañanas más sencillas y peinados impecables en tiempo récord.
+        </p>
+
+        <div class="stats__lista" id="listaStats"></div>
+
+        <p class="stats__nota" id="notaStats"></p>
+        <button class="btn btn--cta btn--bloque" data-comprar-ahora>COMPRAR AHORA</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     CIERRE FINAL
+     ===================================================================== -->
+<section class="seccion seccion--rosa">
+  <div class="contenedor">
+    <h2 class="titulo-seccion revelar">Ese peinado perfecto hoy lo consigo mismo.</h2>
+    <p class="subtitulo-seccion revelar">
+      Recupera tus mañanas con resultados profesionales desde casa. Empieza a disfrutar de más
+      tiempo libre con la tranquilidad de una compra segura y efectiva.
+    </p>
+
+    <div class="cierre__caja revelar">
+      <figure class="cierre__figura">
+        <img src="assets/img/producto-3.svg" alt="Niveles múltiples de temperatura y velocidad del cepillo" width="800" height="800" loading="lazy">
+      </figure>
+      <div>
+        <h3 class="cierre__titulo">Tu varita mágica de salón</h3>
+        <div class="cierre__lista">
+          <p>Desliza el cepillo bajo el cabello para <strong>darle volumen desde la raíz</strong>.</p>
+          <p>Sus cerdas se desenredan con suavidad mientras el aire <em>acaricia cada mechón</em>.</p>
+          <p>Es la herramienta ideal para quienes buscan brillo sin esfuerzo.</p>
+          <p>Siente como se desliza con ligereza sin importar el tipo de pelo.</p>
+        </div>
+        <div class="cierre__destacado">
+          <span class="ico ico--grande" data-icono="chispa" aria-hidden="true"></span>
+          <span>
+            Olvídate de las herramientas pesadas y <strong>ahorra dinero en el salón</strong>.
+            Su diseño cuida tu melena <em>minimizando el daño por calor</em>. Logra un acabado
+            impecable en pocos minutos y empieza bien el día.
+          </span>
+        </div>
+        <button class="btn btn--cta btn--bloque" data-comprar-ahora>COMPRAR AHORA</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- =====================================================================
+     PIE DE PÁGINA
+     ===================================================================== -->
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__grid">
+      <div>
+        <p class="pie__logo">LISAPRO</p>
+        <p>Herramientas de belleza que te devuelven el tiempo. Enviamos a todo el Ecuador con pago contra entrega.</p>
+      </div>
+      <div>
+        <h3 class="pie__titulo">Contacto</h3>
+        <ul class="pie__lista">
+          <li><a id="waPie" href="#" target="_blank" rel="noopener"></a></li>
+          <li><a id="mailPie" href="#"></a></li>
+          <li id="ciudadPie"></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="pie__titulo">Ayuda</h3>
+        <ul class="pie__lista">
+          <li><a href="#tituloFaq">Preguntas frecuentes</a></li>
+          <li><a href="#tituloFaq">Envíos y entregas</a></li>
+          <li><a href="#tituloFaq">Devoluciones</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="pie__titulo">Formas de pago</h3>
+        <ul class="pie__lista">
+          <li><span class="ico" data-icono="billete"></span> Pago contra entrega</li>
+          <li><span class="ico" data-icono="banco"></span> Transferencia o depósito</li>
+          <li><span class="ico" data-icono="camion"></span> Envío gratis nacional</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pie__legal">
+      <p>&copy; <span id="anio"></span> LISAPRO Ecuador. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- =====================================================================
+     BARRA STICKY INFERIOR
+     ===================================================================== -->
+<div class="barra-sticky" id="barraSticky">
+  <div class="barra-sticky__interior">
+    <div class="barra-sticky__mini">
+      <img src="assets/img/producto-1.svg" alt="" width="44" height="44">
+    </div>
+    <div class="barra-sticky__texto">
+      <p class="barra-sticky__nombre" id="stickyNombre"></p>
+      <p class="barra-sticky__precio" id="stickyPrecio"></p>
+    </div>
+    <button class="barra-sticky__btn" id="stickyBtn">
+      <span data-icono-carrito-sticky></span>
+      <span class="corto">AÑADIR</span>
+      <span class="largo">AÑADIR AL CARRITO</span>
+    </button>
+  </div>
+</div>
+
+<!-- Botón flotante de WhatsApp -->
+<a class="wa-flotante" id="waFlotante" href="#" target="_blank" rel="noopener" aria-label="Escribirnos por WhatsApp"></a>
+
+<!-- Datos estructurados para Google -->
+<script type="application/ld+json" id="datosEstructurados"></script>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/contenido.js"></script>
+<script src="assets/js/tienda.js"></script>
+<script src="assets/js/landing.js"></script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es-EC">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FB2E71">
+<meta name="robots" content="noindex, nofollow">
+
+<title>Finalizar compra | LISAPRO</title>
+<meta name="description" content="Completa tu pedido. Pago contra entrega o transferencia con 5% de descuento. Envío gratis a todo Ecuador.">
+
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body class="sin-barra">
+
+<header class="cabecera">
+  <div class="cabecera__anuncio">
+    COMPRA 100% SEGURA &nbsp;·&nbsp; NO PEDIMOS DATOS DE TARJETA
+  </div>
+  <div class="contenedor">
+    <div class="cabecera__barra">
+      <a class="logo" href="index.html" aria-label="LISAPRO, volver al inicio">LISA<span>PRO</span></a>
+      <div class="cabecera__acciones">
+        <a class="icono-btn" id="waCabecera" href="#" target="_blank" rel="noopener" aria-label="Escribirnos por WhatsApp"></a>
+        <button class="icono-btn" data-abrir-cajon aria-label="Abrir el carrito">
+          <span data-icono-carrito></span>
+          <span class="contador-carrito" data-contador-carrito aria-hidden="true">0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="checkout contenedor">
+
+  <nav class="pasos" aria-label="Progreso del pedido">
+    <span class="pasos__item"><span class="pasos__num">1</span> Carrito</span>
+    <span aria-hidden="true">›</span>
+    <span class="pasos__item pasos__item--activo"><span class="pasos__num">2</span> Datos y pago</span>
+    <span aria-hidden="true">›</span>
+    <span class="pasos__item"><span class="pasos__num">3</span> Confirmación</span>
+  </nav>
+
+  <!-- Aviso cuando el carrito está vacío -->
+  <div id="carritoVacio" hidden>
+    <div class="tarjeta centrado" style="max-width:520px;margin-inline:auto">
+      <h1 class="tarjeta__titulo" style="justify-content:center">Tu carrito está vacío</h1>
+      <p class="tarjeta__nota">Añade el cepillo para continuar con tu compra.</p>
+      <a class="btn btn--cta btn--bloque" href="index.html">Ver el producto</a>
+    </div>
+  </div>
+
+  <div class="checkout__grid" id="checkoutContenido">
+
+    <!-- ================= COLUMNA IZQUIERDA: FORMULARIO ================= -->
+    <div>
+      <form id="formPedido" novalidate>
+
+        <!-- ---------- Datos de contacto ---------- -->
+        <section class="tarjeta">
+          <h2 class="tarjeta__titulo"><span class="ico" data-ico="usuario" aria-hidden="true"></span> Tus datos</h2>
+          <p class="tarjeta__nota">Los necesitamos para coordinar la entrega contigo.</p>
+
+          <div class="campos">
+            <div class="campos campos--2">
+              <div class="campo" data-campo="nombre">
+                <label class="campo__etiqueta" for="nombre">Nombres <span class="req">*</span></label>
+                <input type="text" id="nombre" name="nombre" autocomplete="given-name"
+                       placeholder="María" required minlength="2" maxlength="40">
+                <span class="campo__error"></span>
+              </div>
+              <div class="campo" data-campo="apellido">
+                <label class="campo__etiqueta" for="apellido">Apellidos <span class="req">*</span></label>
+                <input type="text" id="apellido" name="apellido" autocomplete="family-name"
+                       placeholder="González" required minlength="2" maxlength="40">
+                <span class="campo__error"></span>
+              </div>
+            </div>
+
+            <div class="campo" data-campo="cedula">
+              <label class="campo__etiqueta" for="cedula">Cédula o RUC <span class="req">*</span></label>
+              <input type="text" id="cedula" name="cedula" inputmode="numeric"
+                     placeholder="0912345678" required maxlength="13">
+              <span class="campo__ayuda">10 dígitos para cédula, 13 para RUC. La usamos solo para la guía de envío.</span>
+              <span class="campo__error"></span>
+            </div>
+
+            <div class="campo" data-campo="telefono">
+              <label class="campo__etiqueta" for="telefono">Celular (WhatsApp) <span class="req">*</span></label>
+              <div class="prefijo">
+                <span class="prefijo__texto">EC +593</span>
+                <input type="tel" id="telefono" name="telefono" inputmode="tel"
+                       autocomplete="tel-national" placeholder="0991234567" required maxlength="10">
+              </div>
+              <span class="campo__ayuda">Aquí te avisamos cuando tu pedido salga a ruta.</span>
+              <span class="campo__error"></span>
+            </div>
+
+            <div class="campo" data-campo="email">
+              <label class="campo__etiqueta" for="email">Correo electrónico <span style="color:var(--gris-500);font-weight:400">(opcional)</span></label>
+              <input type="email" id="email" name="email" autocomplete="email"
+                     placeholder="maria@correo.com" maxlength="80">
+              <span class="campo__error"></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ---------- Dirección de entrega ---------- -->
+        <section class="tarjeta">
+          <h2 class="tarjeta__titulo"><span class="ico" data-ico="pin" aria-hidden="true"></span> Dirección de entrega</h2>
+          <p class="tarjeta__nota" id="notaEnvio"></p>
+
+          <div class="campos">
+            <div class="campos campos--2">
+              <div class="campo" data-campo="provincia">
+                <label class="campo__etiqueta" for="provincia">Provincia <span class="req">*</span></label>
+                <select id="provincia" name="provincia" required>
+                  <option value="">Selecciona…</option>
+                </select>
+                <span class="campo__error"></span>
+              </div>
+              <div class="campo" data-campo="ciudad">
+                <label class="campo__etiqueta" for="ciudad">Ciudad <span class="req">*</span></label>
+                <input type="text" id="ciudad" name="ciudad" autocomplete="address-level2"
+                       placeholder="Guayaquil" required minlength="3" maxlength="40">
+                <span class="campo__error"></span>
+              </div>
+            </div>
+
+            <div class="campo" data-campo="direccion">
+              <label class="campo__etiqueta" for="direccion">Dirección completa <span class="req">*</span></label>
+              <textarea id="direccion" name="direccion" autocomplete="street-address" required
+                        minlength="10" maxlength="200"
+                        placeholder="Calle principal, número de casa, calle secundaria, sector o ciudadela"></textarea>
+              <span class="campo__error"></span>
+            </div>
+
+            <div class="campo" data-campo="referencia">
+              <label class="campo__etiqueta" for="referencia">Referencia para el mensajero <span style="color:var(--gris-500);font-weight:400">(opcional)</span></label>
+              <input type="text" id="referencia" name="referencia" maxlength="120"
+                     placeholder="Casa esquinera de reja blanca, frente a la farmacia">
+              <span class="campo__error"></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ---------- Método de pago ---------- -->
+        <section class="tarjeta">
+          <h2 class="tarjeta__titulo"><span class="ico" data-ico="tarjeta" aria-hidden="true"></span> ¿Cómo prefieres pagar?</h2>
+          <p class="tarjeta__nota">Elige una de las dos opciones. No pedimos datos de tarjeta en ningún momento.</p>
+
+          <div class="opciones-pago" id="opcionesPago"></div>
+          <div class="campo" data-campo="pago" style="margin-top:12px">
+            <span class="campo__error"></span>
+          </div>
+        </section>
+
+        <!-- ---------- Notas ---------- -->
+        <section class="tarjeta">
+          <h2 class="tarjeta__titulo"><span class="ico" data-ico="nota" aria-hidden="true"></span> ¿Algo más que debamos saber?</h2>
+          <div class="campo" data-campo="notas">
+            <label class="campo__etiqueta solo-lectores" for="notas">Notas del pedido</label>
+            <textarea id="notas" name="notas" maxlength="300"
+                      placeholder="Horario en que prefieres recibir, si es un regalo, etc. (opcional)"></textarea>
+          </div>
+        </section>
+
+      </form>
+    </div>
+
+    <!-- ================= COLUMNA DERECHA: RESUMEN ================= -->
+    <aside>
+      <div class="resumen">
+        <h2 class="resumen__titulo">Resumen de tu pedido</h2>
+
+        <div class="resumen__lineas" id="resumenLineas"></div>
+
+        <div class="totales" id="resumenTotales"></div>
+
+        <button class="btn btn--cta btn--bloque" id="btnConfirmar" form="formPedido">
+          CONFIRMAR PEDIDO
+        </button>
+
+        <p style="text-align:center;font-size:var(--t-xs);color:var(--gris-500);margin-top:10px" id="notaBoton"></p>
+
+        <ul class="resumen__confianza">
+          <li><span data-ico="camion"></span> Envío gratis a todo el Ecuador</li>
+          <li><span data-ico="escudo"></span> Garantía de 30 días o te devolvemos tu dinero</li>
+          <li><span data-ico="checkCirculo"></span> Más de 10.000 clientas satisfechas</li>
+          <li><span data-ico="whatsapp"></span> Soporte real por WhatsApp</li>
+        </ul>
+
+        <p style="text-align:center;margin-top:var(--sp-4)">
+          <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;min-height:44px;font-size:var(--t-sm);color:var(--gris-500);text-decoration:underline">
+            <span class="ico ico--neutro" data-ico="izq" aria-hidden="true"></span>
+            Seguir viendo el producto
+          </a>
+        </p>
+      </div>
+    </aside>
+
+  </div>
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__legal">
+      <p>&copy; <span id="anio"></span> LISAPRO Ecuador · WhatsApp <span id="numeroPie"></span></p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/contenido.js"></script>
+<script src="assets/js/tienda.js"></script>
+<script src="assets/js/checkout.js"></script>
+</body>
+</html>

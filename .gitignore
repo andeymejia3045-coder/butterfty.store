@@ -1,0 +1,7 @@
+# Resultados de las pruebas automatizadas
+herramientas/.resultados/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+*.log

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es-EC">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FB2E71">
+<meta name="robots" content="noindex, nofollow">
+
+<title>¡Pedido confirmado! | LISAPRO</title>
+
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body class="sin-barra">
+
+<header class="cabecera">
+  <div class="contenedor">
+    <div class="cabecera__barra">
+      <a class="logo" href="index.html" aria-label="LISAPRO, volver al inicio">LISA<span>PRO</span></a>
+      <div class="cabecera__acciones">
+        <a class="icono-btn" id="waCabecera" href="#" target="_blank" rel="noopener" aria-label="Escribirnos por WhatsApp"></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="gracias contenedor">
+
+  <!-- Si alguien llega aquí sin pedido -->
+  <div id="sinPedido" hidden>
+    <h1 class="gracias__titulo">Aquí no hay ningún pedido</h1>
+    <p class="gracias__texto">Parece que llegaste directo a esta página. Vuelve al producto para hacer tu compra.</p>
+    <div class="gracias__acciones">
+      <a class="btn btn--cta" href="index.html">Ver el producto</a>
+    </div>
+  </div>
+
+  <div id="conPedido" hidden>
+    <div class="gracias__icono" aria-hidden="true" id="iconoOk"></div>
+
+    <h1 class="gracias__titulo">¡Gracias, <span id="nombreCliente"></span>!</h1>
+    <p class="gracias__texto" id="mensajePrincipal"></p>
+
+    <p class="orden-num">PEDIDO <span id="numeroPedido"></span></p>
+
+    <div class="gracias__caja">
+
+      <!-- Aviso importante según el método de pago -->
+      <div class="tarjeta" id="tarjetaPago"></div>
+
+      <!-- Qué pasa ahora -->
+      <div class="tarjeta">
+        <h2 class="tarjeta__titulo"><span class="ico" data-ico="mapa" aria-hidden="true"></span> Qué pasa ahora</h2>
+        <div class="pasos-siguientes" id="pasosSiguientes"></div>
+      </div>
+
+      <!-- Resumen -->
+      <div class="tarjeta">
+        <h2 class="tarjeta__titulo"><span class="ico" data-ico="recibo" aria-hidden="true"></span> Resumen de tu pedido</h2>
+        <div class="resumen__lineas" id="resumenLineas" style="border-color:var(--gris-200)"></div>
+        <div class="totales" id="resumenTotales"></div>
+      </div>
+
+      <!-- Datos de entrega -->
+      <div class="tarjeta">
+        <h2 class="tarjeta__titulo"><span class="ico" data-ico="pin" aria-hidden="true"></span> Entrega</h2>
+        <dl id="datosEntrega"></dl>
+      </div>
+    </div>
+
+    <div class="gracias__acciones">
+      <a class="btn btn--wa btn--bloque" id="btnWa" href="#" target="_blank" rel="noopener">
+        <span id="icoWa"></span> ENVIAR MI PEDIDO POR WHATSAPP
+      </a>
+      <button class="btn btn--fantasma btn--bloque" id="btnImprimir">Guardar o imprimir el comprobante</button>
+      <a class="btn btn--fantasma btn--bloque" href="index.html">Volver a la tienda</a>
+    </div>
+
+    <p style="font-size:var(--t-xs);color:var(--gris-500);margin-top:var(--sp-6);max-width:520px;margin-inline:auto">
+      Si la ventana de WhatsApp no se abrió sola, toca el botón verde de arriba. Tu pedido ya quedó
+      registrado con el número <strong id="numeroPedido2"></strong>.
+    </p>
+  </div>
+
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__legal">
+      <p>&copy; <span id="anio"></span> LISAPRO Ecuador · WhatsApp <span id="numeroPie"></span></p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/contenido.js"></script>
+<script src="assets/js/tienda.js"></script>
+<script src="assets/js/gracias.js"></script>
+</body>
+</html>
