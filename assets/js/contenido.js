@@ -14,84 +14,102 @@ const CONTENIDO = {
     {
       autora: 'Lucía',
       estrellas: 5,
-      foto: 'assets/img/resena-1.svg',
       texto: 'Llegó rapidísimo y funciona igual que en los videos. Totalmente recomendado.',
     },
     {
       autora: 'Sofía',
       estrellas: 5,
-      foto: 'assets/img/resena-4.svg',
       texto:
         'Increíble cómo ahorra tiempo. Ya no necesito el secador y la plancha, con esto es suficiente para dejarlo liso y con volumen.',
     },
     {
       autora: 'Elena',
       estrellas: 4,
-      foto: 'assets/img/resena-8.svg',
       texto:
         'Me encanta el volumen que da. Tenía miedo por el daño para el pelo pero se siente mucho más saludable y brillante desde que cambié mi rutina.',
     },
     {
       autora: 'Valeria',
       estrellas: 5,
-      foto: 'assets/img/resena-3.svg',
       texto:
         'Tenía mis dudas siendo de pelo rizado, pero me ha sorprendido gratamente. Me ayuda a alisar sin maltratar y el resultado dura todo el día.',
     },
     {
       autora: 'Marta',
       estrellas: 5,
-      foto: 'assets/img/resena-2.svg',
       texto:
         'Es súper cómodo de manejar. Se siente como si alguien más me estuviera peinando, el acabado es muy suave y sin nada de frizz.',
     },
     {
       autora: 'Claudia',
       estrellas: 4,
-      foto: 'assets/img/resena-12.svg',
       texto:
         'El resultado es muy natural. Me gusta mucho cómo queda el volumen en las raíces sin que se vea artificial. Muy contenta.',
     },
     {
       autora: 'Paula',
       estrellas: 5,
-      foto: 'assets/img/resena-5.svg',
       texto:
         'Al principio dudé si se quemaría mi pelo, pero al tener control de temperatura estoy tranquila. Lo uso cada mañana y mi cabello sigue viéndose brillante y muy sano. Es la mejor inversión que he hecho para mis mañanas apresuradas.',
     },
     {
       autora: 'Laura',
       estrellas: 5,
-      foto: 'assets/img/resena-6.svg',
       texto:
         'Ya no pierdo la mitad de mi mañana secando y luego pasando la plancha. Este cepillo lo hace todo en un paso y me deja el pelo genial.',
     },
     {
       autora: 'Isabel',
       estrellas: 5,
-      foto: 'assets/img/resena-9.svg',
       texto: 'El empaque venía perfecto y el producto es tal cual la descripción. Pagué al recibirlo, todo súper confiable.',
     },
     {
       autora: 'Andrea',
       estrellas: 5,
-      foto: 'assets/img/resena-7.svg',
       texto:
         'Se lo regalé a mi hermana y terminó comprándose otro para mi mamá. En casa ya somos tres usándolo.',
     },
     {
       autora: 'Gabriela',
       estrellas: 4,
-      foto: 'assets/img/resena-10.svg',
       texto:
         'Mi pelo es muy fino y temía que se me quemara. Con la temperatura baja queda perfecto y con muchísimo cuerpo.',
     },
     {
       autora: 'Daniela',
       estrellas: 5,
-      foto: 'assets/img/resena-11.svg',
       texto:
         'Diez minutos y salgo peinada de casa. Antes me tomaba media hora. Vale cada centavo.',
+    },
+    {
+      autora: 'Jazmín',
+      estrellas: 5,
+      texto: 'Llegó en dos días a Quito y funciona igual que en los videos. Muy contenta.',
+    },
+    {
+      autora: 'Verónica',
+      estrellas: 5,
+      texto: 'Lo pagué al recibirlo, eso me dio mucha confianza para comprar.',
+    },
+    {
+      autora: 'Katherine',
+      estrellas: 4,
+      texto: 'Me deja el cabello con mucho brillo. Al inicio hay que agarrarle la mano, pero después es rapidísimo.',
+    },
+    {
+      autora: 'Mishell',
+      estrellas: 5,
+      texto: 'Se lo compré a mi mamá y ahora lo usamos las dos. Vale totalmente lo que cuesta.',
+    },
+    {
+      autora: 'Carolina',
+      estrellas: 5,
+      texto: 'Tengo el pelo grueso y pensé que no me iba a servir. Me equivoqué, queda liso y con cuerpo.',
+    },
+    {
+      autora: 'Estefanía',
+      estrellas: 5,
+      texto: 'Lo mejor es que no se me enreda el pelo como con otros cepillos. Cero tirones.',
     },
   ],
 

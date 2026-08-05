@@ -534,27 +534,26 @@
       .map(
         (r) =>
           '<article class="resena">' +
-          (r.foto
-            ? '<img class="resena__foto" src="' +
-              esc(r.foto) +
-              '" alt="Resultado compartido por ' +
-              esc(r.autora) +
-              '" width="480" height="600" loading="lazy">'
-            : '') +
-          '<div class="resena__cuerpo">' +
+          '<div class="resena__cabecera">' +
+          '<span class="resena__inicial" aria-hidden="true">' +
+          esc(r.autora.trim().charAt(0).toUpperCase()) +
+          '</span>' +
+          '<div class="resena__quien">' +
           '<p class="resena__autora">' +
-          '<span class="resena__verificada" aria-label="Compra verificada">' +
+          esc(r.autora) +
+          '<span class="resena__verificada" title="Compra verificada" aria-label="Compra verificada">' +
           ICO.checkCirculo +
           '</span>' +
-          esc(r.autora) +
           '</p>' +
           '<span class="estrellas" aria-label="' +
           r.estrellas +
           ' de 5 estrellas">' +
           estrellasHTML(r.estrellas) +
           '</span>' +
+          '</div>' +
+          '</div>' +
           (r.texto ? '<p class="resena__texto">' + esc(r.texto) + '</p>' : '') +
-          '</div></article>'
+          '</article>'
       )
       .join('');
 
@@ -581,25 +580,58 @@
   }
 
   /* =======================================================================
-     12. CARRUSEL DE CLIENTAS FELICES
+     12. FIGURAS DE LAS SECCIONES Y FRANJA DE CONFIANZA
      ======================================================================= */
-  function pintarFelices() {
-    const pista = document.getElementById('pistaFelices');
-    if (!pista) return;
-    const fotos = [];
-    for (let i = 1; i <= 7; i++) fotos.push('assets/img/clienta-' + i + '.svg');
 
-    // Duplicamos la lista para que el desplazamiento sea infinito y sin saltos
-    const html = fotos
-      .concat(fotos)
+  /**
+   * Las secciones de abajo mostraban ilustraciones. Ahora reutilizan las
+   * fotos reales del producto: se toman de la galería, saltándose la primera
+   * (que ya se ve arriba en grande) para no repetir la misma imagen.
+   */
+  function pintarFigurasSecciones() {
+    const disponibles = P.galeria.slice(1).concat(P.galeria.slice(0, 1));
+
+    $$('[data-foto]').forEach((img) => {
+      const n = parseInt(img.getAttribute('data-foto'), 10) || 1;
+      const elegida = disponibles[(n - 1) % disponibles.length];
+      if (!elegida) return;
+      if (elegida.respaldo) img.setAttribute('data-respaldo', elegida.respaldo);
+      img.src = elegida.src;
+    });
+  }
+
+  /** Franja de garantías, en lugar del carrusel de retratos */
+  function pintarConfianza() {
+    const cont = document.getElementById('franjaConfianza');
+    if (!cont) return;
+
+    const items = [
+      { ico: 'camion', t: 'Envío gratis', d: 'A todo el Ecuador, sin monto mínimo' },
+      { ico: 'billete', t: 'Pagas al recibir', d: 'Revisas el producto antes de pagar' },
+      {
+        ico: 'escudo',
+        t: 'Garantía de ' + CONFIG.garantia.dias + ' días',
+        d: 'Si no te gusta, te devolvemos tu dinero',
+      },
+      { ico: 'whatsapp', t: 'Te atiende una persona', d: 'Por WhatsApp, de lunes a sábado' },
+    ];
+
+    cont.innerHTML = items
       .map(
-        (f) =>
-          '<div class="felices__item"><img src="' +
-          esc(f) +
-          '" alt="" width="360" height="480" loading="lazy"></div>'
+        (i) =>
+          '<li class="confianza__item">' +
+          '<span class="confianza__icono" aria-hidden="true">' +
+          (ICO[i.ico] || '') +
+          '</span>' +
+          '<span class="confianza__titulo">' +
+          esc(i.t) +
+          '</span>' +
+          '<span class="confianza__texto">' +
+          esc(i.d) +
+          '</span>' +
+          '</li>'
       )
       .join('');
-    pista.innerHTML = html;
   }
 
   /* =======================================================================
@@ -743,7 +775,8 @@
     actualizarStickyConPack();
     pintarResenas();
     activarMasResenas();
-    pintarFelices();
+    pintarFigurasSecciones();
+    pintarConfianza();
     pintarStats();
     activarBotones();
     activarSticky();

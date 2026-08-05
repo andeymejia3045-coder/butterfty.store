@@ -618,25 +618,6 @@ h4 {
   border-color: var(--rosa);
 }
 
-/* Insignia de esquina "5 Years Top Selling" */
-.galeria__insignia {
-  position: absolute;
-  top: var(--sp-3);
-  left: var(--sp-3);
-  z-index: 2;
-  width: 66px;
-  pointer-events: none;
-}
-
-.galeria__sello {
-  position: absolute;
-  top: var(--sp-3);
-  right: var(--sp-3);
-  z-index: 2;
-  width: 52px;
-  pointer-events: none;
-}
-
 /* Info del producto */
 .producto__titulo {
   font-size: var(--t-3xl);
@@ -1034,7 +1015,14 @@ h4 {
 
 .garantia__sello {
   flex: 0 0 auto;
-  width: 62px;
+  width: 46px;
+  height: 46px;
+  color: var(--rosa);
+}
+
+.garantia__sello svg {
+  width: 100%;
+  height: 100%;
 }
 
 .garantia__etiqueta {
@@ -1166,30 +1154,47 @@ h4 {
 .resena {
   break-inside: avoid;
   margin-bottom: var(--sp-3);
-  border: 2px solid var(--rosa-claro);
+  border: 1px solid var(--gris-200);
+  border-left: 3px solid var(--rosa);
   border-radius: var(--r-md);
   background: var(--blanco);
-  overflow: hidden;
+  padding: var(--sp-4);
+  box-shadow: var(--sombra-sm);
 }
 
-.resena__foto {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  background: var(--gris-100);
+.resena__cabecera {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-3);
 }
 
-.resena__cuerpo {
-  padding: var(--sp-3);
+/* Círculo con la inicial del nombre: da identidad sin usar fotos */
+.resena__inicial {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--rosa-pastel);
+  color: var(--rosa-oscuro);
+  font-weight: 800;
+  font-size: var(--t-md);
+  line-height: 1;
+}
+
+.resena__quien {
+  min-width: 0;
 }
 
 .resena__autora {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   font-weight: 700;
   font-size: var(--t-sm);
-  margin-bottom: 3px;
+  line-height: 1.3;
 }
 
 .resena__verificada {
@@ -1202,7 +1207,6 @@ h4 {
 .resena__texto {
   font-size: var(--t-sm);
   color: var(--gris-700);
-  margin-top: var(--sp-2);
 }
 
 .resenas__acciones {
@@ -1231,46 +1235,44 @@ h4 {
 }
 
 /* -------------------------------------------------------------------------
-   10. CLIENTES FELICES (carrusel infinito)
+   10. FRANJA DE CONFIANZA
    ------------------------------------------------------------------------- */
-.felices {
-  overflow: hidden;
-  padding-block: var(--sp-6);
+.confianza {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-4);
+  text-align: center;
 }
 
-.felices__pista {
+.confianza__item {
   display: flex;
-  gap: var(--sp-3);
-  width: max-content;
-  animation: desliza 42s linear infinite;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
 }
 
-.felices:hover .felices__pista {
-  animation-play-state: paused;
+.confianza__icono {
+  width: 32px;
+  height: 32px;
+  color: var(--rosa);
+  margin-bottom: 2px;
 }
 
-.felices__item {
-  flex: 0 0 auto;
-  width: 132px;
-  aspect-ratio: 3 / 4;
-  border-radius: var(--r-md);
-  overflow: hidden;
-  background: var(--gris-100);
-}
-
-.felices__item img {
+.confianza__icono svg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 
-@keyframes desliza {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+.confianza__titulo {
+  font-weight: 700;
+  font-size: var(--t-base);
+  line-height: 1.25;
+}
+
+.confianza__texto {
+  font-size: var(--t-xs);
+  color: var(--gris-500);
+  max-width: 190px;
 }
 
 /* -------------------------------------------------------------------------
@@ -2582,6 +2584,10 @@ body.sin-barra .wa-flotante {
     columns: 3;
   }
 
+  .confianza {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
   .stats__grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -2603,10 +2609,6 @@ body.sin-barra .wa-flotante {
 
   .pie__grid {
     grid-template-columns: 1.4fr 1fr 1fr;
-  }
-
-  .felices__item {
-    width: 168px;
   }
 
   .btn--cta {

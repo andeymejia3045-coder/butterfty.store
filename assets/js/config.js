@@ -19,7 +19,7 @@ const CONFIG = {
     simbolo: '$',
     // Tu dominio, sin la barra final. Si cambia, actualízalo también en la
     // etiqueta <link rel="canonical"> de index.html
-    dominio: 'https://butterfly.store',
+    dominio: 'https://andeymejia3045-coder.github.io/butterfty.store/',
     // Prefijo con el que se guardan los datos en el navegador de la clienta
     prefijoDatos: 'butterfly',
   },
@@ -68,41 +68,41 @@ const CONFIG = {
 
        2) Un LINK de internet, sin subir nada al proyecto:
             { src: 'https://i.ibb.co/abc123/foto.jpg',
-              respaldo: 'assets/img/producto-3.svg',
+              respaldo: 'assets/img/producto-1.png',
               alt: '...' }
 
        El campo "respaldo" es la ilustración que se muestra si ese link algún
        día deja de funcionar. Así la tienda nunca queda con un hueco.
        --------------------------------------------------------------------- */
     imagenPrincipal: 'assets/img/producto-1.png',
-    imagenPrincipalRespaldo: 'assets/img/producto-1.svg',
+    imagenPrincipalRespaldo: 'assets/img/producto-1.png',
     galeria: [
       /* ── Fotos que están guardadas en el proyecto ──
          Estas son las más seguras: nunca dependen de otro servidor. */
       { src: 'assets/img/producto-1.png',
-        respaldo: 'assets/img/producto-1.svg',
+        respaldo: 'assets/img/producto-1.png',
         alt: 'Cepillo, secador y aplanchador 3 en 1 en color negro con detalles rosados' },
       { src: 'assets/img/producto-2.png',
-        respaldo: 'assets/img/producto-2.svg',
+        respaldo: 'assets/img/producto-2.png',
         alt: 'Temperatura y velocidad ajustables: alta, media y baja, con tecnología de iones negativos' },
 
       /* ── Fotos que vienen por link externo ──
          Si alguno de estos links deja de funcionar, se muestra la ilustración
          indicada en "respaldo" y la galería no queda con huecos. */
       { src: 'https://i.ebayimg.com/images/g/tagAAeSwtxtp1Vjw/s-l1600.webp',
-        respaldo: 'assets/img/producto-3.svg',
+        respaldo: 'assets/img/producto-1.png',
         alt: 'Cepillo, secador y aplanchador 3 en 1 de Butterfly' },
       { src: 'https://i.ebayimg.com/images/g/YJoAAeSwWp1p1Vjw/s-l1600.webp',
-        respaldo: 'assets/img/producto-4.svg',
+        respaldo: 'assets/img/producto-1.png',
         alt: 'Detalle del cepillo, secador y aplanchador 3 en 1' },
       { src: 'https://i.ebayimg.com/images/g/P-gAAeSws9Bp1Vjw/s-l1600.webp',
-        respaldo: 'assets/img/producto-5.svg',
+        respaldo: 'assets/img/producto-2.png',
         alt: 'Vista del cepillo, secador y aplanchador 3 en 1' },
       { src: 'https://i.ebayimg.com/images/g/WkgAAeSwaExp1Vjw/s-l1600.webp',
-        respaldo: 'assets/img/producto-4.svg',
+        respaldo: 'assets/img/producto-1.png',
         alt: 'Uso del cepillo, secador y aplanchador 3 en 1' },
       { src: 'https://i.ebayimg.com/images/g/XT0AAeSweoVp1Vjw/s-l1600.webp',
-        respaldo: 'assets/img/producto-5.svg',
+        respaldo: 'assets/img/producto-2.png',
         alt: 'Características del cepillo, secador y aplanchador 3 en 1' },
     ],
     // "icono" usa los nombres del catálogo de iconos en assets/js/tienda.js
