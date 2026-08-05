@@ -61,22 +61,41 @@ const CONFIG = {
     /* ---------------------------------------------------------------------
        IMÁGENES DEL PRODUCTO
        ---------------------------------------------------------------------
-       Apuntan a archivos .jpg. Mientras no subas una foto, la tienda muestra
-       automáticamente la ilustración .svg con el mismo nombre, así que nunca
-       se ve una imagen rota.
+       Cada imagen se puede poner de DOS maneras:
 
-       Para poner tus fotos reales: súbelas a assets/img/ con estos nombres
-       exactos (producto-1.jpg, producto-2.jpg, ...) y aparecen solas.
+       1) Un archivo dentro del proyecto:
+            { src: 'assets/img/producto-1.png', alt: '...' }
+
+       2) Un LINK de internet, sin subir nada al proyecto:
+            { src: 'https://i.ibb.co/abc123/foto.jpg',
+              respaldo: 'assets/img/producto-3.svg',
+              alt: '...' }
+
+       El campo "respaldo" es la ilustración que se muestra si ese link algún
+       día deja de funcionar. Así la tienda nunca queda con un hueco.
        --------------------------------------------------------------------- */
     imagenPrincipal: 'assets/img/producto-1.png',
+    imagenPrincipalRespaldo: 'assets/img/producto-1.svg',
     galeria: [
-      // ── Fotos reales ya subidas ──
-      { src: 'assets/img/producto-1.png', alt: 'Cepillo, secador y aplanchador 3 en 1 en color negro con detalles rosados' },
-      { src: 'assets/img/producto-2.png', alt: 'Temperatura y velocidad ajustables: alta, media y baja, con tecnología de iones negativos' },
-      // ── Faltan por subir: mientras tanto se ve la ilustración ──
-      { src: 'assets/img/producto-3.jpg', alt: 'Medidas del cepillo: 31,5 cm de largo y barril de 7 cm' },
-      { src: 'assets/img/producto-4.jpg', alt: 'Cuatro estilos posibles: secado, rizos, alisado y volumen' },
-      { src: 'assets/img/producto-5.jpg', alt: 'Especificaciones técnicas: 1000 W, cerámica y ondas suaves' },
+      // ── Fotos reales ya puestas ──
+      { src: 'assets/img/producto-1.png',
+        respaldo: 'assets/img/producto-1.svg',
+        alt: 'Cepillo, secador y aplanchador 3 en 1 en color negro con detalles rosados' },
+      { src: 'assets/img/producto-2.png',
+        respaldo: 'assets/img/producto-2.svg',
+        alt: 'Temperatura y velocidad ajustables: alta, media y baja, con tecnología de iones negativos' },
+
+      // ── Aquí van tus próximas fotos ──
+      // Reemplaza el src por el link que me pases y listo.
+      { src: 'assets/img/producto-3.jpg',
+        respaldo: 'assets/img/producto-3.svg',
+        alt: 'Medidas del cepillo: 31,5 cm de largo y barril de 7 cm' },
+      { src: 'assets/img/producto-4.jpg',
+        respaldo: 'assets/img/producto-4.svg',
+        alt: 'Cuatro estilos posibles: secado, rizos, alisado y volumen' },
+      { src: 'assets/img/producto-5.jpg',
+        respaldo: 'assets/img/producto-5.svg',
+        alt: 'Especificaciones técnicas: 1000 W, cerámica y ondas suaves' },
     ],
     // "icono" usa los nombres del catálogo de iconos en assets/js/tienda.js
     bullets: [

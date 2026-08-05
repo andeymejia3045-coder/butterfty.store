@@ -86,7 +86,9 @@
           esc(img.src) +
           '" alt="' +
           esc(img.alt) +
-          '" width="800" height="800"' +
+          '"' +
+          (img.respaldo ? ' data-respaldo="' + esc(img.respaldo) + '"' : '') +
+          ' width="800" height="800"' +
           (i === 0 ? ' fetchpriority="high"' : ' loading="lazy"') +
           '></div>'
       )
@@ -120,7 +122,9 @@
           (i + 1) +
           '"><img src="' +
           esc(img.src) +
-          '" alt="" width="68" height="68" loading="lazy"></button>'
+          '"' +
+          (img.respaldo ? ' data-respaldo="' + esc(img.respaldo) + '"' : '') +
+          ' alt="" width="68" height="68" loading="lazy"></button>'
       )
       .join('');
 
@@ -239,7 +243,12 @@
     // La miniatura toma la foto real del producto si ya está subida.
     // Si no existe, el respaldo de tienda.js vuelve a la ilustración.
     const stickyFoto = document.getElementById('stickyFoto');
-    if (stickyFoto) stickyFoto.src = P.imagenPrincipal;
+    if (stickyFoto) {
+      if (P.imagenPrincipalRespaldo) {
+        stickyFoto.setAttribute('data-respaldo', P.imagenPrincipalRespaldo);
+      }
+      stickyFoto.src = P.imagenPrincipal;
+    }
 
     // Nota de estadísticas
     set(

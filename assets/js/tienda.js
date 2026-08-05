@@ -568,10 +568,34 @@
   const CADENA_FORMATOS = ['.jpg', '.png', '.svg'];
   const EXTENSIONES_FOTO = /\.(jpe?g|png|webp|avif|svg)$/i;
 
+  /**
+   * Cuando una imagen no carga, buscamos una alternativa.
+   *
+   * Ojo: usamos DOS atributos distintos a propósito.
+   *   data-respaldo        -> la dirección de la imagen alternativa
+   *   data-respaldo-usado  -> la marca de que ya lo intentamos
+   * Si guardáramos las dos cosas en el mismo atributo, la marca borraría la
+   * dirección y el respaldo dejaría de funcionar.
+   */
   function usarRespaldo(img) {
     if (!img || img.tagName !== 'IMG') return;
+    if (img.dataset.respaldoUsado === '1') return; // ya se intentó una vez
 
+    /* Caso 1: la foto viene de un link de internet y ese link falló.
+       Pasamos directo a la ilustración local indicada en data-respaldo. */
+    const alterno = img.getAttribute('data-respaldo');
+    if (alterno) {
+      img.dataset.respaldoUsado = '1';
+      img.src = alterno;
+      return;
+    }
+
+    /* Caso 2: archivo del proyecto. Probamos .jpg, .png y la ilustración. */
     const actual = img.getAttribute('src') || '';
+
+    // Un link de internet sin respaldo declarado: no inventamos direcciones
+    if (/^https?:\/\//i.test(actual)) return;
+
     const coincide = actual.match(EXTENSIONES_FOTO);
     if (!coincide) return;
 
@@ -581,15 +605,15 @@
     // Si ya llegamos a la ilustración, no hay nada más que intentar
     if (posicion === -1 || posicion === CADENA_FORMATOS.length - 1) return;
 
-    const siguiente = CADENA_FORMATOS[posicion + 1];
-    img.dataset.respaldo = 'usado';
-    img.src = actual.replace(EXTENSIONES_FOTO, siguiente);
+    img.src = actual.replace(EXTENSIONES_FOTO, CADENA_FORMATOS[posicion + 1]);
   }
 
   /** Revisa las imágenes que ya fallaron antes de que empezáramos a escuchar */
   function barrerImagenesFallidas() {
     $$('img').forEach((img) => {
-      if (img.complete && img.naturalWidth === 0) usarRespaldo(img);
+      if (img.complete && img.naturalWidth === 0 && img.getAttribute('src')) {
+        usarRespaldo(img);
+      }
     });
   }
 
