@@ -3,7 +3,7 @@
 (() => {
   const pack = CONFIG.packs.find((p) => p.destacado) || CONFIG.packs[0];
 
-  localStorage.setItem('lisapro_carrito_v1', JSON.stringify([{
+  localStorage.setItem(CONFIG.tienda.prefijoDatos + '_carrito_v1', JSON.stringify([{
     id: CONFIG.producto.id + '__' + pack.id,
     nombre: CONFIG.producto.nombre,
     variante: 'Pack de ' + pack.cantidad + ' unidades',
@@ -25,10 +25,10 @@
     unidades: 1,
   };
 
-  localStorage.setItem('lisapro_pedido_actual', JSON.stringify({
+  localStorage.setItem(CONFIG.tienda.prefijoDatos + '_pedido_actual', JSON.stringify({
     numero: 'LP-260805-4821',
     fecha: new Date().toISOString(),
-    lineas: JSON.parse(localStorage.getItem('lisapro_carrito_v1')),
+    lineas: JSON.parse(localStorage.getItem(CONFIG.tienda.prefijoDatos + '_carrito_v1')),
     totales: totales,
     metodo: { id: 'transferencia', nombre: 'Transferencia o depósito' },
     entrega: '24 a 48 horas',

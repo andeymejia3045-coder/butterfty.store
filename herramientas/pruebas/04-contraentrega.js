@@ -4,7 +4,7 @@
   const R = [];
   const ok = (n, c, extra) => R.push({ prueba: n, pasa: !!c, detalle: extra || '' });
 
-  localStorage.removeItem('lisapro_pedido_actual');
+  localStorage.removeItem(CONFIG.tienda.prefijoDatos + '_pedido_actual');
   Tienda.Carrito.vaciar();
 
   /* --- Elegimos el pack de 3 y lo añadimos --- */
@@ -36,7 +36,7 @@
 
   /* --- Guardamos el carrito para que el checkout lo recoja --- */
   ok('El carrito persiste para el checkout',
-     JSON.parse(localStorage.getItem('lisapro_carrito_v1')).length === 1);
+     JSON.parse(localStorage.getItem(CONFIG.tienda.prefijoDatos + '_carrito_v1')).length === 1);
 
   /* --- Verificamos que el pack de 1 no dé precio de pack --- */
   Tienda.Carrito.vaciar();

@@ -160,7 +160,7 @@
   /* =======================================================================
      2. MOTOR DEL CARRITO
      ======================================================================= */
-  const CLAVE = 'lisapro_carrito_v1';
+  const CLAVE = CONFIG.tienda.prefijoDatos + '_carrito_v1';
 
   function leer() {
     try {

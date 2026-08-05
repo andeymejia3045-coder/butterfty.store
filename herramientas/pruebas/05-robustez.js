@@ -7,11 +7,11 @@
   const $$ = (s) => Array.from(document.querySelectorAll(s));
 
   /* ---------- 1. Carrito con datos corruptos en localStorage ---------- */
-  localStorage.setItem('lisapro_carrito_v1', 'esto no es json {{{');
+  localStorage.setItem(CONFIG.tienda.prefijoDatos + '_carrito_v1', 'esto no es json {{{');
   ok('Un carrito corrupto no rompe la tienda',
      Array.isArray(Tienda.Carrito.lineas()) && Tienda.Carrito.lineas().length === 0);
 
-  localStorage.setItem('lisapro_carrito_v1', JSON.stringify([
+  localStorage.setItem(CONFIG.tienda.prefijoDatos + '_carrito_v1', JSON.stringify([
     { id: 'malo', nombre: 'X', precio: 'mucho', cantidad: 1 },      // precio no numérico
     { id: 'malo2', nombre: 'Y', precio: 10, cantidad: -5 },          // cantidad negativa
     { id: 'malo3', nombre: 'Z', precio: -10, cantidad: 1 },          // precio negativo
@@ -46,10 +46,10 @@
   ok('Con carrito vacío se oculta el formulario',
      $('#checkoutContenido').hidden === true);
 
-  localStorage.removeItem('lisapro_pedido_actual');
+  localStorage.removeItem(CONFIG.tienda.prefijoDatos + '_pedido_actual');
   $('#btnConfirmar').click();
   ok('Con carrito vacío no se crea ningún pedido',
-     localStorage.getItem('lisapro_pedido_actual') === null);
+     localStorage.getItem(CONFIG.tienda.prefijoDatos + '_pedido_actual') === null);
 
   /* ---------- 4. Protección contra inyección de HTML ---------- */
   Tienda.Carrito.vaciar();

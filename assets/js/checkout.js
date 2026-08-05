@@ -296,7 +296,11 @@
                   '<div class="banco__fila"><dt>Tipo</dt><dd>' + esc(c.tipo) + '</dd></div>' +
                   '<div class="banco__fila"><dt>Número</dt><dd>' + esc(c.numero) + '</dd></div>' +
                   '<div class="banco__fila"><dt>Titular</dt><dd>' + esc(c.titular) + '</dd></div>' +
-                  '<div class="banco__fila"><dt>Identificación</dt><dd>' + esc(c.identificacion) + '</dd></div>' +
+                  // La identificación es opcional: solo se muestra si la pusiste
+                  (c.identificacion
+                    ? '<div class="banco__fila"><dt>Identificación</dt><dd>' +
+                      esc(c.identificacion) + '</dd></div>'
+                    : '') +
                   '<div class="banco__fila"><dt>Correo</dt><dd>' + esc(c.correo) + '</dd></div>' +
                   '</dl>' +
                   '<button type="button" class="copiar" data-copiar="' +
@@ -598,15 +602,16 @@
 
     // Guardamos el pedido para la página de gracias y el historial
     try {
-      localStorage.setItem('lisapro_pedido_actual', JSON.stringify(pedido));
-      const hist = JSON.parse(localStorage.getItem('lisapro_pedidos') || '[]');
+      const P = CONFIG.tienda.prefijoDatos;
+      localStorage.setItem(P + '_pedido_actual', JSON.stringify(pedido));
+      const hist = JSON.parse(localStorage.getItem(P + '_pedidos') || '[]');
       hist.unshift({
         numero: pedido.numero,
         fecha: pedido.fecha,
         total: pedido.totales.total,
         metodo: pedido.metodo.nombre,
       });
-      localStorage.setItem('lisapro_pedidos', JSON.stringify(hist.slice(0, 20)));
+      localStorage.setItem(P + '_pedidos', JSON.stringify(hist.slice(0, 20)));
     } catch (e) {
       /* si no hay almacenamiento seguimos igual: el mensaje va por WhatsApp */
     }

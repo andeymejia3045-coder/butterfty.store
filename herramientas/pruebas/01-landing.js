@@ -6,8 +6,8 @@
   const $$ = (s) => Array.from(document.querySelectorAll(s));
 
   /* ---------- Limpieza para partir de cero ---------- */
-  localStorage.removeItem('lisapro_carrito_v1');
-  localStorage.removeItem('lisapro_pedido_actual');
+  localStorage.removeItem(CONFIG.tienda.prefijoDatos + '_carrito_v1');
+  localStorage.removeItem(CONFIG.tienda.prefijoDatos + '_pedido_actual');
   Tienda.Carrito.vaciar();
 
   /* ---------- 1. Renderizado básico ---------- */
@@ -26,6 +26,15 @@
   })());
 
   /* ---------- 2. Enlaces de WhatsApp con el número correcto ---------- */
+  ok('El logo dice BUTTERFLY',
+     $('.logo').textContent.replace(/\s/g, '') === 'BUTTERFLY', $('.logo').textContent);
+  ok('El título de la pestaña dice Butterfly', document.title.includes('Butterfly'));
+  ok('El pie muestra el correo de contacto real',
+     $('#mailPie').textContent.includes('corpusenigma4@gmail.com'),
+     $('#mailPie').textContent);
+  ok('Ya no queda el nombre de la marca anterior en el texto visible',
+     !document.body.textContent.includes('LISAPRO Ecuador'));
+
   const waHref = $('#waFlotante').getAttribute('href');
   ok('WhatsApp apunta a 593960702682', waHref.indexOf('wa.me/593960702682') !== -1, waHref.slice(0, 60));
 
@@ -105,7 +114,7 @@
   ok('Envío gratis en ambos casos', tCE.envio === 0 && tTR.envio === 0);
 
   /* ---------- 11. Persistencia en localStorage ---------- */
-  const guardado = JSON.parse(localStorage.getItem('lisapro_carrito_v1'));
+  const guardado = JSON.parse(localStorage.getItem(CONFIG.tienda.prefijoDatos + '_carrito_v1'));
   ok('El carrito quedó guardado en localStorage',
      Array.isArray(guardado) && guardado.length === 1 && guardado[0].precio === 69.99);
 

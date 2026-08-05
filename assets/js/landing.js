@@ -464,7 +464,7 @@
     const elTexto = document.getElementById('regresivaTexto');
     if (!caja) return;
 
-    const CLAVE = 'lisapro_oferta_fin';
+    const CLAVE = CONFIG.tienda.prefijoDatos + '_oferta_fin';
     let fin;
     try {
       fin = parseInt(localStorage.getItem(CLAVE), 10);

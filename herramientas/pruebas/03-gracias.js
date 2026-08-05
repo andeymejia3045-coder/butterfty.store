@@ -6,7 +6,7 @@
   const $$ = (s) => Array.from(document.querySelectorAll(s));
   const txt = document.body.textContent;
 
-  const pedido = JSON.parse(localStorage.getItem('lisapro_pedido_actual') || 'null');
+  const pedido = JSON.parse(localStorage.getItem(CONFIG.tienda.prefijoDatos + '_pedido_actual') || 'null');
 
   ok('Se muestra el bloque del pedido', $('#conPedido').hidden === false);
   ok('El bloque "sin pedido" está oculto', $('#sinPedido').hidden === true);
@@ -17,11 +17,15 @@
   ok('Muestra el total 28.49', txt.includes('28.49'));
 
   /* Como el pedido fue por transferencia */
-  ok('Muestra los datos bancarios', $$('#tarjetaPago .banco').length === 2);
+  ok('Muestra los datos bancarios', $$('#tarjetaPago .banco').length === CONFIG.pagos.transferencia.cuentas.length);
+  ok('Muestra el número de cuenta real',
+     $('#tarjetaPago').textContent.includes(CONFIG.pagos.transferencia.cuentas[0].numero));
+  ok('Muestra el titular real',
+     $('#tarjetaPago').textContent.includes(CONFIG.pagos.transferencia.cuentas[0].titular));
   ok('Pide poner el número de pedido en el detalle',
      $('#tarjetaPago').textContent.includes('escribe tu número de pedido'));
   ok('Avisa del plazo de 24 horas', $('#tarjetaPago').textContent.includes('24 horas'));
-  ok('Hay botones para copiar la cuenta', $$('#tarjetaPago .copiar').length === 2);
+  ok('Hay botón para copiar cada cuenta', $$('#tarjetaPago .copiar').length === CONFIG.pagos.transferencia.cuentas.length);
   ok('Hay 4 pasos siguientes', $$('.paso-sig').length === 4);
   ok('El primer paso es hacer la transferencia',
      $('.paso-sig__titulo').textContent.includes('transferencia'));
