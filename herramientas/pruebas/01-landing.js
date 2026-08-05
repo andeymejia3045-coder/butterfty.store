@@ -10,6 +10,14 @@
   localStorage.removeItem(CONFIG.tienda.prefijoDatos + '_pedido_actual');
   Tienda.Carrito.vaciar();
 
+  /* Precios tomados de la configuración: si los cambias, las pruebas siguen
+     valiendo sin tocar nada aquí. */
+  const P1 = CONFIG.packs.find(p => p.id === 'pack-1').precio;
+  const P2 = CONFIG.packs.find(p => p.id === 'pack-2').precio;
+  const P3 = CONFIG.packs.find(p => p.id === 'pack-3').precio;
+  const RED = (n) => Tienda.redondear(n);
+  const DTO = CONFIG.pagos.transferencia.descuento;
+
   /* ---------- 1. Renderizado básico ---------- */
   ok('El título del producto coincide con la configuración',
      $('#tituloProducto').textContent === CONFIG.producto.nombre,
@@ -92,9 +100,10 @@
   $('#btnAgregar').click();
   const lineas1 = Tienda.Carrito.lineas();
   ok('El carrito tiene 1 línea', lineas1.length === 1, JSON.stringify(lineas1));
-  ok('El precio de la línea es 49.99 (pack de 2)', lineas1[0].precio === 49.99);
+  ok('El precio de la línea es el del pack de 2', lineas1[0].precio === P2,
+     'esperado ' + P2 + ', obtenido ' + lineas1[0].precio);
   ok('La variante dice Pack de 2 unidades', lineas1[0].variante === 'Pack de 2 unidades');
-  ok('Subtotal = 49.99', Tienda.Carrito.subtotal() === 49.99);
+  ok('El subtotal coincide con el pack de 2', Tienda.Carrito.subtotal() === P2);
   ok('El cajón del carrito se abrió', $('.cajon').classList.contains('abierto'));
   ok('La barra fija muestra el nombre corto completo, sin cortarse',
      $('#stickyNombre').textContent === CONFIG.producto.nombreCorto &&
@@ -104,15 +113,17 @@
 
   ok('El contador del ícono muestra 1',
      $('[data-contador-carrito]').textContent === '1');
-  ok('El cajón muestra el total 49.99',
-     $('[data-cajon-pie]').textContent.includes('49.99'));
+  ok('El cajón muestra el total del pack elegido',
+     $('[data-cajon-pie]').textContent.includes(Tienda.dinero(P2)),
+     Tienda.dinero(P2));
   ok('El cajón enlaza al checkout',
      !!$('[data-cajon-pie] a[href="checkout.html"]'));
 
   /* ---------- 6. Sumar y restar cantidad dentro del cajón ---------- */
   $('[data-mas]').click();
   ok('El botón + sube la cantidad a 2', Tienda.Carrito.lineas()[0].cantidad === 2);
-  ok('Subtotal se duplica a 99.98', Tienda.Carrito.subtotal() === 99.98);
+  ok('El subtotal se duplica', Tienda.Carrito.subtotal() === RED(P2 * 2),
+     'esperado ' + RED(P2 * 2));
   $('[data-menos]').click();
   ok('El botón − baja la cantidad a 1', Tienda.Carrito.lineas()[0].cantidad === 1);
 
@@ -130,31 +141,33 @@
   $('#btnAgregar').click();
   const lineas2 = Tienda.Carrito.lineas();
   ok('Ahora hay 2 líneas distintas', lineas2.length === 2, JSON.stringify(lineas2.map(l => l.precio)));
-  ok('La segunda línea cuesta 69.99', lineas2[1].precio === 69.99);
-  ok('Subtotal = 119.98', Tienda.Carrito.subtotal() === 119.98);
+  ok('La segunda línea cuesta lo del pack de 3', lineas2[1].precio === P3);
+  ok('El subtotal suma los dos packs', Tienda.Carrito.subtotal() === RED(P2 + P3),
+     'esperado ' + RED(P2 + P3) + ', obtenido ' + Tienda.Carrito.subtotal());
   ok('El contador del ícono muestra 2', $('[data-contador-carrito]').textContent === '2');
 
   /* ---------- 9. Eliminar una línea ---------- */
   $('[data-quitar]').click();
   ok('Al eliminar queda 1 línea', Tienda.Carrito.lineas().length === 1);
-  ok('Subtotal vuelve a 69.99', Tienda.Carrito.subtotal() === 69.99);
+  ok('El subtotal vuelve al pack de 3', Tienda.Carrito.subtotal() === P3);
 
   /* ---------- 10. Totales con cada método de pago ---------- */
   const tCE = Tienda.Carrito.totales('contraentrega');
-  ok('Contra entrega: total 69.99 sin recargo',
-     tCE.total === 69.99 && tCE.recargo === 0 && tCE.descuento === 0,
+  ok('Contra entrega: cobra el subtotal, sin recargo ni descuento',
+     tCE.total === P3 && tCE.recargo === 0 && tCE.descuento === 0,
      JSON.stringify(tCE));
 
   const tTR = Tienda.Carrito.totales('transferencia');
-  ok('Transferencia: 5 % de descuento = 3.50',
-     tTR.descuento === 3.5, JSON.stringify(tTR));
-  ok('Transferencia: total 66.49', tTR.total === 66.49, 'total=' + tTR.total);
+  ok('Transferencia: aplica el 5 % sobre el subtotal',
+     tTR.descuento === RED(P3 * DTO), 'esperado ' + RED(P3 * DTO) + ', obtenido ' + tTR.descuento);
+  ok('Transferencia: el total es el subtotal menos el descuento',
+     tTR.total === RED(P3 - RED(P3 * DTO)), 'total=' + tTR.total);
   ok('Envío gratis en ambos casos', tCE.envio === 0 && tTR.envio === 0);
 
   /* ---------- 11. Persistencia en localStorage ---------- */
   const guardado = JSON.parse(localStorage.getItem(CONFIG.tienda.prefijoDatos + '_carrito_v1'));
   ok('El carrito quedó guardado en localStorage',
-     Array.isArray(guardado) && guardado.length === 1 && guardado[0].precio === 69.99);
+     Array.isArray(guardado) && guardado.length === 1 && guardado[0].precio === P3);
 
   /* ---------- 12. Dejamos el carrito listo para el checkout ---------- */
   Tienda.Carrito.vaciar();
@@ -162,13 +175,13 @@
     id: 'cepillo-secador-3en1__pack-1',
     nombre: CONFIG.producto.nombre,
     variante: 'Unidad',
-    precio: 29.99,
-    precioAntes: 50,
+    precio: P1,
+    precioAntes: CONFIG.producto.precioAntes,
     imagen: CONFIG.producto.imagenPrincipal,
     unidades: 1,
   }, 1);
-  ok('Carrito preparado con 1 unidad de $29.99',
-     Tienda.Carrito.subtotal() === 29.99);
+  ok('Carrito preparado con una unidad al precio de lista de la tienda',
+     Tienda.Carrito.subtotal() === P1);
 
   const fallan = R.filter((r) => !r.pasa);
   return JSON.stringify({

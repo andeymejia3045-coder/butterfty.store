@@ -14,14 +14,18 @@
     cantidad: 1,
   }]));
 
+  // Calculado desde la configuración, así el ejemplo nunca queda desfasado
+  const R = (n) => Math.round((n + Number.EPSILON * Math.abs(n)) * 100) / 100;
+  const lista = R(CONFIG.producto.precioAntes * pack.cantidad);
+  const dto = R(pack.precio * CONFIG.pagos.transferencia.descuento);
   const totales = {
-    precioLista: 100,
-    ahorroLista: 50.01,
-    subtotal: 49.99,
+    precioLista: lista,
+    ahorroLista: R(lista - pack.precio),
+    subtotal: pack.precio,
     envio: 0,
-    descuento: 2.5,
+    descuento: dto,
     recargo: 0,
-    total: 47.49,
+    total: R(pack.precio - dto),
     unidades: 1,
   };
 
