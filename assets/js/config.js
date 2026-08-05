@@ -77,7 +77,8 @@ const CONFIG = {
     imagenPrincipal: 'assets/img/producto-1.png',
     imagenPrincipalRespaldo: 'assets/img/producto-1.svg',
     galeria: [
-      // ── Fotos reales ya puestas ──
+      /* ── Fotos que están guardadas en el proyecto ──
+         Estas son las más seguras: nunca dependen de otro servidor. */
       { src: 'assets/img/producto-1.png',
         respaldo: 'assets/img/producto-1.svg',
         alt: 'Cepillo, secador y aplanchador 3 en 1 en color negro con detalles rosados' },
@@ -85,17 +86,24 @@ const CONFIG = {
         respaldo: 'assets/img/producto-2.svg',
         alt: 'Temperatura y velocidad ajustables: alta, media y baja, con tecnología de iones negativos' },
 
-      // ── Aquí van tus próximas fotos ──
-      // Reemplaza el src por el link que me pases y listo.
-      { src: 'assets/img/producto-3.jpg',
+      /* ── Fotos que vienen por link externo ──
+         Si alguno de estos links deja de funcionar, se muestra la ilustración
+         indicada en "respaldo" y la galería no queda con huecos. */
+      { src: 'https://i.ebayimg.com/images/g/tagAAeSwtxtp1Vjw/s-l1600.webp',
         respaldo: 'assets/img/producto-3.svg',
-        alt: 'Medidas del cepillo: 31,5 cm de largo y barril de 7 cm' },
-      { src: 'assets/img/producto-4.jpg',
+        alt: 'Cepillo, secador y aplanchador 3 en 1 de Butterfly' },
+      { src: 'https://i.ebayimg.com/images/g/YJoAAeSwWp1p1Vjw/s-l1600.webp',
         respaldo: 'assets/img/producto-4.svg',
-        alt: 'Cuatro estilos posibles: secado, rizos, alisado y volumen' },
-      { src: 'assets/img/producto-5.jpg',
+        alt: 'Detalle del cepillo, secador y aplanchador 3 en 1' },
+      { src: 'https://i.ebayimg.com/images/g/P-gAAeSws9Bp1Vjw/s-l1600.webp',
         respaldo: 'assets/img/producto-5.svg',
-        alt: 'Especificaciones técnicas: 1000 W, cerámica y ondas suaves' },
+        alt: 'Vista del cepillo, secador y aplanchador 3 en 1' },
+      { src: 'https://i.ebayimg.com/images/g/WkgAAeSwaExp1Vjw/s-l1600.webp',
+        respaldo: 'assets/img/producto-4.svg',
+        alt: 'Uso del cepillo, secador y aplanchador 3 en 1' },
+      { src: 'https://i.ebayimg.com/images/g/XT0AAeSweoVp1Vjw/s-l1600.webp',
+        respaldo: 'assets/img/producto-5.svg',
+        alt: 'Características del cepillo, secador y aplanchador 3 en 1' },
     ],
     // "icono" usa los nombres del catálogo de iconos en assets/js/tienda.js
     bullets: [

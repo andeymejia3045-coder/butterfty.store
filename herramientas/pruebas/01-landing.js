@@ -20,7 +20,13 @@
   ok('Precio actual $29.99', $('#precioAhora').textContent.includes('29.99'));
   ok('Precio anterior $50.00', $('#precioAntes').textContent.includes('50.00'));
   ok('Descuento del 40 %', $('#insigniaAhorro').textContent === 'AHORRA UN 40%');
-  ok('5 imágenes en la galería', $$('.galeria__slide').length === 5);
+  ok('La galería tiene todas las imágenes configuradas',
+     $$('.galeria__slide').length === CONFIG.producto.galeria.length,
+     $$('.galeria__slide').length + ' de ' + CONFIG.producto.galeria.length);
+  ok('Cada imagen externa tiene ilustración de respaldo',
+     CONFIG.producto.galeria.filter(g => /^https?:/.test(g.src))
+       .every(g => !!g.respaldo),
+     'externas: ' + CONFIG.producto.galeria.filter(g => /^https?:/.test(g.src)).length);
   ok('3 packs disponibles', $$('.pack').length === 3);
   ok('Pack de 2 preseleccionado', $('input[value="pack-2"]').checked);
   ok('6 preguntas frecuentes', $$('#listaFaq .acordeon').length === 6);
