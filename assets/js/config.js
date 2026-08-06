@@ -38,7 +38,7 @@ const CONFIG = {
     numeroBonito: '+593 96 070 2682',
     // Mensaje del botón flotante (consultas, no pedidos)
     saludo:
-      '¡Hola! 👋 Vi la página del Cepillo, Secador y Aplanchador 3 en 1 y quiero más información.',
+      '¡Hola! 👋 Vi la página del Cepillo, Secador y Aplanchador 3 en 1 PRO y quiero más información.',
   },
 
   /* ---------------------------------------------------------------------
@@ -53,7 +53,7 @@ const CONFIG = {
     horario: 'Lunes a sábado · 9:00 a 19:00',
     // Con qué mensaje arranca la conversación
     mensaje:
-      '¡Hola Karla! 😊 Tengo una duda sobre el Cepillo, Secador y Aplanchador 3 en 1.',
+      '¡Hola Karla! 😊 Tengo una duda sobre el Cepillo, Secador y Aplanchador 3 en 1 PRO.',
   },
 
   /* ---------------------------------------------------------------------
@@ -61,9 +61,9 @@ const CONFIG = {
      --------------------------------------------------------------------- */
   producto: {
     id: 'cepillo-secador-3en1',
-    nombre: 'Cepillo, Secador y Aplanchador 3 en 1',
+    nombre: 'Cepillo, Secador y Aplanchador 3 en 1 PRO',
     // Versión corta para la barra fija de abajo, donde no cabe el nombre completo
-    nombreCorto: 'Cepillo 3 en 1',
+    nombreCorto: 'Cepillo 3 en 1 PRO',
     subtitulo:
       'Logra un acabado de salón en minutos con <strong>menos daño</strong> para tu cabello.',
     sku: 'LSP-3EN1-001',
