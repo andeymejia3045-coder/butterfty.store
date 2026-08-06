@@ -1021,13 +1021,19 @@ h4 {
   position: absolute;
   top: -10px;
   left: var(--sp-4);
+  right: var(--sp-4);
+  width: fit-content;
+  max-width: calc(100% - var(--sp-8));
   background: var(--negro);
   color: var(--blanco);
   font-size: 10px;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   padding: 3px 9px;
   border-radius: var(--r-pill);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .pack--destacado .pack__etiqueta {

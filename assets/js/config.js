@@ -146,7 +146,9 @@ const CONFIG = {
       titulo: '2 Cepillos',
       descripcion: 'Uno para ti y uno para regalar',
       precio: 44.99,
-      etiqueta: 'MÁS VENDIDO',
+      // Beneficio concreto en lugar de "más vendido": convierte mejor porque
+      // la clienta entiende de una lo que gana
+      etiqueta: 'EL 2° A MITAD DE PRECIO',
       destacado: true,
     },
     {
