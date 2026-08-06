@@ -651,7 +651,7 @@
         esc(A.nombre) +
         '</strong>, ' +
         esc(A.cargo.toLowerCase()) +
-        '. Te responde una persona real.</p>' +
+        '.</p>' +
         '<p class="asesora__horario">' +
         esc(A.horario) +
         '</p>' +
@@ -660,7 +660,7 @@
         esc(enlaceWa(A.mensaje)) +
         '" target="_blank" rel="noopener">' +
         ICO.whatsapp +
-        '<span>Escríbeme</span>' +
+        '<span>Escribir</span>' +
         '</a>' +
         '</div>';
     });
