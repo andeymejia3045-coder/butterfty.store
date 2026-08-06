@@ -19,7 +19,7 @@ const CONFIG = {
     simbolo: '$',
     // Tu dominio, sin la barra final. Si cambia, actualízalo también en la
     // etiqueta <link rel="canonical"> de index.html
-    dominio: 'https://andeymejia3045-coder.github.io/butterfty.store/',
+    dominio: 'https://butterflyec.netlify.app/',
     // Prefijo con el que se guardan los datos en el navegador de la clienta
     prefijoDatos: 'butterfly',
   },
