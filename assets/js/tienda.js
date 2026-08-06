@@ -532,6 +532,10 @@
   function abrirCajon() {
     construirCajon();
     pintarCajon();
+    if (window.Analytics && !Carrito.vacio()) {
+      const lineas = Carrito.lineas();
+      window.Analytics.track('view_cart', window.Analytics.parametrosCarrito(lineas));
+    }
     ultimoFoco = document.activeElement;
     velo.classList.add('abierto');
     cajon.classList.add('abierto');

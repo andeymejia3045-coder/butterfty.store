@@ -208,7 +208,14 @@
     /* --------------------------- Botón WhatsApp --------------------------- */
     const btnWa = document.getElementById('btnWa');
     if (btnWa) {
-      btnWa.href = enlaceWa(p.mensajeWa || 'Hola, mi pedido es ' + p.numero);
+      const mensajeCompleto = p.mensajeWa || 'Hola, mi pedido es ' + p.numero;
+      // El href visible solo lleva el número de pedido. Así la medición
+      // automática de clics salientes nunca recibe datos personales.
+      btnWa.href = enlaceWa('Hola, mi pedido es ' + p.numero);
+      btnWa.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.open(enlaceWa(mensajeCompleto), '_blank', 'noopener');
+      });
       const ico = document.getElementById('icoWa');
       if (ico) ico.innerHTML = ICO.whatsapp;
     }
@@ -251,6 +258,19 @@
     if (sin) sin.hidden = true;
     if (con) con.hidden = false;
     pintar(pedido);
+
+    if (window.Analytics) {
+      window.Analytics.once('purchase_' + pedido.numero, () => {
+        window.Analytics.track('purchase', {
+          transaction_id: pedido.numero,
+          currency: 'USD',
+          value: pedido.totales.total,
+          shipping: pedido.totales.envio,
+          payment_type: pedido.metodo.id,
+          items: window.Analytics.itemsLineas(pedido.lineas),
+        });
+      });
+    }
 
     const imprimir = document.getElementById('btnImprimir');
     if (imprimir) imprimir.addEventListener('click', () => window.print());

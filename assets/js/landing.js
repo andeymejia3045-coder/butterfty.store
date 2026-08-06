@@ -387,6 +387,12 @@
         l.classList.toggle('pack--activo', l.getAttribute('data-pack') === packElegido.id)
       );
       actualizarStickyConPack();
+      if (window.Analytics) {
+        window.Analytics.track('select_item', {
+          item_list_name: 'packs',
+          items: [window.Analytics.itemPack(packElegido, 1)],
+        });
+      }
     });
   }
 
@@ -404,7 +410,7 @@
   /* =======================================================================
      8. AÑADIR AL CARRITO
      ======================================================================= */
-  function agregarAlCarrito(abrirDespues) {
+  function agregarAlCarrito(abrirDespues, origen) {
     const p = packElegido;
     Carrito.agregar({
       id: P.id + '__' + p.id,
@@ -415,6 +421,14 @@
       imagen: P.imagenPrincipal,
       unidades: p.cantidad,
     });
+    if (window.Analytics) {
+      window.Analytics.track('add_to_cart', {
+        currency: 'USD',
+        value: p.precio,
+        items: [window.Analytics.itemPack(p, 1)],
+        cta_source: origen || 'unknown',
+      });
+    }
     if (abrirDespues !== false) {
       // El cajón que se abre ya es la confirmación visual; un aviso encima
       // taparía el producto recién añadido.
@@ -426,15 +440,23 @@
 
   function activarBotones() {
     const btn = document.getElementById('btnAgregar');
-    if (btn) btn.addEventListener('click', () => agregarAlCarrito(true));
+    if (btn) btn.addEventListener('click', () => agregarAlCarrito(true, 'main_cta'));
 
     const sticky = document.getElementById('stickyBtn');
-    if (sticky) sticky.addEventListener('click', () => agregarAlCarrito(true));
+    if (sticky) sticky.addEventListener('click', () => agregarAlCarrito(true, 'sticky_cta'));
 
     // Botones "COMPRAR AHORA": añaden y van directo al checkout
-    $$('[data-comprar-ahora]').forEach((b) =>
+    $$('[data-comprar-ahora]').forEach((b, indice) =>
       b.addEventListener('click', () => {
-        agregarAlCarrito(false);
+        const origen = ['benefits_cta', 'stats_cta', 'closing_cta'][indice] || 'section_cta';
+        agregarAlCarrito(false, origen);
+        if (window.Analytics) {
+          const lineas = Carrito.lineas();
+          window.Analytics.track(
+            'begin_checkout',
+            window.Analytics.parametrosCarrito(lineas, { checkout_source: origen })
+          );
+        }
         setTimeout(() => {
           window.location.href = 'checkout.html';
         }, 320);
@@ -791,6 +813,15 @@
   /* =======================================================================
      15. ARRANQUE
      ======================================================================= */
+  function medirVistaProducto() {
+    if (!window.Analytics) return;
+    window.Analytics.track('view_item', {
+      currency: 'USD',
+      value: packElegido.precio,
+      items: [window.Analytics.itemPack(packElegido, 1)],
+    });
+  }
+
   function iniciar() {
     pintarIconos();
     construirGaleria();
@@ -809,6 +840,7 @@
     activarFlotanteWa();
     activarRegresiva();
     pintarSchema();
+    medirVistaProducto();
     window.Tienda.activarRevelado();
   }
 

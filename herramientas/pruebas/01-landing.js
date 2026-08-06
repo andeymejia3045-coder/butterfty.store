@@ -92,9 +92,11 @@
   $('#galeriaPrev').click();
   ok('La flecha anterior regresa',
      $$('.galeria__punto')[0].classList.contains('activo'));
-  $$('.galeria__mini')[3].click();
+  const minisGaleria = $$('.galeria__mini');
+  const ultimaMini = minisGaleria[minisGaleria.length - 1];
+  ultimaMini.click();
   ok('Las miniaturas saltan a su imagen',
-     $$('.galeria__mini')[3].classList.contains('activo'));
+     ultimaMini.classList.contains('activo'));
 
   /* ---------- 5. Elegir el pack de 2 y añadir al carrito ---------- */
   const radio2 = document.querySelector('input[value="pack-2"]');
