@@ -97,28 +97,14 @@ const CONFIG = {
       { src: 'assets/img/promocion-revlon-pestanas.png',
         respaldo: 'assets/img/producto-1.png',
         alt: 'Promoción Revlon One-Step Volumizer Titanium con sérum de pestañas gratis' },
-      { src: 'assets/img/producto-2.png',
-        respaldo: 'assets/img/producto-2.png',
-        alt: 'Temperatura y velocidad ajustables: alta, media y baja, con tecnología de iones negativos' },
-
-      /* ── Fotos que vienen por link externo ──
-         Si alguno de estos links deja de funcionar, se muestra la ilustración
-         indicada en "respaldo" y la galería no queda con huecos. */
-      { src: 'https://i.ebayimg.com/images/g/tagAAeSwtxtp1Vjw/s-l1600.webp',
+      /* ── Fotos nuevas del producto ──
+         Si Mercado Libre bloquea un enlace, aparece la foto local de respaldo. */
+      { src: 'https://http2.mlstatic.com/D_NQ_NP_2X_781832-MLM95825423143_102025-F.webp',
         respaldo: 'assets/img/producto-1.png',
-        alt: 'Cepillo, secador y aplanchador 3 en 1 de Butterfly' },
-      { src: 'https://i.ebayimg.com/images/g/YJoAAeSwWp1p1Vjw/s-l1600.webp',
-        respaldo: 'assets/img/producto-1.png',
-        alt: 'Detalle del cepillo, secador y aplanchador 3 en 1' },
-      { src: 'https://i.ebayimg.com/images/g/P-gAAeSws9Bp1Vjw/s-l1600.webp',
+        alt: 'Cepillo secador Revlon One-Step Volumizer Titanium' },
+      { src: 'https://http2.mlstatic.com/D_NQ_NP_2X_631848-MLM90930668241_082025-F.webp',
         respaldo: 'assets/img/producto-2.png',
-        alt: 'Vista del cepillo, secador y aplanchador 3 en 1' },
-      { src: 'https://i.ebayimg.com/images/g/WkgAAeSwaExp1Vjw/s-l1600.webp',
-        respaldo: 'assets/img/producto-1.png',
-        alt: 'Uso del cepillo, secador y aplanchador 3 en 1' },
-      { src: 'https://i.ebayimg.com/images/g/XT0AAeSweoVp1Vjw/s-l1600.webp',
-        respaldo: 'assets/img/producto-2.png',
-        alt: 'Características del cepillo, secador y aplanchador 3 en 1' },
+        alt: 'Vista del cepillo Revlon One-Step Volumizer Titanium' },
     ],
     // "icono" usa los nombres del catálogo de iconos en assets/js/tienda.js
     bullets: [

@@ -8,6 +8,7 @@
   const { ICO, dinero, esc, $, $$, enlaceWa, aviso, Carrito } = window.Tienda;
 
   let metodoElegido = 'contraentrega'; // el que menos fricción tiene, va por defecto
+  let enviandoPedido = false;
 
   /* =======================================================================
      1. VALIDADORES
@@ -372,6 +373,12 @@
       );
       pintarTotales();
       marcarOk('pago');
+      if (window.Analytics) {
+        window.Analytics.track('payment_method_selected', {
+          payment_type: metodoElegido,
+          page_type: 'checkout',
+        });
+      }
     });
   }
 
@@ -563,6 +570,8 @@
   }
 
   function enviarPedido() {
+    if (enviandoPedido) return;
+
     if (Carrito.vacio()) {
       aviso('Tu carrito está vacío', 'error');
       return;
@@ -576,6 +585,7 @@
     const metodo = CONFIG.pagos[metodoElegido];
     const provincia = recoger('provincia');
     const rapida = CONFIG.provinciasRapidas.indexOf(provincia) !== -1;
+    enviandoPedido = true;
 
     const pedido = {
       numero: generarNumeroPedido(),
@@ -599,6 +609,20 @@
     };
 
     pedido.mensajeWa = construirMensaje(pedido);
+
+    if (window.Analytics) {
+      const ecommerce = {
+        currency: 'USD',
+        value: pedido.totales.total,
+        payment_type: pedido.metodo.id,
+        items: window.Analytics.itemsLineas(pedido.lineas),
+      };
+      window.Analytics.track('add_payment_info', ecommerce);
+      window.Analytics.track('order_submitted', Object.assign({}, ecommerce, {
+        transaction_id: pedido.numero,
+        shipping_tier: rapida ? 'fast' : 'standard',
+      }));
+    }
 
     // Guardamos el pedido para la página de gracias y el historial
     try {
@@ -625,6 +649,14 @@
     // Abrimos WhatsApp con el pedido ya escrito.
     // Se ejecuta dentro del clic del usuario, así el navegador no lo bloquea.
     const url = enlaceWa(pedido.mensajeWa);
+    if (window.Analytics) {
+      window.Analytics.track('order_whatsapp_open', {
+        placement: 'checkout_auto',
+        page_type: 'checkout',
+        transaction_id: pedido.numero,
+        payment_type: pedido.metodo.id,
+      });
+    }
     window.open(url, '_blank', 'noopener');
 
     // Vaciamos el carrito y pasamos a la confirmación
