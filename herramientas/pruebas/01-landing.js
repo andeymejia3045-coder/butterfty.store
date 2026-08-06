@@ -36,7 +36,7 @@
        .every(g => !!g.respaldo),
      'externas: ' + CONFIG.producto.galeria.filter(g => /^https?:/.test(g.src)).length);
   ok('3 packs disponibles', $$('.pack').length === 3);
-  ok('Pack de 2 preseleccionado', $('input[value="pack-2"]').checked);
+  ok('Pack de 1 preseleccionado', $('input[value="pack-1"]').checked);
   ok('6 preguntas frecuentes', $$('#listaFaq .acordeon').length === 6);
   ok('Estadísticas presentes', $$('.stat').length === 3);
   ok('Datos estructurados válidos', (() => {
@@ -96,7 +96,13 @@
   ok('Las miniaturas saltan a su imagen',
      $$('.galeria__mini')[3].classList.contains('activo'));
 
-  /* ---------- 5. Añadir al carrito (pack de 2 por defecto) ---------- */
+  /* ---------- 5. Elegir el pack de 2 y añadir al carrito ---------- */
+  const radio2 = document.querySelector('input[value="pack-2"]');
+  radio2.checked = true;
+  radio2.dispatchEvent(new Event('change', { bubbles: true }));
+  ok('El pack de 2 sigue disponible y se puede seleccionar',
+     document.querySelector('[data-pack="pack-2"]').classList.contains('pack--activo'));
+
   $('#btnAgregar').click();
   const lineas1 = Tienda.Carrito.lineas();
   ok('El carrito tiene 1 línea', lineas1.length === 1, JSON.stringify(lineas1));
