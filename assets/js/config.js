@@ -89,14 +89,14 @@ const CONFIG = {
        El campo "respaldo" es la ilustración que se muestra si ese link algún
        día deja de funcionar. Así la tienda nunca queda con un hueco.
        --------------------------------------------------------------------- */
-    imagenPrincipal: 'assets/img/producto-1.png',
+    imagenPrincipal: 'assets/img/promocion-revlon-pestanas.png',
     imagenPrincipalRespaldo: 'assets/img/producto-1.png',
     galeria: [
       /* ── Fotos que están guardadas en el proyecto ──
          Estas son las más seguras: nunca dependen de otro servidor. */
-      { src: 'assets/img/producto-1.png',
+      { src: 'assets/img/promocion-revlon-pestanas.png',
         respaldo: 'assets/img/producto-1.png',
-        alt: 'Cepillo, secador y aplanchador 3 en 1 en color negro con detalles rosados' },
+        alt: 'Promoción Revlon One-Step Volumizer Titanium con sérum de pestañas gratis' },
       { src: 'assets/img/producto-2.png',
         respaldo: 'assets/img/producto-2.png',
         alt: 'Temperatura y velocidad ajustables: alta, media y baja, con tecnología de iones negativos' },
