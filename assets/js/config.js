@@ -139,6 +139,7 @@ const CONFIG = {
       descripcion: 'Para ti',
       precio: 29.99,
       etiqueta: '',
+      destacado: true,
     },
     {
       id: 'pack-2',
@@ -149,14 +150,13 @@ const CONFIG = {
       // Beneficio concreto en lugar de "más vendido": convierte mejor porque
       // la clienta entiende de una lo que gana
       etiqueta: 'EL 2° A MITAD DE PRECIO',
-      destacado: true,
     },
     {
       id: 'pack-3',
       cantidad: 3,
       titulo: '3 Cepillos',
       descripcion: 'El mejor precio por unidad',
-      precio: 59.99,
+      precio: 54.99,
       etiqueta: 'MÁXIMO AHORRO',
     },
   ],
