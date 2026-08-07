@@ -1,8 +1,8 @@
 /* =========================================================================
-   ANALYTICS.JS — Google Analytics 4 y eventos comerciales de Butterfly
+   ANALYTICS.JS — Google Analytics 4, Meta Pixel y eventos comerciales
    -------------------------------------------------------------------------
-   - En producción carga GA4 con el ID configurado.
-   - En localhost no envía tráfico, pero deja dataLayer disponible para pruebas.
+   - En producción carga GA4 y Meta Pixel con sus IDs configurados.
+   - En localhost no envía tráfico, pero deja las colas disponibles para pruebas.
    - Nunca recibe ni envía nombres, teléfonos, cédulas, correos o direcciones.
    ========================================================================= */
 
@@ -10,6 +10,7 @@
   'use strict';
 
   const MEDICION_ID = 'G-1HBW75GE8N';
+  const META_PIXEL_ID = '1371399734434750';
   const MONEDA = 'USD';
   const esLocal = /^(localhost|127(?:\.\d+){3}|0\.0\.0\.0)$/i.test(location.hostname);
   const esProduccion = location.protocol === 'https:' && !esLocal;
@@ -35,13 +36,93 @@
     }
   }
 
+  /* Meta Pixel: misma cola oficial que entrega Meta, sin datos personales. */
+  if (!window.__butterflyMetaPixelInicializado) {
+    window.__butterflyMetaPixelInicializado = true;
+
+    if (!window.fbq) {
+      const fbq = (window.fbq = function () {
+        if (fbq.callMethod) {
+          fbq.callMethod.apply(fbq, arguments);
+        } else {
+          fbq.queue.push(arguments);
+        }
+      });
+      if (!window._fbq) window._fbq = fbq;
+      fbq.push = fbq;
+      fbq.loaded = true;
+      fbq.version = '2.0';
+      fbq.queue = [];
+    }
+
+    if (esProduccion) {
+      const scriptMeta = document.createElement('script');
+      scriptMeta.async = true;
+      scriptMeta.src = 'https://connect.facebook.net/en_US/fbevents.js';
+      document.head.appendChild(scriptMeta);
+    }
+
+    window.fbq('init', META_PIXEL_ID);
+    window.fbq('track', 'PageView');
+  }
+
   function redondear(valor) {
     return Math.round((Number(valor) + Number.EPSILON) * 100) / 100;
   }
 
+  const EVENTOS_META = {
+    view_item: ['track', 'ViewContent'],
+    select_item: ['trackCustom', 'SelectPack'],
+    add_to_cart: ['track', 'AddToCart'],
+    view_cart: ['trackCustom', 'ViewCart'],
+    begin_checkout: ['track', 'InitiateCheckout'],
+    payment_method_selected: ['trackCustom', 'PaymentMethodSelected'],
+    add_payment_info: ['track', 'AddPaymentInfo'],
+    order_submitted: ['trackCustom', 'OrderSubmitted'],
+    order_whatsapp_open: ['trackCustom', 'OrderWhatsAppOpen'],
+    whatsapp_click: ['track', 'Contact'],
+    purchase: ['track', 'Purchase'],
+  };
+
+  function parametrosMeta(parametros) {
+    const p = parametros || {};
+    const items = Array.isArray(p.items) ? p.items : [];
+    const seguros = {};
+
+    if (p.currency) seguros.currency = String(p.currency);
+    if (typeof p.value === 'number' && isFinite(p.value)) seguros.value = redondear(p.value);
+
+    if (items.length) {
+      seguros.content_ids = items.map((item) => String(item.item_id));
+      seguros.contents = items.map((item) => ({
+        id: String(item.item_id),
+        quantity: Math.max(1, Number(item.quantity) || 1),
+        item_price: redondear(item.price),
+      }));
+      seguros.content_type = 'product';
+      seguros.content_name = String(items[0].item_name || CONFIG.producto.nombre);
+    }
+
+    // Solo parámetros comerciales controlados; jamás datos del formulario.
+    ['placement', 'page_type', 'checkout_source', 'cta_source', 'payment_type',
+      'transaction_id', 'shipping_tier'].forEach((clave) => {
+      if (p[clave] !== undefined && p[clave] !== null) seguros[clave] = String(p[clave]);
+    });
+
+    return seguros;
+  }
+
+  function trackMeta(nombre, parametros) {
+    const evento = EVENTOS_META[nombre];
+    if (!evento || !window.fbq) return;
+    window.fbq(evento[0], evento[1], parametrosMeta(parametros));
+  }
+
   function track(nombre, parametros) {
     if (!nombre || typeof nombre !== 'string') return;
-    window.gtag('event', nombre, Object.assign({ transport_type: 'beacon' }, parametros || {}));
+    const datos = parametros || {};
+    window.gtag('event', nombre, Object.assign({ transport_type: 'beacon' }, datos));
+    trackMeta(nombre, datos);
   }
 
   function idPackDesdeLinea(linea) {
@@ -148,6 +229,7 @@
 
   window.Analytics = {
     measurementId: MEDICION_ID,
+    metaPixelId: META_PIXEL_ID,
     enabled: esProduccion,
     track,
     once,
