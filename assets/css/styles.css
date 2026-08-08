@@ -1709,6 +1709,159 @@ h4 {
 }
 
 /* -------------------------------------------------------------------------
+   12.b PROMESA DE PAGO CONTRA ENTREGA
+   ------------------------------------------------------------------------- */
+.promesa-pago {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+  padding: 10px 12px;
+  border: 1px solid #b9e3c6;
+  border-radius: var(--r-md);
+  background: #f1fbf4;
+  color: var(--gris-700);
+  font-size: var(--t-sm);
+  line-height: 1.35;
+}
+
+.promesa-pago .ico {
+  flex: 0 0 auto;
+  color: var(--verde);
+}
+
+.promesa-cod {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: flex-start;
+  margin-bottom: var(--sp-5);
+  padding: var(--sp-4);
+  border: 1px solid #b9e3c6;
+  border-radius: var(--r-lg);
+  background: #f1fbf4;
+}
+
+.promesa-cod__icono {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  color: var(--verde);
+}
+
+.promesa-cod__titulo {
+  font-weight: 800;
+  font-size: var(--t-lg);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.promesa-cod__texto {
+  font-size: var(--t-sm);
+  color: var(--gris-700);
+  line-height: 1.4;
+}
+
+/* Campos opcionales plegados: menos campos a la vista = menos abandono */
+.opcionales {
+  border: 1px dashed var(--gris-300);
+  border-radius: var(--r-md);
+  padding: 10px var(--sp-4);
+  background: var(--gris-100);
+}
+
+.opcionales__titulo {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: var(--t-sm);
+  font-weight: 600;
+  color: var(--gris-700);
+  cursor: pointer;
+}
+
+.opcionales[open] .opcionales__titulo {
+  margin-bottom: var(--sp-3);
+}
+
+/* -------------------------------------------------------------------------
+   12.c BARRA FIJA DE PAGO EN EL CHECKOUT
+   ------------------------------------------------------------------------- */
+.barra-pago {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .barra-pago {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    background: var(--blanco);
+    border-top: 1px solid var(--gris-200);
+    box-shadow: 0 -6px 20px rgba(16, 16, 16, 0.12);
+    padding: 10px var(--sp-4);
+    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .barra-pago[hidden] {
+    display: none;
+  }
+
+  .barra-pago__interior {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+
+  .barra-pago__texto {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .barra-pago__total {
+    font-weight: 800;
+    font-size: var(--t-base);
+    line-height: 1.2;
+  }
+
+  .barra-pago__nota {
+    font-size: var(--t-xs);
+    color: var(--verde);
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .barra-pago__btn {
+    flex: 0 0 auto;
+    min-height: 50px;
+    padding-inline: var(--sp-5);
+    border-radius: var(--r-pill);
+    background: var(--rosa);
+    color: var(--blanco);
+    font-weight: 800;
+    font-size: var(--t-sm);
+    letter-spacing: 0.03em;
+    box-shadow: var(--sombra-sm);
+  }
+
+  .barra-pago__btn:active {
+    transform: scale(0.97);
+  }
+
+  .barra-pago__btn[aria-disabled='true'] {
+    opacity: 0.7;
+  }
+
+  body.con-barra-pago {
+    padding-bottom: 84px;
+  }
+}
+
+/* -------------------------------------------------------------------------
    13. BARRA STICKY INFERIOR
    ------------------------------------------------------------------------- */
 .barra-sticky {

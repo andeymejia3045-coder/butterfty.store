@@ -112,7 +112,14 @@
      'esperado ' + P2 + ', obtenido ' + lineas1[0].precio);
   ok('La variante dice Pack de 2 unidades', lineas1[0].variante === 'Pack de 2 unidades');
   ok('El subtotal coincide con el pack de 2', Tienda.Carrito.subtotal() === P2);
-  ok('El cajón del carrito se abrió', $('.cajon').classList.contains('abierto'));
+
+  // El botón principal ya no abre el cajón: lleva directo a los datos de
+  // entrega. El cajón sigue disponible desde el ícono del carrito.
+  ok('Comprar no abre el cajón, va directo al checkout',
+     !$('.cajon').classList.contains('abierto'));
+  document.querySelector('[data-abrir-cajon]').click();
+  ok('El cajón se abre desde el ícono del carrito',
+     $('.cajon').classList.contains('abierto'));
   ok('La barra fija muestra el nombre corto completo, sin cortarse',
      $('#stickyNombre').textContent === CONFIG.producto.nombreCorto &&
      $('#stickyNombre').scrollWidth <= $('#stickyNombre').clientWidth + 1,
