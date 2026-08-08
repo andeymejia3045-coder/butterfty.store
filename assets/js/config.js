@@ -89,11 +89,17 @@ const CONFIG = {
        El campo "respaldo" es la ilustración que se muestra si ese link algún
        día deja de funcionar. Así la tienda nunca queda con un hueco.
        --------------------------------------------------------------------- */
-    imagenPrincipal: 'assets/img/promocion-revlon-pestanas.png',
-    imagenPrincipalRespaldo: 'assets/img/producto-1.png',
+    imagenPrincipal: 'https://www.gloriasaltos.com/wp-content/uploads/2025/05/156894-600x600.jpg',
+    imagenPrincipalRespaldo: 'assets/img/promocion-revlon-pestanas.png',
     galeria: [
-      /* ── Fotos que están guardadas en el proyecto ──
-         Estas son las más seguras: nunca dependen de otro servidor. */
+      /* ── Primera foto: la que se ve al entrar ──
+         Viene por link. Si ese servidor falla, se muestra el respaldo y la
+         galería nunca queda con un hueco. */
+      { src: 'https://www.gloriasaltos.com/wp-content/uploads/2025/05/156894-600x600.jpg',
+        respaldo: 'assets/img/promocion-revlon-pestanas.png',
+        alt: 'Cepillo secador eléctrico Revlon One-Step Volumizer Titanium' },
+
+      /* La promoción del sérum de pestañas se conserva, ahora en segundo lugar */
       { src: 'assets/img/promocion-revlon-pestanas.png',
         respaldo: 'assets/img/producto-1.png',
         alt: 'Promoción Revlon One-Step Volumizer Titanium con sérum de pestañas gratis' },
