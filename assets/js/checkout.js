@@ -487,6 +487,18 @@
           ? 'CONFIRMAR Y PAGAR ' + dinero(t.total)
           : 'CONFIRMAR PEDIDO · ' + dinero(t.total);
     }
+
+    // Barra fija del celular
+    const totalMovil = document.getElementById('barraPagoTotal');
+    if (totalMovil) totalMovil.textContent = 'Total ' + dinero(t.total);
+
+    const notaMovil = document.querySelector('.barra-pago__nota');
+    if (notaMovil) {
+      notaMovil.textContent =
+        metodoElegido === 'transferencia'
+          ? 'Transferencia · 5 % menos'
+          : 'Pagas al recibir · Envío gratis';
+    }
   }
 
   /* =======================================================================
@@ -579,6 +591,15 @@
 
     if (!validarTodo()) {
       aviso('Revisa los campos marcados en rojo', 'error');
+      // En el celular el error puede quedar fuera de pantalla: la llevamos ahí
+      const primerError = document.querySelector('.campo--error');
+      if (primerError) {
+        const bloque = primerError.closest('details');
+        if (bloque) bloque.open = true;
+        primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const campo = primerError.querySelector('input, select, textarea');
+        if (campo) setTimeout(() => campo.focus({ preventScroll: true }), 320);
+      }
       return;
     }
 
@@ -646,6 +667,12 @@
       btn.innerHTML = 'ENVIANDO TU PEDIDO…';
     }
 
+    const btnMovil = document.getElementById('btnConfirmarMovil');
+    if (btnMovil) {
+      btnMovil.setAttribute('aria-disabled', 'true');
+      btnMovil.textContent = 'ENVIANDO…';
+    }
+
     // Abrimos WhatsApp con el pedido ya escrito.
     // Se ejecuta dentro del clic del usuario, así el navegador no lo bloquea.
     const url = enlaceWa(pedido.mensajeWa);
@@ -676,6 +703,10 @@
     const estaVacio = Carrito.vacio();
     vacio.hidden = !estaVacio;
     contenido.hidden = estaVacio;
+
+    const barra = document.getElementById('barraPago');
+    if (barra) barra.hidden = estaVacio;
+    document.body.classList.toggle('con-barra-pago', !estaVacio);
   }
 
   /* =======================================================================
@@ -722,6 +753,15 @@
     const btn = document.getElementById('btnConfirmar');
     if (btn) {
       btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        enviarPedido();
+      });
+    }
+
+    // El botón de la barra fija hace exactamente lo mismo
+    const btnMovil = document.getElementById('btnConfirmarMovil');
+    if (btnMovil) {
+      btnMovil.addEventListener('click', (e) => {
         e.preventDefault();
         enviarPedido();
       });

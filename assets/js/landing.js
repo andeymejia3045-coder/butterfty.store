@@ -438,28 +438,37 @@
     }
   }
 
+  /**
+   * Un solo toque para comprar: añade el pack elegido y lleva directo a los
+   * datos de entrega. Antes había que pasar por el cajón del carrito, y ese
+   * paso extra hacía que muchas clientas abandonaran en el celular.
+   */
+  function comprarAhora(origen) {
+    agregarAlCarrito(false, origen);
+    if (window.Analytics) {
+      const lineas = Carrito.lineas();
+      window.Analytics.track(
+        'begin_checkout',
+        window.Analytics.parametrosCarrito(lineas, { checkout_source: origen })
+      );
+    }
+    setTimeout(() => {
+      window.location.href = 'checkout.html';
+    }, 320);
+  }
+
   function activarBotones() {
     const btn = document.getElementById('btnAgregar');
-    if (btn) btn.addEventListener('click', () => agregarAlCarrito(true, 'main_cta'));
+    if (btn) btn.addEventListener('click', () => comprarAhora('main_cta'));
 
     const sticky = document.getElementById('stickyBtn');
-    if (sticky) sticky.addEventListener('click', () => agregarAlCarrito(true, 'sticky_cta'));
+    if (sticky) sticky.addEventListener('click', () => comprarAhora('sticky_cta'));
 
-    // Botones "COMPRAR AHORA": añaden y van directo al checkout
+    // Botones "COMPRAR AHORA" de las secciones de abajo
     $$('[data-comprar-ahora]').forEach((b, indice) =>
       b.addEventListener('click', () => {
         const origen = ['benefits_cta', 'stats_cta', 'closing_cta'][indice] || 'section_cta';
-        agregarAlCarrito(false, origen);
-        if (window.Analytics) {
-          const lineas = Carrito.lineas();
-          window.Analytics.track(
-            'begin_checkout',
-            window.Analytics.parametrosCarrito(lineas, { checkout_source: origen })
-          );
-        }
-        setTimeout(() => {
-          window.location.href = 'checkout.html';
-        }, 320);
+        comprarAhora(origen);
       })
     );
   }

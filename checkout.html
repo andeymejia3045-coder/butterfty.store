@@ -59,6 +59,18 @@
 
     <!-- ================= COLUMNA IZQUIERDA: FORMULARIO ================= -->
     <div>
+      <!-- Lo primero que ve la clienta: no arriesga nada -->
+      <div class="promesa-cod">
+        <span class="promesa-cod__icono" data-ico="billete" aria-hidden="true"></span>
+        <div>
+          <p class="promesa-cod__titulo">Pagas en efectivo cuando lo recibes</p>
+          <p class="promesa-cod__texto">
+            No pagas nada hoy y no pedimos datos de tarjeta. Revisas el producto y recién ahí pagas
+            al mensajero. Solo necesitamos tus datos para la entrega.
+          </p>
+        </div>
+      </div>
+
       <form id="formPedido" novalidate>
 
         <!-- ---------- Datos de contacto ---------- -->
@@ -140,12 +152,23 @@
               <span class="campo__error"></span>
             </div>
 
-            <div class="campo" data-campo="referencia">
-              <label class="campo__etiqueta" for="referencia">Referencia para el mensajero <span style="color:var(--gris-500);font-weight:400">(opcional)</span></label>
-              <input type="text" id="referencia" name="referencia" maxlength="120"
-                     placeholder="Casa esquinera de reja blanca, frente a la farmacia">
-              <span class="campo__error"></span>
-            </div>
+            <!-- Lo opcional va escondido para no abrumar en el celular -->
+            <details class="opcionales">
+              <summary class="opcionales__titulo">Agregar una referencia o una nota (opcional)</summary>
+
+              <div class="campo" data-campo="referencia">
+                <label class="campo__etiqueta" for="referencia">Referencia para el mensajero</label>
+                <input type="text" id="referencia" name="referencia" maxlength="120"
+                       placeholder="Casa esquinera de reja blanca, frente a la farmacia">
+                <span class="campo__error"></span>
+              </div>
+
+              <div class="campo" data-campo="notas">
+                <label class="campo__etiqueta" for="notas">Notas del pedido</label>
+                <textarea id="notas" name="notas" maxlength="300"
+                          placeholder="Horario en que prefieres recibir, si es un regalo, etc."></textarea>
+              </div>
+            </details>
           </div>
         </section>
 
@@ -157,16 +180,6 @@
           <div class="opciones-pago" id="opcionesPago"></div>
           <div class="campo" data-campo="pago" style="margin-top:12px">
             <span class="campo__error"></span>
-          </div>
-        </section>
-
-        <!-- ---------- Notas ---------- -->
-        <section class="tarjeta">
-          <h2 class="tarjeta__titulo"><span class="ico" data-ico="nota" aria-hidden="true"></span> ¿Algo más que debamos saber?</h2>
-          <div class="campo" data-campo="notas">
-            <label class="campo__etiqueta solo-lectores" for="notas">Notas del pedido</label>
-            <textarea id="notas" name="notas" maxlength="300"
-                      placeholder="Horario en que prefieres recibir, si es un regalo, etc. (opcional)"></textarea>
           </div>
         </section>
 
@@ -216,6 +229,21 @@
     </div>
   </div>
 </footer>
+
+<!-- =====================================================================
+     BARRA FIJA DE PAGO (solo en celular)
+     El botón de confirmar quedaba abajo del resumen y en el celular había que
+     buscarlo. Así siempre está a la vista mientras se llenan los datos.
+     ===================================================================== -->
+<div class="barra-pago" id="barraPago" hidden>
+  <div class="barra-pago__interior">
+    <div class="barra-pago__texto">
+      <p class="barra-pago__total" id="barraPagoTotal"></p>
+      <p class="barra-pago__nota">Pagas al recibir · Envío gratis</p>
+    </div>
+    <button type="button" class="barra-pago__btn" id="btnConfirmarMovil">CONFIRMAR</button>
+  </div>
+</div>
 
 <script src="assets/js/config.js"></script>
 <script src="assets/js/analytics.js"></script>
